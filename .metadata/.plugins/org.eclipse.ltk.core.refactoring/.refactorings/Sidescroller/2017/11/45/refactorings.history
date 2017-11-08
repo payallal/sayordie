@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;multiplayer.KeyThread&apos; to &apos;ReadKeyThread&apos;&#x0A;- Original project: &apos;Sidescroller&apos;&#x0A;- Original element: &apos;multiplayer.KeyThread&apos;&#x0A;- Renamed element: &apos;multiplayer.ReadKeyThread&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;KeyThread&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;multiplayer{KeyThread.java[KeyThread" matchStrategy="1" name="ReadKeyThread" qualified="false" references="true" similarDeclarations="false" stamp="1510115355620" textual="false" version="1.0"/>
+</session>

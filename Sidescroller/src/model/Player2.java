@@ -19,9 +19,7 @@ public class Player2 extends Player {
 		
 	@Override
 	public void left() {
-		System.out.println("Player2, left method called.");
 		if (this.moveableLeft == true & this.controller.getBgX() > this.controller.getBGMIN()) {
-			System.out.println("Player2, left method called inside if.");
 
 			//Instead of moving the background, you move the character
 			int newX = this.getCharCoord().getX()-8;
@@ -39,8 +37,12 @@ public class Player2 extends Player {
 
 	@Override
 	public void right() {
+		//System.out.println(this.moveableRight);
+		//System.out.println(this.controller.getBgX() < this.controller.getBGMAX() - 800);
+
 		if (this.moveableRight == true & this.controller.getBgX() < this.controller.getBGMAX() - 800) {
 			//instead of moving the background, you move the character
+			System.out.println("right");
 			int newX = this.getCharCoord().getX()+8;
 			int y = this.getCharCoord().getY();
 			this.setCharCoord(newX, y);

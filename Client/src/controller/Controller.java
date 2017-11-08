@@ -66,7 +66,8 @@ public class Controller implements ActionListener {
 		this.gp.repaint();
 	}
 	
-	//this is the function that checks the left right bounds 
+	//this is the function that checks the left right bounds to make sure player is not at the edge of the map
+	//If player is at the edge, the we set moveable to false
 	public void checkBoundsToSetMoveable() {
 		if (this.gp.getBgX() >= this.gp.getBGMAX() - 800) {
 			this.player.setMoveableRight(false);
@@ -76,7 +77,6 @@ public class Controller implements ActionListener {
 		}
 		
 		if (this.gp.getBgX() <= this.gp.getBGMIN()) {
-			System.out.println("leftban");
 			this.player.setMoveableLeft(false);
 		}
 		else {
@@ -149,7 +149,13 @@ public class Controller implements ActionListener {
 	}
 	
 	/*all player2 movements here. This should work like MyKeyAdapter*/
-	public void updatePlayer2Movement(boolean left, boolean right, boolean jump, boolean leftr, boolean rightr, boolean jumpr) {
+	public void updatePlayer2Movement(boolean barray[]) {
+		
+		boolean left = barray[0];
+		boolean right = barray[1];
+		boolean jump = barray[2];
+		boolean leftr = barray[3];
+		boolean rightr = barray[4];
 		
 		if (right && this.player2.getMoveableRight() == true) {
 			this.player2.setDirection(2);

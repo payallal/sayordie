@@ -59,6 +59,7 @@ public class Controller implements ActionListener {
 	}
 	
 	public void checkMovement(Player p) {
+		System.out.println(p.getDirection());
 		if (p.getDirection() == 2) {
 			p.right();
 		}
@@ -122,12 +123,12 @@ public class Controller implements ActionListener {
 	public void updatePlayer2Movement(boolean left, boolean right, boolean jump, boolean leftr, boolean rightr, boolean jumpr) {
 		
 		if (right && this.player2.getMoveableRight() == true) {
+			System.out.println("call");
 			this.player2.setDirection(2);
 			this.player2.setJumpRight(true);
 		}
 		
 		if (left && this.player2.getMoveableLeft() == true) {
-			System.out.println("In if left loop.");
 			this.player2.setDirection(3);
 			this.player2.setJumpRight(false);
 		}
