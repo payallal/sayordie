@@ -10,6 +10,7 @@ import javax.swing.Timer;
 import model.Enemy;
 import model.Player;
 import model.Player2;
+import multiplayer.GameServer;
 import view.GamePanel;
 
 public class Controller implements ActionListener {
@@ -19,13 +20,13 @@ public class Controller implements ActionListener {
 	
 	//the controller does not have any field itself- it leaves that to the view and model classes to carry
 	private GamePanel gp;
+	private GameServer gs;
 	//for our convenience
 	private Player player;
 	private Player2 player2;
 	private Timer timer;
 		
-	private Controller() {
-	}
+	private Controller() {}
 	
 	public static Controller getSingleton() {
 		return controller;
@@ -37,6 +38,14 @@ public class Controller implements ActionListener {
 		this.player2 = gp.getPlayer2();
 	}
 	
+	public void setServer(GameServer gs) {
+		this.gs = gs;
+	}
+	
+	public GameServer getServer () {
+		return this.gs;
+	}
+	
 	//set timer 
 	public void setTimer(int i) {
 		this.timer = new Timer(i, this);
@@ -44,22 +53,38 @@ public class Controller implements ActionListener {
 	}
 	
 	public void addKeyListenerToGamePanel() {
-		this.gp.addKeyListener(new MyKeyAdapter(this.gp));		
+		this.gp.addKeyListener(new MyKeyAdapter());		
 	}
 	
 	//this is called when timer reaches 30ms. Essentially the update function
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		//System.out.println("30ms has elapsed");
+		this.checkBoundsToSetMoveable();
 		this.checkMovement(this.player);
 		this.checkMovement(this.player2);
 		this.checkCollisions();
 		this.gp.repaint();
 	}
 	
+	//this is the function that checks the left right bounds to make sure player is not at the edge of the map
+	//If player is at the edge, the we set moveable to false
+	public void checkBoundsToSetMoveable() {
+		if (this.gp.getBgX() >= this.gp.getBGMAX() - 800) {
+			this.player.setMoveableRight(false);
+		}
+		else {
+			this.player.setMoveableRight(true);
+		}
+		
+		if (this.gp.getBgX() <= this.gp.getBGMIN()) {
+			this.player.setMoveableLeft(false);
+		}
+		else {
+			this.player.setMoveableLeft(true);
+		}
+	}
+	
 	public void checkMovement(Player p) {
-		System.out.println(p.getDirection());
 		if (p.getDirection() == 2) {
 			p.right();
 		}
@@ -107,6 +132,10 @@ public class Controller implements ActionListener {
 		}
 	}
 	
+	public Player getPlayer() {
+		return this.gp.getPlayer();
+	}
+	
 	public int getBgX() {
 		return this.gp.getBgX();
 	}
@@ -120,15 +149,21 @@ public class Controller implements ActionListener {
 	}
 	
 	/*all player2 movements here. This should work like MyKeyAdapter*/
-	public void updatePlayer2Movement(boolean left, boolean right, boolean jump, boolean leftr, boolean rightr, boolean jumpr) {
+	public void updatePlayer2Movement(boolean barray[]) {
+		
+		boolean left = barray[0];
+		boolean right = barray[1];
+		boolean jump = barray[2];
+		boolean leftr = barray[3];
+		boolean rightr = barray[4];
 		
 		if (right && this.player2.getMoveableRight() == true) {
-			System.out.println("call");
 			this.player2.setDirection(2);
 			this.player2.setJumpRight(true);
 		}
 		
 		if (left && this.player2.getMoveableLeft() == true) {
+			System.out.println("In if left loop.");
 			this.player2.setDirection(3);
 			this.player2.setJumpRight(false);
 		}

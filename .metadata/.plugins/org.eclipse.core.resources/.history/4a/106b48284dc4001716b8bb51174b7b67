@@ -1,0 +1,59 @@
+package view;
+import java.io.IOException;
+
+import javax.swing.JFrame;
+
+import controller.Controller;
+import multiplayer.GameClient;
+import multiplayer.GameServer;
+
+public class GameWindow extends JFrame{
+	
+	private GamePanel gp;
+	
+	public GameWindow() {
+		this.gp = new GamePanel();
+		add(gp);
+		setSize(1024, 750);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+	} 
+
+	public static void main(String[] args) {
+		GameWindow gw = new GameWindow();
+		GameServer s;
+		s = new GameServer(1664);
+		s.acceptClientLoop();
+
+		Controller.getSingleton().setServer(s);
+	}
+}
+
+
+public class ClientGameWindow extends JFrame{
+	
+	private GamePanel gp;
+	
+	public ClientGameWindow() {
+		this.gp = new GamePanel();
+		add(gp);
+		setSize(1024, 750);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+	} 
+
+	public static void main(String[] args) {
+		ClientGameWindow gw = new ClientGameWindow();
+		GameClient c;
+		try {
+			c = new GameClient("127.0.0.1", 1664);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
+		
+		Controller.getSingleton().setClient(c);
+	}
+}
+

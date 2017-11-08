@@ -27,6 +27,12 @@ public class ClientThread extends Thread {
 		}
 	}
 	
+	public void sendJSONToClient(boolean [] barray) {
+		WriteJSONThread writeJSONThread = new WriteJSONThread(this.pw, barray);
+		writeJSONThread.start();
+	}
+	
+	
 	/*
 	public synchronized void sendConfirmation()
 	{

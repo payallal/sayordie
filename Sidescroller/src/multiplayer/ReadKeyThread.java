@@ -1,3 +1,4 @@
+
 package multiplayer;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,28 +10,25 @@ import javax.json.JsonReader;
 
 import controller.Controller;
 
-
 public class ReadKeyThread extends Thread {
+	
 	private BufferedReader incomingJSON;
-	private ClientThread clientThread;
-	private boolean leftPressed;
-	private boolean rightPressed;
-	private boolean jumpPressed;
-	private boolean leftReleased;
-	private boolean rightReleased;
-	private boolean jumpReleased;
+	private ClientThread ct;
+	private boolean barray[];
 	private Controller controller;
 	
 	public ReadKeyThread (ClientThread ct, BufferedReader br) {
 		this.incomingJSON = br;
-		this.clientThread = ct;
-		this.leftPressed = false;
-		this.rightPressed = false;
-		this.jumpPressed = false;
-		this.leftReleased = false;
-		this.rightReleased = false;
-		this.jumpReleased = false;
+		this.ct = ct;
+		this.barray = new boolean[6];
+		this.resetBooleans();
 		this.controller = Controller.getSingleton();
+	}
+	
+	public void resetBooleans() {
+		for (int i = 0; i<this.barray.length; i++) {
+			this.barray[i] = false;
+		}
 	}
 
 	@Override
@@ -41,10 +39,10 @@ public class ReadKeyThread extends Thread {
 			while(true)
 			{
 				if ((json = this.incomingJSON.readLine()) != null) {
-					System.out.println("I received the following JSON: " + json);
+					System.out.println("Server received the following JSON: " + json);
 					// parseJSON, and sets the booleans
 					parseJSONToSetBool(json);
-					controller.updatePlayer2Movement(this.leftPressed, this.rightPressed, this.jumpPressed, this.leftReleased, this.rightReleased, this.jumpReleased);
+					controller.updatePlayer2Movement(this.barray);
 				}
 			}
 		}
@@ -62,14 +60,12 @@ public class ReadKeyThread extends Thread {
 		reader.close();
 		
 		//now grab the boolean values we need
-		this.leftPressed = keyObject.getBoolean("leftPressed");
-		this.rightPressed = keyObject.getBoolean("rightPressed");
-		this.jumpPressed = keyObject.getBoolean("jumpPressed");
-		this.leftReleased = keyObject.getBoolean("leftReleased");
-		this.rightReleased = keyObject.getBoolean("rightReleased");
-		this.jumpReleased = keyObject.getBoolean("jumpReleased");
+		this.barray[0] = keyObject.getBoolean("leftPressed");
+		this.barray[1] = keyObject.getBoolean("rightPressed");
+		this.barray[2] = keyObject.getBoolean("jumpPressed");
+		this.barray[3] = keyObject.getBoolean("leftReleased");
+		this.barray[4] = keyObject.getBoolean("rightReleased");
+		this.barray[5] = keyObject.getBoolean("jumpReleased");
 		
-		//Send a confirmation to the client that message was received
-		//this.clientThread.sendConfirmation();
 	}
 }
