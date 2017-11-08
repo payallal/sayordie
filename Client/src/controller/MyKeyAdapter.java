@@ -22,15 +22,7 @@ public class MyKeyAdapter extends KeyAdapter {
 	
 	public void keyPressed(KeyEvent kp) {
 		
-		
-		if (kp.getKeyCode() == KeyEvent.VK_RIGHT && this.c.getPlayer().getMoveableRight() == true) {
-			this.c.getPlayer().setDirection(2);
-			this.c.getPlayer().setJumpRight(true);
-			this.resetBooleans();
-			this.barray[1] = true;
-			//We get the client late so make sure we retrieve it from controller
-			Controller.getSingleton().getClient().sendJSONToServer(this.barray);
-		}
+
 		if (kp.getKeyCode() == KeyEvent.VK_LEFT && this.c.getPlayer().getMoveableLeft() == true) {
 			this.c.getPlayer().setDirection(3);
 			this.c.getPlayer().setJumpRight(false);
@@ -39,11 +31,21 @@ public class MyKeyAdapter extends KeyAdapter {
 			this.c.getClient().sendJSONToServer(this.barray);
 		}
 		
+		//if right key is pressed, and player can move right 
+		if (kp.getKeyCode() == KeyEvent.VK_RIGHT && this.c.getPlayer().getMoveableRight() == true) {
+			this.c.getPlayer().setDirection(2);
+			this.c.getPlayer().setJumpRight(true);
+			this.resetBooleans();
+			this.barray[1] = true;
+			//We get the client late so make sure we retrieve it from controller
+			this.c.getClient().sendJSONToServer(this.barray);
+		}
+		
 		if (kp.getKeyCode() == KeyEvent.VK_SPACE) {
 			this.c.getPlayer().checkJump();
 			this.resetBooleans();
 			this.barray[2] = true;
-			Controller.getSingleton().getClient().sendJSONToServer(this.barray);
+			this.c.getClient().sendJSONToServer(this.barray);
 		}
 		
 	}
@@ -51,7 +53,6 @@ public class MyKeyAdapter extends KeyAdapter {
 	public void keyReleased(KeyEvent kp) {
 		if (kp.getKeyCode() == KeyEvent.VK_LEFT || kp.getKeyCode() == KeyEvent.VK_RIGHT)
 		{
-			
 			this.resetBooleans();
 			if (this.c.getPlayer().getDirection() == 2) {
 				this.c.getPlayer().setCurrentSprite(this.c.getPlayer().getStillRightSprite());// if direction is right
@@ -65,7 +66,7 @@ public class MyKeyAdapter extends KeyAdapter {
 				this.barray[3] = true;
 				this.c.getClient().sendJSONToServer(this.barray);
 			}
-			this.c.getPlayer().setDirection(0); // set still image	
+			this.c.getPlayer().setDirection(0); 	
 		}
 		
 	}

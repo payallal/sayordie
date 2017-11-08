@@ -184,3 +184,130 @@ org.eclipse.jdt.core.JavaModelException: bin/model [in Client] is not on its pro
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:590) ~[org.eclipse.equinox.launcher_1.4.0.v20161219-1356.jar:na]
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1499) ~[org.eclipse.equinox.launcher_1.4.0.v20161219-1356.jar:na]
 2017-11-08 10:23:11,257 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2017-11-08 11:01:21,702 [Worker-25] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:01:21,768 [Worker-25] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:01:21,771 [Worker-25] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:01:21,772 [Worker-25] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:01:36,532 [Worker-26] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:01:36,570 [Worker-26] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:01:36,572 [Worker-26] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:01:36,572 [Worker-26] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:03:30,934 [Worker-28] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:03:30,998 [Worker-28] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:03:31,002 [Worker-28] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:03:31,003 [Worker-28] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:03:41,524 [Worker-28] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:03:41,576 [Worker-28] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:03:41,578 [Worker-28] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:03:41,579 [Worker-28] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:10:16,386 [Worker-30] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:10:16,418 [Worker-30] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:10:16,421 [Worker-30] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:10:16,423 [Worker-30] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:10:40,239 [Worker-35] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:10:40,275 [Worker-35] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:10:40,276 [Worker-35] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:10:40,277 [Worker-35] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:11:02,825 [Worker-33] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:11:02,865 [Worker-33] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:11:02,867 [Worker-33] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:11:02,868 [Worker-33] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:12:16,366 [Worker-34] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:12:16,402 [Worker-34] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:12:16,407 [Worker-34] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:12:16,408 [Worker-34] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:13:06,221 [Worker-30] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:13:06,260 [Worker-30] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:13:06,262 [Worker-30] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:13:06,263 [Worker-30] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:13:28,131 [Worker-35] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:13:28,145 [Worker-35] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:13:28,146 [Worker-35] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:13:28,146 [Worker-35] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:15:30,824 [Worker-35] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:15:30,858 [Worker-35] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:15:30,860 [Worker-35] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:15:30,860 [Worker-35] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:16:13,958 [Worker-34] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:16:14,015 [Worker-34] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:16:14,017 [Worker-34] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:16:14,019 [Worker-34] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:17:14,247 [main] INFO  o.e.m2e.actions.ExecutePomAction - Creating new launch configuration
+2017-11-08 11:17:22,589 [Worker-19] INFO  o.e.m.i.launch.MavenLaunchDelegate - /Users/yiuchungko/ProgramZ/sayordie/Client
+2017-11-08 11:17:22,668 [Worker-19] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B clean install
+2017-11-08 11:20:30,157 [Worker-24] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:20:30,205 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:20:30,207 [Worker-24] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:20:30,208 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:20:31,241 [Worker-25] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:20:31,242 [Worker-25] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:20:31,244 [Worker-25] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:20:31,245 [Worker-25] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:20:36,419 [Worker-33] INFO  o.e.m.i.launch.MavenLaunchDelegate - /Users/yiuchungko/ProgramZ/sayordie/Client
+2017-11-08 11:20:36,419 [Worker-33] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B clean install
+2017-11-08 11:20:36,559 [Worker-36] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:20:36,560 [Worker-36] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:20:36,562 [Worker-36] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:20:36,582 [Worker-36] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:24:04,210 [Worker-24] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:24:04,248 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:24:04,253 [Worker-24] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:24:04,253 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:24:05,270 [Worker-24] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:24:05,270 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:24:05,272 [Worker-24] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:24:05,285 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:30:27,370 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:30:27,433 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:30:27,435 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:30:27,435 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:30:28,485 [Worker-37] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:30:28,486 [Worker-37] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:30:28,488 [Worker-37] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:30:28,489 [Worker-37] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:30:30,888 [Worker-37] INFO  o.e.m.i.launch.MavenLaunchDelegate - /Users/yiuchungko/ProgramZ/sayordie/Client
+2017-11-08 11:30:30,888 [Worker-37] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B clean install
+2017-11-08 11:31:37,944 [Worker-24] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:31:37,962 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:31:37,964 [Worker-24] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:31:37,965 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:31:39,084 [Worker-40] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:31:39,086 [Worker-40] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:31:39,088 [Worker-40] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:31:39,102 [Worker-40] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:32:56,178 [Worker-41] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:32:56,201 [Worker-41] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:32:56,208 [Worker-41] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:32:56,209 [Worker-41] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:34:40,195 [Worker-47] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:34:40,214 [Worker-47] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:34:40,215 [Worker-47] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:34:40,216 [Worker-47] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:35:28,304 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:35:28,307 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:35:28,308 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:35:28,309 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:36:16,692 [Worker-46] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:36:16,731 [Worker-46] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:36:16,735 [Worker-46] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:36:16,737 [Worker-46] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:37:28,086 [Worker-43] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:37:28,100 [Worker-43] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:37:28,102 [Worker-43] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:37:28,102 [Worker-43] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:37:42,114 [Worker-45] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:37:42,115 [Worker-45] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:37:42,116 [Worker-45] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:37:42,117 [Worker-45] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:38:23,192 [Worker-37] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:38:23,193 [Worker-37] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Sidescroller/src/main/resources
+2017-11-08 11:38:23,195 [Worker-37] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:38:23,211 [Worker-37] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Sidescroller/src/test/resources
+2017-11-08 11:40:03,096 [Worker-33] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:40:03,120 [Worker-33] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:40:03,124 [Worker-33] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:40:03,124 [Worker-33] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources
+2017-11-08 11:40:12,148 [Worker-49] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:40:12,164 [Worker-49] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/main/resources
+2017-11-08 11:40:12,166 [Worker-49] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-11-08 11:40:12,167 [Worker-49] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/yiuchungko/ProgramZ/sayordie/Client/src/test/resources

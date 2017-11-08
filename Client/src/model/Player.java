@@ -47,6 +47,14 @@ public class Player extends Character{
 
 	}
 	
+	public void setMoveableRight(boolean b) {
+		this.moveableRight = b;
+	}
+	
+	public void setMoveableLeft(boolean b) {
+		this.moveableLeft = b;
+	}
+	
 	public boolean getMoveableRight() {
 		return this.moveableRight;
 	}
@@ -73,7 +81,7 @@ public class Player extends Character{
 	}
 	
 	public void left() {
-		if (this.moveableLeft == true & this.controller.getBgX() > this.controller.getBGMIN()) {
+		if (this.moveableLeft == true) {
 			this.controller.decrementBgX(); // decrease xcoord while moving left
 			if (this.run % 3 == 0 | this.run % 5 == 0) {
 				this.currentSprite = this.stillLeftSprite;
@@ -86,7 +94,7 @@ public class Player extends Character{
 	}
 
 	public void right() {
-		if (this.moveableRight == true & this.controller.getBgX() < this.controller.getBGMAX() - 800) {
+		if (this.moveableRight == true) {
 			this.controller.incrementBgX(); // increasing xcoord while moving right
 
 			if (this.run % 3 == 0 | this.run % 5 == 0) {

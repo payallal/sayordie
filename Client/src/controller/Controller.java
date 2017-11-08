@@ -26,8 +26,7 @@ public class Controller implements ActionListener {
 	private Player2 player2;
 	private Timer timer;
 		
-	private Controller() {
-	}
+	private Controller() {}
 	
 	public static Controller getSingleton() {
 		return controller;
@@ -60,12 +59,29 @@ public class Controller implements ActionListener {
 	//this is called when timer reaches 30ms. Essentially the update function
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		//System.out.println("30ms has elapsed");
+		this.checkBoundsToSetMoveable();
 		this.checkMovement(this.player);
 		this.checkMovement(this.player2);
 		this.checkCollisions();
 		this.gp.repaint();
+	}
+	
+	//this is the function that checks the left right bounds 
+	public void checkBoundsToSetMoveable() {
+		if (this.gp.getBgX() >= this.gp.getBGMAX() - 800) {
+			this.player.setMoveableRight(false);
+		}
+		else {
+			this.player.setMoveableRight(true);
+		}
+		
+		if (this.gp.getBgX() <= this.gp.getBGMIN()) {
+			System.out.println("leftban");
+			this.player.setMoveableLeft(false);
+		}
+		else {
+			this.player.setMoveableLeft(true);
+		}
 	}
 	
 	public void checkMovement(Player p) {
