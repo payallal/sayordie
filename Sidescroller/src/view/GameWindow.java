@@ -1,5 +1,10 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import controller.Controller;
@@ -8,11 +13,19 @@ import multiplayer.GameServer;
 public class GameWindow extends JFrame{
 	
 	private GamePanel gp;
+	private JButton recordButton;
 	
 	public GameWindow() {
 		this.gp = new GamePanel();
-		add(gp);
-		setSize(1024, 750);
+		this.recordButton = new JButton("Record Button");
+		Controller.getSingleton().setRecordButtonListener(this.recordButton);
+	    Dimension d = new Dimension(100,20);
+	    this.recordButton.setPreferredSize(d);
+		Container pane = this.getContentPane();
+		pane.add(recordButton, BorderLayout.WEST);
+		pane.add(gp, BorderLayout.CENTER);
+
+		setSize(1024, 800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	} 

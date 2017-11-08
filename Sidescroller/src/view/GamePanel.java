@@ -1,17 +1,11 @@
 package view;
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.Timer;
-
 import controller.Controller;
-import controller.MyKeyAdapter;
-import model.Character;
 import model.Coordinate;
 import model.Enemy;
 import model.Player;
 import model.Player2;
-
-import java.awt.event.*;
 import java.util.*;
 
 public class GamePanel extends JPanel {

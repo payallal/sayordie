@@ -3,12 +3,9 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 
-import model.Enemy;
-
 
 public class GameServer {
 	private ServerSocket servSock;
-	private PrintWriter pw;
 	private ArrayList<ClientThread> clientList;
 
 	public GameServer (int port) {

@@ -3,8 +3,8 @@ package controller;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
+import javax.swing.JButton;
 import javax.swing.Timer;
 
 import model.Enemy;
@@ -183,4 +183,16 @@ public class Controller implements ActionListener {
 			this.player2.setDirection(0); // set still image	
 		}
 	}
+	
+	/*audio listening part*/
+	public void record() {
+		SoundRecordingUtil recorder = new SoundRecordingUtil();
+		AudioListenerThread at = new AudioListenerThread(recorder);
+		at.start();
+	}
+
+	public void setRecordButtonListener(JButton recordButton) {
+		recordButton.addActionListener(new RecordButtonListener());
+	}
+	
 }
