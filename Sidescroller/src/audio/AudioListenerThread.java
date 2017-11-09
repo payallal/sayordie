@@ -1,4 +1,4 @@
-package controller;
+package audio;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +9,7 @@ public class AudioListenerThread extends Thread{
 	
 	private SoundRecordingUtil recorder;
 	private static final int RECORD_TIME = 10000;   // 10 seconds 
-	private File wavFile = new File("record.wav");
+	private File wavFile = new File("record.raw");
 	
 	public AudioListenerThread(SoundRecordingUtil recorder) {
 		this.recorder = recorder;

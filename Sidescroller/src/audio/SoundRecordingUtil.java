@@ -1,4 +1,4 @@
-package controller;
+package audio;
  
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -31,8 +31,8 @@ public class SoundRecordingUtil {
      */
     AudioFormat getAudioFormat() {
         float sampleRate = 16000;
-        int sampleSizeInBits = 8;
-        int channels = 2;
+        int sampleSizeInBits = 16;
+        int channels = 1;
         boolean signed = true;
         boolean bigEndian = true;
         return new AudioFormat(sampleRate, sampleSizeInBits, channels, signed,

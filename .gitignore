@@ -25,6 +25,9 @@ target/
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+# Ignore my authentication JSON
+*.json
+
 # Package Files #
 *.jar
 *.war
@@ -35,6 +38,7 @@ target/
 
 #Video files
 *.wav
+*.raw
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
