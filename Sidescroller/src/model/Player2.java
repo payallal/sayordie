@@ -25,12 +25,16 @@ public class Player2 extends Player {
 			int newX = this.getCharCoord().getX()-8;
 			int y = this.getCharCoord().getY();
 			this.setCharCoord(newX, y);
-			if (this.run % 3 == 0 | this.run % 5 == 0) {
-				this.setCurrentSprite(this.stillLeftSprite);
-			}
-			else {
+			if (this.run % 3 == 0) {
 				this.setCurrentSprite(this.walkLeftSprite);
 			}
+			if (this.run % 5 == 0) {
+				this.setCurrentSprite(this.walkLeftSprite2);
+			}
+			if (this.run % 7 == 0) {
+				this.setCurrentSprite(this.walkLeftSprite3);
+			}
+
 			this.run++;
 		}
 	}
@@ -46,12 +50,16 @@ public class Player2 extends Player {
 			int newX = this.getCharCoord().getX()+8;
 			int y = this.getCharCoord().getY();
 			this.setCharCoord(newX, y);
-			if (this.run % 3 == 0 | this.run % 5 == 0) {
-				this.setCurrentSprite(this.stillRightSprite);
-			}
-			else {
+			if (this.run % 3 == 0) {
 				this.setCurrentSprite(this.walkRightSprite);
 			}
+			if (this.run % 5 == 0) {
+				this.setCurrentSprite(this.walkRightSprite2);
+			}
+			if (this.run % 7 == 0) {
+				this.setCurrentSprite(this.walkRightSprite2);
+			}
+
 			this.run++;
 		}
 	}

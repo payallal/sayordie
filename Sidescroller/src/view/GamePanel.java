@@ -34,17 +34,17 @@ public class GamePanel extends JPanel {
 		this.BGMIN_X = 1000;
 		this.BGMAX_X = 10000;
 		
-		this.backgroundImage = new ImageIcon("img/background/bkg5.png").getImage();
+		this.backgroundImage = new ImageIcon("img/background/bg.png").getImage();
 		
 		//Create player and player2
-		this.player = new Player(new Coordinate(600,615));
-		this.player2 = new Player2(new Coordinate(650, 615));
+		this.player = new Player(new Coordinate(600,530));
+		this.player2 = new Player2(new Coordinate(650, 530));
 		this.players = new ArrayList<Player>();
 		this.players.add(this.player);
 		this.players.add(this.player2);
 		
 		//Create enemies
-		this.enemy = new Enemy(new Coordinate(900,615));	
+		this.enemy = new Enemy(new Coordinate(900,530));	
 		//Put the enemies in relevant array
 		this.enemies = new ArrayList<Enemy>();
 		this.enemies.add(this.enemy);

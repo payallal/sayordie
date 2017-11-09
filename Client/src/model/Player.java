@@ -22,18 +22,33 @@ public class Player extends Character{
 	private boolean jump;
 	private int velocity;
 	private double acceleration;
+	private int floor;
+
+	protected Image walkRightSprite2;
+	protected Image walkRightSprite3;
+	protected Image walkRightSprite4;
+	
+	protected Image walkLeftSprite2;
+	protected Image walkLeftSprite3;
+	protected Image walkLeftSprite4;
 	
 	public Player(Coordinate p) {
 		super(p);
 		
 		//Protected fields from parent Character class
-		this.stillRightSprite = new ImageIcon("img/sprites/rz_still_right.png").getImage(); 
-		this.stillLeftSprite = new ImageIcon("img/sprites/rz_still_left.png").getImage(); 
-		this.walkLeftSprite = new ImageIcon("img/sprites/rz_walk_left2.png").getImage(); 
-		this.walkRightSprite = new ImageIcon("img/sprites/rz_walk_right2.png").getImage();
-		this.jumpRightSprite = new ImageIcon("img/sprites/rz_right_jump.png").getImage(); 
-		this.jumpLeftSprite = new ImageIcon("img/sprites/rz_left_jump.png").getImage();
-		this.currentSprite = this.stillRightSprite;
+		this.stillRightSprite = new ImageIcon("img/sprites/playerStillRight.png").getImage(); 
+		this.stillLeftSprite = new ImageIcon("img/sprites/playerStillLeft.png").getImage(); 
+		this.walkLeftSprite = new ImageIcon("img/sprites/playerWalkLeft.png").getImage(); 
+		this.walkRightSprite = new ImageIcon("img/sprites/playerWalkRight.png").getImage();
+		this.walkRightSprite2 = new ImageIcon("img/sprites/playerWalkRight2.png").getImage();
+		this.walkRightSprite3 = new ImageIcon("img/sprites/playerWalkRight3.png").getImage();
+		this.walkRightSprite4 = new ImageIcon("img/sprites/playerWalkRight4.png").getImage();
+		this.walkLeftSprite2 = new ImageIcon("img/sprites/playerWalkLeft2.png").getImage();
+		this.walkLeftSprite3 = new ImageIcon("img/sprites/playerWalkLeft3.png").getImage();
+		this.walkLeftSprite4 = new ImageIcon("img/sprites/playerWalkLeft4.png").getImage();
+		this.jumpRightSprite = new ImageIcon("img/sprites/playerJumpRight.png").getImage(); 
+		this.jumpLeftSprite = new ImageIcon("img/sprites/playerJumpLeft.png").getImage();
+		this.currentSprite = this.stillLeftSprite;
 		
 		this.direction = 0;
 		this.moveableLeft = true;
@@ -44,6 +59,7 @@ public class Player extends Character{
 		this.run = 0;
 		this.velocity = 15;
 		this.acceleration = 1;
+		this.floor = p.getY();
 
 	}
 	
@@ -83,12 +99,16 @@ public class Player extends Character{
 	public void left() {
 		if (this.moveableLeft == true) {
 			this.controller.decrementBgX(); // decrease xcoord while moving left
-			if (this.run % 3 == 0 | this.run % 5 == 0) {
-				this.currentSprite = this.stillLeftSprite;
-			}
-			else {
+			if (this.run % 3 == 0) {
 				this.currentSprite = this.walkLeftSprite;
 			}
+			if (this.run % 5 == 0) {
+				this.currentSprite = this.walkLeftSprite2;
+			}
+			if (this.run % 7 == 0) {
+				this.currentSprite = this.walkLeftSprite3;
+			}
+
 			this.run++;
 		}
 	}
@@ -97,19 +117,23 @@ public class Player extends Character{
 		if (this.moveableRight == true) {
 			this.controller.incrementBgX(); // increasing xcoord while moving right
 
-			if (this.run % 3 == 0 | this.run % 5 == 0) {
-				this.currentSprite = this.stillRightSprite;
-			}
-			else {
+			if (this.run % 3 == 0) {
 				this.currentSprite = this.walkRightSprite;
 			}
+			if (this.run % 5 == 0) {
+				this.currentSprite = this.walkRightSprite2;
+			}
+			if (this.run % 7 == 0) {
+				this.currentSprite = this.walkRightSprite3;
+			}
+
 			this.run++;
 		}
 	}
 
 	public void checkJump() {
 		// TODO Auto-generated method stub
-		if (this.jump == false && this.getCharCoord().getY() == 615) {
+		if (this.jump == false && this.getCharCoord().getY() == this.floor) {
 			this.jump = true;
 			this.moveableDown = true;
 			
@@ -129,7 +153,7 @@ public class Player extends Character{
 
 			int playerY = this.getCharCoord().getY();			
 			//jumping upwards
-			if (this.jump == true &&  playerY >= 520) {
+			if (this.jump == true &&  playerY >= this.floor-95) {
 				if (this.jumpRight == true) {
 					this.currentSprite = this.jumpRightSprite;
 				}
@@ -139,13 +163,13 @@ public class Player extends Character{
 				this.velocity -= this.acceleration;
 				playerY -= this.velocity;
 				this.setCharCoord(this.getCharCoord().getX(), playerY);
-				if (playerY < 520) {
+				if (playerY < this.floor-95) {
 					this.jump = false;
 				}
 			}
 			
 			//no longer jumping but still in the air
-			if (this.jump == false && playerY < 615) {
+			if (this.jump == false && playerY < this.floor) {
 				if (this.jumpRight == true) {
 					this.currentSprite = this.jumpRightSprite;
 				}
@@ -156,8 +180,8 @@ public class Player extends Character{
 				playerY += this.velocity;
 				this.setCharCoord(this.getCharCoord().getX(), playerY);
 				
-				if (playerY >= 615) {
-					this.setCharCoord(this.getCharCoord().getX(), 615);
+				if (playerY >= this.floor) {
+					this.setCharCoord(this.getCharCoord().getX(), this.floor);
 					this.moveableDown = false;
 					if (this.jumpRight == true) {
 						this.currentSprite = this.stillRightSprite;
