@@ -5,18 +5,14 @@ import java.awt.image.ImageObserver;
 
 import controller.Controller;
 
-public abstract class Character implements ImageObserver {
-	protected Image stillRightSprite;
-	protected Image stillLeftSprite;
-	protected Image walkLeftSprite;
-	protected Image walkRightSprite;
-	protected Image jumpRightSprite;
-	protected Image jumpLeftSprite;
+public abstract class Sprite implements ImageObserver {
+
 	protected Controller controller;
+	protected Image currentSprite;
 	private Coordinate characterPosition;
 
 	
-	public Character(Coordinate p) {
+	public Sprite(Coordinate p) {
 		this.characterPosition = p;
 		this.controller = Controller.getSingleton();
 	}
@@ -32,36 +28,17 @@ public abstract class Character implements ImageObserver {
 		this.characterPosition.setY(y);
 	}
 	
-	public Image getStillRightSprite() {
-		return this.stillRightSprite;
+	public Image getCurrentSprite() {
+		return this.currentSprite;
 	}
 	
-	public Image getStillLeftSprite() {
-		return this.stillLeftSprite;
-	}
-	
-	public Image getWalkLeftSprite() {
-		return this.walkLeftSprite;
-	}
-	
-	public Image getWalkRightSprite() {
-		return this.walkRightSprite;
-	}
-	
-	public Image getJumpRightSprite() {
-		return this.jumpRightSprite;
-	}
-	
-	public Image getJumpLeftSprite() {
-		return this.jumpLeftSprite;
-	}
 	
 	public int getWidth() {
-		return this.stillRightSprite.getWidth(this);
+		return this.currentSprite.getWidth(this);
 	}
 	
 	public int getHeight() {
-		return this.stillRightSprite.getHeight(this);
+		return this.currentSprite.getHeight(this);
 	}
 	
 	public Rectangle getBounds() {
@@ -70,7 +47,6 @@ public abstract class Character implements ImageObserver {
 
 	@Override
 	public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

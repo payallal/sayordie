@@ -1,6 +1,9 @@
 #google cloud speech trial
 GoogleSpeechTest/
 
+# Recommenders
+.recommenders/
+
 # Eclipse
 .classpath
 .project

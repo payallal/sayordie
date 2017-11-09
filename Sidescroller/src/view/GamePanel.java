@@ -4,8 +4,11 @@ import javax.swing.*;
 import controller.Controller;
 import model.Coordinate;
 import model.Enemy;
+import model.Obstacle;
 import model.Player;
 import model.Player2;
+import model.Sprite;
+
 import java.util.*;
 
 public class GamePanel extends JPanel {
@@ -19,16 +22,21 @@ public class GamePanel extends JPanel {
 	private Player player;
 	private Player2 player2;
 	//probably need a list to keep track of all the enemies but later
-	private Enemy enemy;
 	//background offsets for when the main player moves left and right
 	private int bgX;
 	private int bgY;
 	private Controller controller;
 	
+	
 	//Arrays to keep track of various groups
-	private ArrayList<Player> players;
 	private ArrayList<Enemy> enemies;
 	//private ArrayList<Backgrounds> backgrounds;
+	private ArrayList<Obstacle> obstacles;
+	
+	//the array of all hostile sprites
+	private ArrayList<Sprite> hostiles;
+	//the one array to keep track of all sprites;
+	private ArrayList<Sprite> sprites;
 	
 	public GamePanel() {
 		this.BGMIN_X = 1000;
@@ -38,16 +46,25 @@ public class GamePanel extends JPanel {
 		
 		//Create player and player2
 		this.player = new Player(new Coordinate(600,530));
-		this.player2 = new Player2(new Coordinate(650, 530));
-		this.players = new ArrayList<Player>();
-		this.players.add(this.player);
-		this.players.add(this.player2);
+		//this.player2 = new Player2(new Coordinate(650, 530));
 		
-		//Create enemies
-		this.enemy = new Enemy(new Coordinate(900,530));	
 		//Put the enemies in relevant array
 		this.enemies = new ArrayList<Enemy>();
-		this.enemies.add(this.enemy);
+		
+		//Put the obstacles in relevant array
+		this.obstacles = new ArrayList<Obstacle>();
+		this.obstacles.add(new Obstacle(new Coordinate(1200, 645), "img/sprites/flower.png", "flower"));
+		
+		//Add all hostile sprites
+		this.hostiles = new ArrayList<Sprite>();
+		this.hostiles.addAll(this.enemies);
+		this.hostiles.addAll(this.obstacles);
+		
+		//Add all sprites to sprites list
+		this.sprites = new ArrayList<Sprite>();
+		this.sprites.add(this.player);
+		this.sprites.addAll(this.enemies);
+		this.sprites.addAll(this.obstacles);
 
 		//set background offsets
 		this.bgX = 695;
@@ -70,8 +87,7 @@ public class GamePanel extends JPanel {
 		setFocusable(true);
 
 		this.drawBackground(g2d);
-		this.drawEnemies(g2d);
-		this.drawPlayers(g2d);
+		this.drawSprites(g2d);
 	}
 	 
 	public void drawBackground(Graphics2D g2d) {
@@ -79,21 +95,17 @@ public class GamePanel extends JPanel {
 
 	}
 	
-	public void drawEnemies(Graphics2D g2d) {
-		for (Enemy e : this.enemies) {
-			g2d.drawImage(e.getStillLeftSprite(), e.getCharCoord().getX(), e.getCharCoord().getY(), null);
+	public void drawSprites(Graphics2D g2d) {
+		for (Sprite s : this.sprites) {
+			g2d.drawImage(s.getCurrentSprite(), s.getCharCoord().getX(), s.getCharCoord().getY(), null);
 		}
 	}
 	
-	public void drawPlayers(Graphics2D g2d) {
-		for (Player p : this.players) {
-			g2d.drawImage(p.getCurrentSprite(), p.getCharCoord().getX(), p.getCharCoord().getY(), null); // Drawing the character image
-		}
-	}
 
 	public Player getPlayer() {
 		return this.player;
 	}
+	
 	
 	public Player2 getPlayer2() {
 		return this.player2;
@@ -111,8 +123,21 @@ public class GamePanel extends JPanel {
 		return this.BGMIN_X;
 	}
 	
+	
 	public ArrayList<Enemy> getEnemies() {
 		return this.enemies;
+	}
+	
+	public ArrayList<Obstacle> getObstacles() {
+		return this.obstacles;
+	}
+	
+	public ArrayList<Sprite> getHostiles() {
+		return this.hostiles;
+	}
+	
+	public ArrayList<Sprite> getSprites() {
+		return this.sprites;
 	}
 
 	public void setBgX(int i) {

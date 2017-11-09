@@ -18,7 +18,7 @@ import javax.sound.sampled.TargetDataLine;
  * @author www.codejava.net
  *
  */
-public class SoundRecordingUtil {
+public class AudioRecordingUtil {
     private static final int BUFFER_SIZE = 4096;
     private ByteArrayOutputStream recordBytes;
     private TargetDataLine audioLine;

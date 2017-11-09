@@ -4,12 +4,18 @@
   <artifactId>Sidescroller</artifactId>
   <version>0.0.1-SNAPSHOT</version>
       <dependencies>
-    		<!-- https://mvnrepository.com/artifact/org.glassfish/javax.json -->
-		<dependency>
+    		<!-- [START dependencies] -->
+    		<dependency>
+      		<groupId>com.google.cloud</groupId>
+      		<artifactId>google-cloud-speech</artifactId>
+      		<version>0.26.0-alpha</version>
+    		</dependency>
+    		<dependency>
 		    <groupId>org.glassfish</groupId>
 		    <artifactId>javax.json</artifactId>
 		    <version>1.0</version>
 		</dependency>
+		<!-- [END dependencies] -->		
     </dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>

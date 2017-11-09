@@ -7,11 +7,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.Timer;
 
-import audio.AudioListenerThread;
-import audio.SoundRecordingUtil;
+import audio.AudioHandlerThread;
+import audio.AudioInterpreterUtil;
+import audio.AudioRecordingUtil;
 import model.Enemy;
 import model.Player;
 import model.Player2;
+import model.Sprite;
 import multiplayer.GameServer;
 import view.GamePanel;
 
@@ -24,6 +26,7 @@ public class Controller implements ActionListener {
 	private GamePanel gp;
 	private GameServer gs;
 	//for our convenience
+	private boolean gameStarted = false;
 	private Player player;
 	private Player2 player2;
 	private Timer timer;
@@ -61,11 +64,15 @@ public class Controller implements ActionListener {
 	//this is called when timer reaches 30ms. Essentially the update function
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.checkBoundsToSetMoveable();
-		this.checkMovement(this.player);
-		this.checkMovement(this.player2);
-		this.checkCollisions();
-		this.gp.repaint();
+		if (this.gameStarted) {
+			this.checkBoundsToSetMoveable();
+			this.checkMovement(this.player);
+			if (player2 != null) {
+				this.checkMovement(this.player2);
+			}
+			this.checkCollisions();
+			this.gp.repaint();
+		}
 	}
 	
 	//this is the function that checks the left right bounds to make sure player is not at the edge of the map
@@ -100,37 +107,45 @@ public class Controller implements ActionListener {
 		this.gp.setBgX(this.gp.getBgX() + 8);
 		
 		//for each enemy, have them move with the background
-		for (Enemy e : this.gp.getEnemies()) {
-			int newX = e.getCharCoord().getX() - 8;
-			e.setCharCoord(newX, e.getCharCoord().getY());
+		for (Sprite s : this.gp.getHostiles()) {
+			int newX = s.getCharCoord().getX() - 8;
+			s.setCharCoord(newX, s.getCharCoord().getY());
 		}
-		this.player2.setCharCoord(this.player2.getCharCoord().getX()-8, this.player2.getCharCoord().getY());
+		
+		if (this.player2 != null) {
+			this.player2.setCharCoord(this.player2.getCharCoord().getX()-8, this.player2.getCharCoord().getY());
+		}
 	}
 	
 	public void decrementBgX() {
 		this.gp.setBgX(this.gp.getBgX() - 8);
 		
 		//for each enemy, have them move with the background
-		for (Enemy e : this.gp.getEnemies()) {
-			int newX = e.getCharCoord().getX() + 8;
-			e.setCharCoord(newX, e.getCharCoord().getY());
+		for (Sprite s : this.gp.getHostiles()) {
+			int newX = s.getCharCoord().getX() + 8;
+			s.setCharCoord(newX, s.getCharCoord().getY());
 		}
-		this.player2.setCharCoord(this.player2.getCharCoord().getX()+8, this.player2.getCharCoord().getY());
+		
+		if (this.player2 != null) {
+			this.player2.setCharCoord(this.player2.getCharCoord().getX()+8, this.player2.getCharCoord().getY());
+		}
 	}
 	
 	public void checkCollisions() {
 		Rectangle playerRect = this.player.getBounds();
-		for (Enemy e: this.gp.getEnemies()) {
-			Rectangle enemyRect = e.getBounds();
-			if (playerRect.intersects(enemyRect)) {
-				System.out.println("Collision with Enemy Detected.");
+		for (Sprite s: this.gp.getHostiles()) {
+			Rectangle hostileRect = s.getBounds();
+			if (playerRect.intersects(hostileRect)) {
+				System.out.println("Collision with hostile Detected.");
 			}
 		}
 		
 		//Check for collision with player2
-		Rectangle playerRect2 = this.player2.getBounds();
-		if (playerRect.intersects(playerRect2)) {
-			System.out.println("Collision with player2 Detected.");
+		if (this.player2 != null) {
+			Rectangle playerRect2 = this.player2.getBounds();
+			if (playerRect.intersects(playerRect2)) {
+				System.out.println("Collision with player2 Detected.");
+			}
 		}
 	}
 	
@@ -153,48 +168,74 @@ public class Controller implements ActionListener {
 	/*all player2 movements here. This should work like MyKeyAdapter*/
 	public void updatePlayer2Movement(boolean barray[]) {
 		
-		boolean left = barray[0];
-		boolean right = barray[1];
-		boolean jump = barray[2];
-		boolean leftr = barray[3];
-		boolean rightr = barray[4];
+		if (this.player2 != null) {
 		
-		if (right && this.player2.getMoveableRight() == true) {
-			this.player2.setDirection(2);
-			this.player2.setJumpRight(true);
-		}
-		
-		if (left && this.player2.getMoveableLeft() == true) {
-			System.out.println("In if left loop.");
-			this.player2.setDirection(3);
-			this.player2.setJumpRight(false);
-		}
-		
-		if (jump) {
-			this.player2.checkJump();
-		}	
-		
-		if (leftr || rightr)
-		{
-			if (this.player2.getDirection() == 2) {
-				this.player2.setCurrentSprite(this.player2.getStillRightSprite());// if direction is right
+			boolean left = barray[0];
+			boolean right = barray[1];
+			boolean jump = barray[2];
+			boolean leftr = barray[3];
+			boolean rightr = barray[4];
+			
+			if (right && this.player2.getMoveableRight() == true) {
+				this.player2.setDirection(2);
+				this.player2.setJumpRight(true);
 			}
-			if (this.player2.getDirection() == 3) {
-				this.player2.setCurrentSprite(this.player2.getStillLeftSprite());
+			
+			if (left && this.player2.getMoveableLeft() == true) {
+				this.player2.setDirection(3);
+				this.player2.setJumpRight(false);
 			}
-			this.player2.setDirection(0); // set still image	
+			
+			if (jump) {
+				this.player2.checkJump();
+			}	
+			
+			if (leftr || rightr)
+			{
+				if (this.player2.getDirection() == 2) {
+					this.player2.setCurrentSprite(this.player2.getStillRightSprite());// if direction is right
+				}
+				if (this.player2.getDirection() == 3) {
+					this.player2.setCurrentSprite(this.player2.getStillLeftSprite());
+				}
+				this.player2.setDirection(0); // set still image	
+			}
 		}
+	}
+	
+	public void setRecordButtonListener(JButton recordButton) {
+		recordButton.addActionListener(new RecordButtonListener());
 	}
 	
 	/*audio listening part*/
 	public void record() {
-		SoundRecordingUtil recorder = new SoundRecordingUtil();
-		AudioListenerThread at = new AudioListenerThread(recorder);
+		AudioRecordingUtil recorder = new AudioRecordingUtil();
+		AudioInterpreterUtil interpreter = new AudioInterpreterUtil();
+		AudioHandlerThread at = new AudioHandlerThread(recorder, interpreter);
 		at.start();
 	}
+	
+	public void convertStringToMovement(String s) {
+		if (s.contains("start") || s.contains("begin")) {
+			this.player.setCurrentSprite(this.player.getStillRightSprite());
+			this.gp.repaint();
 
-	public void setRecordButtonListener(JButton recordButton) {
-		recordButton.addActionListener(new RecordButtonListener());
+		}
+		if (s.contains("walk") || s.equals("right")) {
+			if (!this.gameStarted) {	
+				this.gameStarted = true;
+				if (this.player.getMoveableRight()) {
+					this.player.setDirection(2);
+					this.player.setJumpRight(true);
+				}
+			}
+		}
+		if (s.contains("stop") && (this.player.getDirection() == 2)) {
+			this.player.setCurrentSprite(this.player.getStillRightSprite());
+			this.player.setDirection(0); 	
+
+		}
 	}
+	
 	
 }

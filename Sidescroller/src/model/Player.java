@@ -5,7 +5,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 
-public class Player extends Character{
+public class Player extends Sprite{
 	
 	// 0=still 1=up , 2=right , 3=left , 4=down	
 	private int direction;
@@ -16,13 +16,19 @@ public class Player extends Character{
 	protected boolean moveableLeft;
 	protected int run;
 
-	private Image currentSprite;
 	private boolean moveableDown;
 	private boolean jumpRight;
 	private boolean jump;
 	private int velocity;
 	private double acceleration;
 	private int floor;
+	
+	protected Image stillRightSprite;
+	protected Image stillLeftSprite;
+	protected Image walkLeftSprite;
+	protected Image walkRightSprite;
+	protected Image jumpRightSprite;
+	protected Image jumpLeftSprite;
 
 	protected Image walkRightSprite2;
 	protected Image walkRightSprite3;
@@ -57,10 +63,36 @@ public class Player extends Character{
 		this.jumpRight = true;
 		this.jump = false;
 		this.run = 0;
+		
+		//for falling
 		this.velocity = 15;
 		this.acceleration = 1;
 		this.floor = p.getY();
 
+	}
+	
+	public Image getStillRightSprite() {
+		return this.stillRightSprite;
+	}
+	
+	public Image getStillLeftSprite() {
+		return this.stillLeftSprite;
+	}
+	
+	public Image getWalkLeftSprite() {
+		return this.walkLeftSprite;
+	}
+	
+	public Image getWalkRightSprite() {
+		return this.walkRightSprite;
+	}
+	
+	public Image getJumpRightSprite() {
+		return this.jumpRightSprite;
+	}
+	
+	public Image getJumpLeftSprite() {
+		return this.jumpLeftSprite;
 	}
 	
 	public void setMoveableRight(boolean b) {
