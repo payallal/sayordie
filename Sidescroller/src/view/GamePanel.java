@@ -1,5 +1,9 @@
 package view;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import controller.Controller;
 import model.Coordinate;
@@ -26,6 +30,11 @@ public class GamePanel extends JPanel {
 	private int bgX;
 	private int bgY;
 	private Controller controller;
+	
+	//Start menu setup
+	private Image blackOverlay;
+	private enum STATE {MENU, GAME}
+	private STATE state;
 	
 	
 	//Arrays to keep track of various groups
@@ -76,6 +85,11 @@ public class GamePanel extends JPanel {
 		this.controller.setTimer(30);
 		this.controller.addKeyListenerToGamePanel();
 		
+		//Menu setup
+		this.state = STATE.MENU;
+		blackOverlay = new ImageIcon("img/background/black.png").getImage();
+		
+		
 		setLayout(null);
 	}
 	
@@ -88,6 +102,11 @@ public class GamePanel extends JPanel {
 
 		this.drawBackground(g2d);
 		this.drawSprites(g2d);
+		//Start
+	/*	if (this.state == STATE.MENU)
+		{
+			g2d.drawImage(this.blackOverlay, 0, 0, null);
+		}*/
 	}
 	 
 	public void drawBackground(Graphics2D g2d) {
