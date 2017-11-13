@@ -11,7 +11,7 @@ public class AudioHandlerThread extends Thread{
 	
 	private AudioRecordingUtil recorder;
 	private AudioInterpreterUtil interpreter;
-	private static final int RECORD_TIME = 4000;   // 10 seconds 
+	private static final int RECORD_TIME = 1000;   // 4 seconds 
 	private String rawFileName = "record.raw";
 	private File rawFile = new File(this.rawFileName);
 	private Controller controller;

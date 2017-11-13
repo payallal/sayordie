@@ -148,7 +148,6 @@ public class Player extends Sprite{
 	public void right() {
 		if (this.moveableRight == true) {
 			this.controller.incrementBgX(); // increasing xcoord while moving right
-
 			if (this.run % 3 == 0) {
 				this.currentSprite = this.walkRightSprite;
 			}
@@ -166,6 +165,8 @@ public class Player extends Sprite{
 	public void checkJump() {
 		// TODO Auto-generated method stub
 		if (this.jump == false && this.getCharCoord().getY() == this.floor) {
+			System.out.println("j2");
+
 			this.jump = true;
 			this.moveableDown = true;
 			

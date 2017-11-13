@@ -7,10 +7,14 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.Timer;
 
+import audio2.AudioHandlerThread;
+
+/*
 import audio.AudioHandlerThread;
 import audio.AudioInterpreterUtil;
 import audio.AudioRecordingUtil;
-import model.Enemy;
+*/
+
 import model.Player;
 import model.Player2;
 import model.Sprite;
@@ -29,9 +33,8 @@ public class Controller implements ActionListener {
 	private boolean gameStarted = false;
 	private Player player;
 	private Player2 player2;
-	private Timer timer;
-		
-	private Controller() {}
+	private Timer timer;		
+	
 	
 	public static Controller getSingleton() {
 		return controller;
@@ -71,8 +74,8 @@ public class Controller implements ActionListener {
 				this.checkMovement(this.player2);
 			}
 			this.checkCollisions();
-			this.gp.repaint();
 		}
+		this.gp.repaint();
 	}
 	
 	//this is the function that checks the left right bounds to make sure player is not at the edge of the map
@@ -106,8 +109,8 @@ public class Controller implements ActionListener {
 	public void incrementBgX() {
 		this.gp.setBgX(this.gp.getBgX() + 8);
 		
-		//for each enemy, have them move with the background
-		for (Sprite s : this.gp.getHostiles()) {
+		//for each sprite, have them move with the background
+		for (Sprite s : this.gp.getBackgroundSprites()) {
 			int newX = s.getCharCoord().getX() - 8;
 			s.setCharCoord(newX, s.getCharCoord().getY());
 		}
@@ -120,8 +123,8 @@ public class Controller implements ActionListener {
 	public void decrementBgX() {
 		this.gp.setBgX(this.gp.getBgX() - 8);
 		
-		//for each enemy, have them move with the background
-		for (Sprite s : this.gp.getHostiles()) {
+		//for each sprite, have them move with the background
+		for (Sprite s : this.gp.getBackgroundSprites()) {
 			int newX = s.getCharCoord().getX() + 8;
 			s.setCharCoord(newX, s.getCharCoord().getY());
 		}
@@ -209,32 +212,65 @@ public class Controller implements ActionListener {
 	
 	/*audio listening part*/
 	public void record() {
+		/*
 		AudioRecordingUtil recorder = new AudioRecordingUtil();
 		AudioInterpreterUtil interpreter = new AudioInterpreterUtil();
 		AudioHandlerThread at = new AudioHandlerThread(recorder, interpreter);
 		at.start();
+		*/
+		
+		AudioHandlerThread aht = new AudioHandlerThread(1500);
+		aht.start();
 	}
 	
 	public void convertStringToMovement(String s) {
+		
 		if (s.contains("start") || s.contains("begin")) {
-			this.player.setCurrentSprite(this.player.getStillRightSprite());
-			this.gp.repaint();
+			if (!this.gameStarted) {
+				this.gameStarted = true;
+				this.player.setCurrentSprite(this.player.getStillRightSprite());
+				this.gp.repaint();
+			}
 
 		}
-		if (s.contains("walk") || s.equals("right")) {
-			if (!this.gameStarted) {	
-				this.gameStarted = true;
-				if (this.player.getMoveableRight()) {
-					this.player.setDirection(2);
-					this.player.setJumpRight(true);
-				}
+		
+		if (!this.gameStarted) {
+			return;
+		}
+		
+		if (s.contains("walk") || s.contains("right")) {
+			if (this.player.getMoveableRight()) {
+				this.player.setDirection(2);
+				this.player.setJumpRight(true);
 			}
 		}
+		
+		if (s.contains("jump")) {
+			System.out.println("j");
+			this.player.checkJump();
+		}
+		
 		if (s.contains("stop") && (this.player.getDirection() == 2)) {
 			this.player.setCurrentSprite(this.player.getStillRightSprite());
 			this.player.setDirection(0); 	
 
 		}
+	}
+	
+	public void setTextOfWordSaid(String wordSaid) {
+		this.gp.setTextOfWordSaid(wordSaid);
+	}
+	
+	public void setTextOfInstruction(String instruction) {
+		this.gp.setTextOfInstruction(instruction);
+	}
+	
+	public void setRecordingButtonRed() {
+		this.gp.setRecordingButtonRed();
+	}
+	
+	public void setRecordingButtonGrey() {
+		this.gp.setRecordingButtonGrey();
 	}
 	
 	

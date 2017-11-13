@@ -9,5 +9,4 @@ public class RecordButtonListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Controller.getSingleton().record();
 	}
-
 }
