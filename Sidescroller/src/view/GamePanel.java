@@ -1,5 +1,9 @@
 package view;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import controller.Controller;
 import model.Coordinate;
@@ -31,6 +35,7 @@ public class GamePanel extends JPanel {
 	private int bgX;
 	private int bgY;
 	private Controller controller;
+	
 	
 	
 	//Arrays to keep track of various groups

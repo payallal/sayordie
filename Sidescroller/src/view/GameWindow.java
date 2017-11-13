@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 
@@ -14,8 +15,11 @@ public class GameWindow extends JFrame{
 	
 	private GamePanel gp;
 	private JButton recordButton;
+	private StartMenu menu;
+	private StartPanel sp;
 	
 	public GameWindow() {
+		
 		this.gp = new GamePanel();
 		this.recordButton = new JButton("Record Button");
 		Controller.getSingleton().setRecordButtonListener(this.recordButton);
@@ -24,18 +28,22 @@ public class GameWindow extends JFrame{
 		Container pane = this.getContentPane();
 		pane.add(recordButton, BorderLayout.WEST);
 		pane.add(gp, BorderLayout.CENTER);
+		
+		
 
 		setSize(1024, 800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
+		this.sp = new StartPanel(this);
 	} 
 
 	public static void main(String[] args) {
-		GameWindow gw = new GameWindow();
-		GameServer s;
-		s = new GameServer(1664);
-		Controller.getSingleton().setServer(s);
-		s.acceptClientLoop();
+			GameWindow gw = new GameWindow();
+			GameServer s;
+			s = new GameServer(1664);
+			Controller.getSingleton().setServer(s);
+			s.acceptClientLoop();
+		
 	}
 }
 
