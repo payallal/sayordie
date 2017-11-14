@@ -42,7 +42,7 @@ public class ResponseThread extends Thread {
 		    System.out.println(resultString);
 		    this.c.convertStringToMovement(resultString);
 		    this.c.setTextOfWordSaid(resultString);
-		    this.c.setTextOfInstruction("Understood!");
+		    	this.c.setTextOfInstruction("Understood!");
 		  }
 	  }
 }

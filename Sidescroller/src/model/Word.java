@@ -4,13 +4,11 @@ public class Word extends Sprite{
 	
 	private String text;
 	private Coordinate coord;
-	private String color; 
 	
-	public Word(String s, Coordinate coord, String color) {
+	public Word(String s, Coordinate coord) {
 		super(coord);
 		this.text = s;
 		this.coord = coord;
-		this.color = color;
 	}
 
 	public String getText() {

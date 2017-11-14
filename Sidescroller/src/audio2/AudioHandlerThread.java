@@ -160,8 +160,8 @@ public class AudioHandlerThread extends Thread{
 		      }
 		      
 			  speech.close();
-			  this.c.setTextOfInstruction("Understood!");
-		  
+			  this.c.setTextOfInstruction("Processed!");
+
 		  //Set preload to true, time to preload for a new thread
 		  //this.c.setPreLoadAudioFlag(true);
 

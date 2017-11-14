@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.Timer;
 
 import audio2.AudioHandlerThread;
+import model.Enemy;
+import model.Obstacle;
 
 /*
 import audio.AudioHandlerThread;
@@ -30,11 +32,16 @@ public class Controller implements ActionListener {
 	private GamePanel gp;
 	private GameServer gs;
 	//for our convenience
-	private boolean gameStarted = false;
+	private boolean gameInProgress = false;
 	private Player player;
 	private Player2 player2;
-	private Timer timer;		
+	private Timer timer;	
+	private final int obstacleDistance = 900;
+	private final int accurateJumpDistance = 60;
+	private Obstacle nextObstacle;
+	private boolean jumpOverObstacle = false;
 	
+	private Controller() {}
 	
 	public static Controller getSingleton() {
 		return controller;
@@ -67,13 +74,42 @@ public class Controller implements ActionListener {
 	//this is called when timer reaches 30ms. Essentially the update function
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (this.gameStarted) {
+		if (this.gameInProgress) {
+			
 			this.checkBoundsToSetMoveable();
+			
 			this.checkMovement(this.player);
+			
+			for (Enemy enemy: this.gp.getEnemies()) {
+				this.checkMovement(enemy);
+			}
+			
 			if (player2 != null) {
 				this.checkMovement(this.player2);
 			}
+			
 			this.checkCollisions();
+			
+			//check range for obstacles, but we only do so if there is no current nextObstacle
+			//remmeber to set nextobstacle as null when the obstacle is jumped over 
+			if (this.nextObstacle == null) {
+				for (Obstacle obstacle: this.gp.getObstacles()) {
+					if ((obstacle.getCharCoord().getX() - this.player.getCharCoord().getX()) <= this.obstacleDistance) {
+						this.nextObstacle = obstacle;
+						this.record();
+					}
+				}
+			} 
+			
+			//if there is a next obstacle
+			else {
+				//if we are jumping over the obstacle and the distance is right
+				if (this.jumpOverObstacle && ((this.nextObstacle.getCharCoord().getX() - this.player.getCharCoord().getX()) <= this.accurateJumpDistance)) {
+					this.player.checkJump();
+					this.gp.getObstacles().remove(this.nextObstacle);
+					this.nextObstacle = null;
+				}
+			}
 		}
 		this.gp.repaint();
 	}
@@ -139,7 +175,8 @@ public class Controller implements ActionListener {
 		for (Sprite s: this.gp.getHostiles()) {
 			Rectangle hostileRect = s.getBounds();
 			if (playerRect.intersects(hostileRect)) {
-				System.out.println("Collision with hostile Detected.");
+				this.player.die();
+				this.setGameOver();
 			}
 		}
 		
@@ -226,15 +263,14 @@ public class Controller implements ActionListener {
 	public void convertStringToMovement(String s) {
 		
 		if (s.contains("start") || s.contains("begin")) {
-			if (!this.gameStarted) {
-				this.gameStarted = true;
+			if (!this.gameInProgress) {
+				this.gameInProgress = true;
 				this.player.setCurrentSprite(this.player.getStillRightSprite());
 				this.gp.repaint();
 			}
-
 		}
 		
-		if (!this.gameStarted) {
+		if (!this.gameInProgress) {
 			return;
 		}
 		
@@ -243,11 +279,21 @@ public class Controller implements ActionListener {
 				this.player.setDirection(2);
 				this.player.setJumpRight(true);
 			}
+			for (Enemy e : this.gp.getEnemies()) {
+				if (e.getMoveableRight()) {
+					e.setDirection(2);
+					e.setJumpRight(true);
+				}
+			}
 		}
-		
-		if (s.contains("jump")) {
-			System.out.println("j");
-			this.player.checkJump();
+		if (this.nextObstacle != null) {
+			if (s.contains(this.nextObstacle.getCaption().getText())) {
+				this.jumpOverObstacle = true;
+				//calm the enemy down
+				for (Enemy enemy : this.gp.getEnemies()) {
+					enemy.setVelocity(0);
+				}
+			}
 		}
 		
 		if (s.contains("stop") && (this.player.getDirection() == 2)) {
@@ -273,5 +319,12 @@ public class Controller implements ActionListener {
 		this.gp.setRecordingButtonGrey();
 	}
 	
+	public void setGameOver() {
+		this.gameInProgress = false;
+		this.setTextOfInstruction("GAME OVER.");
+	}
 	
+	public void setNextObstacle(Obstacle o) {
+		this.nextObstacle = o;
+	}
 }

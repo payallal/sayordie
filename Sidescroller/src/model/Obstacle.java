@@ -12,8 +12,7 @@ public class Obstacle extends Sprite {
 	public Obstacle (Coordinate p, String imgPath, String wordDescriptor) {
 		super(p);
 		this.currentSprite = new ImageIcon(imgPath).getImage(); 
-		Coordinate captionCoord = new Coordinate(p.getX(),p.getY()-10);
-		this.caption = new Word(wordDescriptor, captionCoord, "red");
+		this.caption = new Word(wordDescriptor, this.getCaptionCoordinate(p,5));
 	}
 	
 	//the get bounds needs to be a little less sensitive

@@ -49,5 +49,9 @@ public abstract class Sprite implements ImageObserver {
 	public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
 		return false;
 	}
+	
+	public Coordinate getCaptionCoordinate (Coordinate p, int offset) {
+		 return new Coordinate(p.getX(),p.getY()-offset);
+	}
 
 }

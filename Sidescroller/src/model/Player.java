@@ -38,23 +38,26 @@ public class Player extends Sprite{
 	protected Image walkLeftSprite3;
 	protected Image walkLeftSprite4;
 	
+	private Image deadSprite;
+	
 	public Player(Coordinate p) {
 		super(p);
 		
 		//Protected fields from parent Character class
-		this.stillRightSprite = new ImageIcon("img/sprites/playerStillRight.png").getImage(); 
-		this.stillLeftSprite = new ImageIcon("img/sprites/playerStillLeft.png").getImage(); 
-		this.walkLeftSprite = new ImageIcon("img/sprites/playerWalkLeft.png").getImage(); 
-		this.walkRightSprite = new ImageIcon("img/sprites/playerWalkRight.png").getImage();
-		this.walkRightSprite2 = new ImageIcon("img/sprites/playerWalkRight2.png").getImage();
-		this.walkRightSprite3 = new ImageIcon("img/sprites/playerWalkRight3.png").getImage();
-		this.walkRightSprite4 = new ImageIcon("img/sprites/playerWalkRight4.png").getImage();
-		this.walkLeftSprite2 = new ImageIcon("img/sprites/playerWalkLeft2.png").getImage();
-		this.walkLeftSprite3 = new ImageIcon("img/sprites/playerWalkLeft3.png").getImage();
-		this.walkLeftSprite4 = new ImageIcon("img/sprites/playerWalkLeft4.png").getImage();
-		this.jumpRightSprite = new ImageIcon("img/sprites/playerJumpRight.png").getImage(); 
-		this.jumpLeftSprite = new ImageIcon("img/sprites/playerJumpLeft.png").getImage();
+		this.stillRightSprite = new ImageIcon("img/sprites/player/playerStillRight.png").getImage(); 
+		this.stillLeftSprite = new ImageIcon("img/sprites/player/playerStillLeft.png").getImage(); 
+		this.walkLeftSprite = new ImageIcon("img/sprites/player/playerWalkLeft.png").getImage(); 
+		this.walkRightSprite = new ImageIcon("img/sprites/player/playerWalkRight.png").getImage();
+		this.walkRightSprite2 = new ImageIcon("img/sprites/player/playerWalkRight2.png").getImage();
+		this.walkRightSprite3 = new ImageIcon("img/sprites/player/playerWalkRight3.png").getImage();
+		this.walkRightSprite4 = new ImageIcon("img/sprites/player/playerWalkRight4.png").getImage();
+		this.walkLeftSprite2 = new ImageIcon("img/sprites/player/playerWalkLeft2.png").getImage();
+		this.walkLeftSprite3 = new ImageIcon("img/sprites/player/playerWalkLeft3.png").getImage();
+		this.walkLeftSprite4 = new ImageIcon("img/sprites/player/playerWalkLeft4.png").getImage();
+		this.jumpRightSprite = new ImageIcon("img/sprites/player/playerJumpRight.png").getImage(); 
+		this.jumpLeftSprite = new ImageIcon("img/sprites/player/playerJumpLeft.png").getImage();
 		this.currentSprite = this.stillLeftSprite;
+		this.deadSprite = new ImageIcon("img/sprites/player/playerDead.png").getImage();
 		
 		this.direction = 0;
 		this.moveableLeft = true;
@@ -165,7 +168,6 @@ public class Player extends Sprite{
 	public void checkJump() {
 		// TODO Auto-generated method stub
 		if (this.jump == false && this.getCharCoord().getY() == this.floor) {
-			System.out.println("j2");
 
 			this.jump = true;
 			this.moveableDown = true;
@@ -234,6 +236,13 @@ public class Player extends Sprite{
 	
 	public void setCurrentSprite(Image img) {
 		this.currentSprite = img;
+	}
+	
+	public void die() {
+		this.currentSprite = this.deadSprite;
+		//increase x coordinate so that character is lying on the ground
+		Coordinate currentCoord = this.getCharCoord();
+		this.setCharCoord(currentCoord.getX()-80, currentCoord.getY()+100);
 	}
 	
 	

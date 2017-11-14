@@ -36,7 +36,8 @@ public class GamePanel extends JPanel {
 	private int bgY;
 	private Controller controller;
 	
-	
+	private int width;
+	private int height;
 	
 	//Arrays to keep track of various groups
 	private ArrayList<Enemy> enemies;
@@ -59,7 +60,11 @@ public class GamePanel extends JPanel {
 	private Word textOfWordSaid;
 	private Word textInstruction;
 	
-	public GamePanel() {
+	public GamePanel(int w, int h) {
+		
+		this.width = w;
+		this.height = h;
+		
 		this.BGMIN_X = 1000;
 		this.BGMAX_X = 10000;
 		
@@ -70,15 +75,16 @@ public class GamePanel extends JPanel {
 
 		
 		//Create player and player2
-		this.player = new Player(new Coordinate(600,530));
+		this.player = new Player(new Coordinate(400,530));
 		//this.player2 = new Player2(new Coordinate(650, 530));
 		
 		//Put the enemies in relevant array
 		this.enemies = new ArrayList<Enemy>();
+		this.enemies.add(new Enemy(new Coordinate(100, 530)));
 		
 		//Put the obstacles in relevant array
 		this.obstacles = new ArrayList<Obstacle>();
-		this.obstacles.add(new Obstacle(new Coordinate(2000, 645), "img/sprites/flower.png", "flower"));
+		this.obstacles.add(new Obstacle(new Coordinate(3000, 645), "img/sprites/obstacles/flower.png", "flower"));
 		
 		//add all hostiles
 		this.hostiles = new ArrayList<Sprite>();
@@ -93,10 +99,10 @@ public class GamePanel extends JPanel {
 		
 		//On Screen text
 		this.words = new ArrayList<Word>();
-		Word status = new Word("Status:", new Coordinate(550,60), "black");
-		this.textInstruction = new Word("", new Coordinate(700,60), "black");
-		Word whatYouSaid = new Word("What you said:", new Coordinate(550,90), "black");
-		this.textOfWordSaid = new Word("", new Coordinate(700,90), "black");
+		Word status = new Word("Status:", new Coordinate(this.width-600,60));
+		this.textInstruction = new Word("", new Coordinate(this.width-400,60));
+		Word whatYouSaid = new Word("What you said:", new Coordinate(this.width-600,90));
+		this.textOfWordSaid = new Word("", new Coordinate(this.width-400,90));
 
 		this.words.add(this.textOfWordSaid);
 		this.words.add(this.textInstruction);
@@ -115,6 +121,11 @@ public class GamePanel extends JPanel {
 		for (Obstacle o : this.obstacles) {
 			this.words.add(o.getCaption());
 			this.backgroundSprites.add(o.getCaption());
+		}
+		
+		for (Enemy e : this.enemies) {
+			this.words.add(e.getCaption());
+			this.backgroundSprites.add(e.getCaption());
 		}
 		
 		//This is the part where the controller adds listeners
@@ -137,7 +148,7 @@ public class GamePanel extends JPanel {
 	 
 	public void drawBackground(Graphics2D g2d) {
 		g2d.drawImage(this.backgroundImage, 700 - this.bgX, 0, null);
-		g2d.drawImage(this.record, 820,20,null);
+		g2d.drawImage(this.record, this.width-200,20,null);
 	}
 	
 	public void drawSprites(Graphics2D g2d) {
