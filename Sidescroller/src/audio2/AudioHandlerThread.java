@@ -104,7 +104,6 @@ public class AudioHandlerThread extends Thread{
 		    	  	targetDataLine.start();
 		    		this.c.setTextOfInstruction("Speak now!");
 		    		this.c.setRecordingButtonRed();
-		    	  	System.out.println("microphone start");
 		      } catch (LineUnavailableException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

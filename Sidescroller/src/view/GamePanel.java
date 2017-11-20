@@ -132,7 +132,7 @@ public class GamePanel extends JPanel {
 		this.controller = Controller.getSingleton();
 		this.controller.setGamePanel(this);
 		this.controller.setTimer(30);
-		this.controller.addKeyListenerToGamePanel();
+		//this.controller.addKeyListenerToGamePanel();
 		
 		setLayout(null);
 	}

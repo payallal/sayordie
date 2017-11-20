@@ -39,7 +39,6 @@ public class ResponseThread extends Thread {
 		    // first (most likely) one here.
 		    SpeechRecognitionAlternative alternative = result.getAlternativesList().get(0);
 		    String resultString = alternative.getTranscript();
-		    System.out.println(resultString);
 		    this.c.convertStringToMovement(resultString);
 		    this.c.setTextOfWordSaid(resultString);
 		    	this.c.setTextOfInstruction("Understood!");

@@ -1,3 +1,4 @@
+/*We don't use this class any more- it is the keyboard action*/
 package controller;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
