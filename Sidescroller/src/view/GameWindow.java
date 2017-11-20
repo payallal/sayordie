@@ -1,10 +1,10 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -13,6 +13,10 @@ import multiplayer.GameServer;
 
 public class GameWindow extends JFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private GamePanel gp;
 	private JButton recordButton;
 	private StartMenu menu;
@@ -21,7 +25,6 @@ public class GameWindow extends JFrame{
 	private final int height = 800;
 	
 	public GameWindow() {
-		
 		this.gp = new GamePanel(this.width, this.height);
 		this.recordButton = new JButton("Record Button");
 		Controller.getSingleton().setRecordButtonListener(this.recordButton);
@@ -35,6 +38,7 @@ public class GameWindow extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		this.sp = new StartPanel(this);
+		Controller.getSingleton().setGameWindow(this);
 	} 
 
 	public static void main(String[] args) {
@@ -44,6 +48,10 @@ public class GameWindow extends JFrame{
 			Controller.getSingleton().setServer(s);
 			s.acceptClientLoop();
 		
+	}
+
+	public JButton getRecordButton() {
+		return this.recordButton;
 	}
 }
 

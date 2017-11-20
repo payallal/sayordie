@@ -1,9 +1,6 @@
 package view;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import controller.Controller;
 import model.Coordinate;
@@ -18,6 +15,10 @@ import java.util.*;
 
 public class GamePanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	final private int BGMIN_X;
 	final private int BGMAX_X;
 	
@@ -25,7 +26,7 @@ public class GamePanel extends JPanel {
 	private Image backgroundImage;
 	private Image recordRed;
 	private Image recordGrey;
-	private Image record;
+	private Image recordIndicator;
 	
 	//Player variable and player2 variable
 	private Player player;
@@ -71,12 +72,18 @@ public class GamePanel extends JPanel {
 		this.backgroundImage = new ImageIcon("img/background/bg.png").getImage();
 		this.recordRed = new ImageIcon("img/ui/recordRed.png").getImage();
 		this.recordGrey = new ImageIcon("img/ui/recordGrey.png").getImage();
-		this.record = this.recordGrey;
+		this.recordIndicator = this.recordGrey;
 
+		//Get controller singleton
+		this.controller = Controller.getSingleton();
 		
 		//Create player and player2
 		this.player = new Player(new Coordinate(400,530));
-		//this.player2 = new Player2(new Coordinate(650, 530));
+		
+		//If multiplayer is true then we create a player2
+		if (controller.getMultiplayer()) {
+			this.player2 = new Player2(new Coordinate(650, 530));
+		}
 		
 		//Put the enemies in relevant array
 		this.enemies = new ArrayList<Enemy>();
@@ -129,7 +136,6 @@ public class GamePanel extends JPanel {
 		}
 		
 		//This is the part where the controller adds listeners
-		this.controller = Controller.getSingleton();
 		this.controller.setGamePanel(this);
 		this.controller.setTimer(30);
 		//this.controller.addKeyListenerToGamePanel();
@@ -148,7 +154,7 @@ public class GamePanel extends JPanel {
 	 
 	public void drawBackground(Graphics2D g2d) {
 		g2d.drawImage(this.backgroundImage, 700 - this.bgX, 0, null);
-		g2d.drawImage(this.record, this.width-200,20,null);
+		g2d.drawImage(this.recordIndicator, this.width-200,20,null);
 	}
 	
 	public void drawSprites(Graphics2D g2d) {
@@ -218,12 +224,12 @@ public class GamePanel extends JPanel {
 		this.textOfWordSaid.setText(wordSaid);
 	}
 	
-	public void setRecordingButtonRed() {
-		this.record = this.recordRed;
+	public void setRecordingIndicatorRed() {
+		this.recordIndicator = this.recordRed;
 	}
 	
-	public void setRecordingButtonGrey() {
-		this.record = this.recordGrey;
+	public void setRecordingIndicatorGrey() {
+		this.recordIndicator = this.recordGrey;
 	}
 	
 }

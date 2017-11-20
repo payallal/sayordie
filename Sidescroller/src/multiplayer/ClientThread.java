@@ -7,18 +7,16 @@ import java.io.*;
 public class ClientThread extends Thread {
 	
 	private Socket client;
-	private ReadKeyThread keyRead;
-	private GameServer server;
+	private ReadMovementThread readMovementThread;
 	private PrintWriter pw;
 	private BufferedReader br;
 	
-	public ClientThread (Socket c, GameServer gs) {
-		this.server = gs;
+	public ClientThread (Socket c) {
 		this.client = c;
 		try {
 			this.pw = new PrintWriter(this.client.getOutputStream());	
 			this.br = new BufferedReader(new InputStreamReader(this.client.getInputStream()));
-			this.keyRead = new ReadKeyThread(this, this.br);
+			this.readMovementThread = new ReadMovementThread(this.br);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -42,11 +40,10 @@ public class ClientThread extends Thread {
 	@Override
 	public void run()
 	{
-		this.keyRead.start();
+		this.readMovementThread.start();
 	}
 	
 	//method that will 
-
 	public void cleanConnection()
 	{
 		System.out.println("Client disconnecting, cleaning the data!");

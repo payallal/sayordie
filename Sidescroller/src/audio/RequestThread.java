@@ -1,4 +1,4 @@
-package audio2;
+package audio;
 
 import com.google.api.gax.rpc.ApiStreamObserver;
 import com.google.cloud.speech.v1.StreamingRecognizeRequest;

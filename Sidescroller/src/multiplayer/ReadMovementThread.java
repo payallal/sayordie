@@ -10,16 +10,14 @@ import javax.json.JsonReader;
 
 import controller.Controller;
 
-public class ReadKeyThread extends Thread {
+public class ReadMovementThread extends Thread {
 	
 	private BufferedReader incomingJSON;
-	private ClientThread ct;
 	private boolean barray[];
 	private Controller controller;
 	
-	public ReadKeyThread (ClientThread ct, BufferedReader br) {
+	public ReadMovementThread (BufferedReader br) {
 		this.incomingJSON = br;
-		this.ct = ct;
 		this.barray = new boolean[6];
 		this.resetBooleans();
 		this.controller = Controller.getSingleton();
@@ -60,12 +58,10 @@ public class ReadKeyThread extends Thread {
 		reader.close();
 		
 		//now grab the boolean values we need
-		this.barray[0] = keyObject.getBoolean("leftPressed");
-		this.barray[1] = keyObject.getBoolean("rightPressed");
-		this.barray[2] = keyObject.getBoolean("jumpPressed");
-		this.barray[3] = keyObject.getBoolean("leftReleased");
-		this.barray[4] = keyObject.getBoolean("rightReleased");
-		this.barray[5] = keyObject.getBoolean("jumpReleased");
+		this.barray[0] = keyObject.getBoolean("start");
+		this.barray[1] = keyObject.getBoolean("right");
+		this.barray[2] = keyObject.getBoolean("jump");
+		this.barray[3] = keyObject.getBoolean("stop");
 		
 	}
 }

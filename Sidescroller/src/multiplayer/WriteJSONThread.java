@@ -16,12 +16,10 @@ public class WriteJSONThread extends Thread{
 	public void run() {
 		this.pw.println(
 				"  {" +
-		        "   \"leftPressed\": " + barray[0] + "," +
-		        "   \"rightPressed\" : " + barray[1] + "," +
-		        "   \"jumpPressed\" : " + barray[2] + "," +
-		        "   \"leftReleased\" : " + barray[3] + "," +	
-		        "   \"rightReleased\" : " + barray[4] + "," +	
-		        "   \"jumpReleased\" : " + barray[5] +	
+		        "   \"start\": " + barray[0] + "," +
+		        "   \"right\" : " + barray[1] + "," +
+		        "   \"jump\" : " + barray[2] + "," +
+		        "   \"stop\" : " + barray[3] +	
 		        " }");
 		this.pw.flush();
 	}

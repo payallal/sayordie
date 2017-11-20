@@ -3,11 +3,12 @@ package controller;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.Timer;
 
-import audio2.AudioHandlerThread;
+import audio.AudioHandlerThread;
 import model.Enemy;
 import model.Obstacle;
 
@@ -22,17 +23,21 @@ import model.Player2;
 import model.Sprite;
 import multiplayer.GameServer;
 import view.GamePanel;
+import view.GameWindow;
 
 public class Controller implements ActionListener {
 	
 	//Singleton
 	private static Controller controller = new Controller();
 	
+	
 	//the controller does not have any field itself- it leaves that to the view and model classes to carry
+	private GameWindow gw;
 	private GamePanel gp;
 	private GameServer gs;
 	//for our convenience
 	private boolean gameInProgress = false;
+	private boolean multiplayer = true;
 	private Player player;
 	private Player2 player2;
 	private Timer timer;	
@@ -45,6 +50,10 @@ public class Controller implements ActionListener {
 	
 	public static Controller getSingleton() {
 		return controller;
+	}
+	
+	public void setGameWindow(GameWindow gw) {
+		this.gw = gw;
 	}
 	
 	public void setGamePanel(GamePanel gp) {
@@ -205,40 +214,52 @@ public class Controller implements ActionListener {
 		return this.gp.getBGMIN();
 	}
 	
+	public boolean getMultiplayer() {
+		return this.multiplayer;
+	}
+	
+	public void setMultiplayer(boolean b) {
+		this.multiplayer = b;
+	}
+	
 	/*all player2 movements here. This should work like MyKeyAdapter*/
 	public void updatePlayer2Movement(boolean barray[]) {
 		
 		if (this.player2 != null) {
 		
-			boolean left = barray[0];
+			boolean start = barray[0];
 			boolean right = barray[1];
 			boolean jump = barray[2];
-			boolean leftr = barray[3];
-			boolean rightr = barray[4];
+			boolean stop = barray[3];
+			
+			if (start) {
+				if (!this.player2.getGameStarted()) {
+					this.player2.setGameStarted(true);
+					this.player2.setCurrentSprite(this.player2.getStillRightSprite());
+				}			
+			}
+			
+			if (!this.player2.getGameStarted()) {
+				return;
+			}
 			
 			if (right && this.player2.getMoveableRight() == true) {
 				this.player2.setDirection(2);
 				this.player2.setJumpRight(true);
 			}
 			
-			if (left && this.player2.getMoveableLeft() == true) {
-				this.player2.setDirection(3);
-				this.player2.setJumpRight(false);
-			}
 			
 			if (jump) {
 				this.player2.checkJump();
 			}	
 			
-			if (leftr || rightr)
+			if (stop)
 			{
 				if (this.player2.getDirection() == 2) {
-					this.player2.setCurrentSprite(this.player2.getStillRightSprite());// if direction is right
+					this.player2.setCurrentSprite(this.player2.getStillRightSprite());// set still image	
 				}
-				if (this.player2.getDirection() == 3) {
-					this.player2.setCurrentSprite(this.player2.getStillLeftSprite());
-				}
-				this.player2.setDirection(0); // set still image	
+
+				this.player2.setDirection(0); //set direction back to still
 			}
 		}
 	}
@@ -249,27 +270,47 @@ public class Controller implements ActionListener {
 	
 	/*audio listening part*/
 	public void record() {
-		/*
-		AudioRecordingUtil recorder = new AudioRecordingUtil();
-		AudioInterpreterUtil interpreter = new AudioInterpreterUtil();
-		AudioHandlerThread at = new AudioHandlerThread(recorder, interpreter);
-		at.start();
-		*/
-		
 		AudioHandlerThread aht = new AudioHandlerThread(1500);
 		aht.start();
 	}
 	
 	public void convertStringToMovement(String s) {
 		
+		boolean[] barray = new boolean[6];
+		Arrays.fill(barray, false);	
+		
 		if (s.contains("start") || s.contains("begin")) {
-			if (!this.gameInProgress) {
+			if (!this.gameInProgress) {		
+				
 				this.gameInProgress = true;
 				this.player.setCurrentSprite(this.player.getStillRightSprite());
-				this.gp.repaint();
+				if (multiplayer) {
+					//Tell client we have started game, and then wait for client to start game
+					barray[0] = true; 
+					this.gs.sendJSONToClients(barray);
+					
+					//we wait for player 2 to get started, disable the recording button
+					this.setTextOfInstruction("Waiting for other player...");
+					this.setTextOfWordSaid(s);
+					this.gw.getRecordButton().setEnabled(false);
+					while(!player2.getGameStarted()) {}
+					this.gw.getRecordButton().setEnabled(true);
+
+					//Once player 2 has joined, we start moving right
+					this.setTextOfInstruction("Player 2 is in. BEGIN!");
+					if (this.player.getMoveableRight()) {
+						this.player.setDirection(2);
+						this.player.setJumpRight(true);
+					}
+				
+					//Start telling client that server player is moving right
+					barray[1] = true; //set right
+					this.gs.sendJSONToClients(barray);
+				}
 			}
 		}
 		
+		//start or begin is the only command allowed if game is not in progress
 		if (!this.gameInProgress) {
 			return;
 		}
@@ -279,6 +320,7 @@ public class Controller implements ActionListener {
 				this.player.setDirection(2);
 				this.player.setJumpRight(true);
 			}
+			
 			for (Enemy e : this.gp.getEnemies()) {
 				if (e.getMoveableRight()) {
 					e.setDirection(2);
@@ -286,6 +328,7 @@ public class Controller implements ActionListener {
 				}
 			}
 		}
+		
 		if (this.nextObstacle != null) {
 			if (s.contains(this.nextObstacle.getCaption().getText())) {
 				this.jumpOverObstacle = true;
@@ -311,12 +354,12 @@ public class Controller implements ActionListener {
 		this.gp.setTextOfInstruction(instruction);
 	}
 	
-	public void setRecordingButtonRed() {
-		this.gp.setRecordingButtonRed();
+	public void setRecordingIndicatorRed() {
+		this.gp.setRecordingIndicatorRed();
 	}
 	
-	public void setRecordingButtonGrey() {
-		this.gp.setRecordingButtonGrey();
+	public void setRecordingIndicatorGrey() {
+		this.gp.setRecordingIndicatorGrey();
 	}
 	
 	public void setGameOver() {

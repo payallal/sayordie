@@ -1,25 +1,21 @@
 package audio;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.sound.sampled.LineUnavailableException;
 
 public class AudioSleepThread extends Thread{
 	
-	private AudioHandlerThread alt;
 	private int recordTime; 
+	private AudioHandlerThread aht;
 	
-	public AudioSleepThread(AudioHandlerThread alt, int recordTime) {
-		this.alt = alt;
+	public AudioSleepThread(AudioHandlerThread aht, int recordTime) {
 		this.recordTime = recordTime;
+		this.aht = aht;
 	}
 	
 	@Override
 	public void run() {
 		try {
 			Thread.sleep(this.recordTime);
-			this.alt.getRecorder().setIsRunning(false);
+			this.aht.setStopCapture(true);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

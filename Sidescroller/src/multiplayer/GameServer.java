@@ -22,14 +22,13 @@ public class GameServer {
 			Socket c;
 			try {
 				c = this.servSock.accept();
-				ClientThread th = new ClientThread(c, this);
-				this.clientList.add(th);
-				th.start();
+				ClientThread clientThread = new ClientThread(c);
+				this.clientList.add(clientThread);
+				clientThread.start();
 				System.out.println("Just accepted a client. Going to the next iteration");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
 		}
 	}
 	
@@ -41,7 +40,7 @@ public class GameServer {
 	
 	/*
 	public void broadcastMessage(String message, ClientThread sender) {
-//		for each client but the sender, send message
+		//for each client but the sender, send message
 		
 	}
 	*/

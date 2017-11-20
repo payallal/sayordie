@@ -2,9 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Window;
 import java.awt.Dialog.ModalityType;
-
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
