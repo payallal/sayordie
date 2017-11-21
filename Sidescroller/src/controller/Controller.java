@@ -37,7 +37,7 @@ public class Controller implements ActionListener {
 	private GameServer gs;
 	//for our convenience
 	private boolean gameInProgress = false;
-	private boolean multiplayer = true;
+	private boolean multiplayer = false;
 	private Player player;
 	private Player2 player2;
 	private Timer timer;	
