@@ -1,13 +1,32 @@
 package model;
 import javax.swing.ImageIcon;
 
-
+/**
+ * Represents the features of enemy characters. Extends Player class and automates movements.
+ * @see model.Player
+ * @author Roger
+ *
+ */
 public class Enemy extends Player {
-	
+	/**
+	 * Stores the text to be shown above enemy character on game screen.
+	 * @see model.Word
+	 */
 	private Word caption;
+	/**
+	 * Stores the value velocity at which the character will move.
+	 */
 	private int velocity;
+	/**
+	 * Stores the value of how much the character will accelerate.
+	 */
 	private double acceleration;
 	
+	/**
+	 * Constructor for enemy class. Initializes velocity and acceleration.
+	 * Sets the enemy sprite images and caption.
+	 * @param p X and Y-coordinates at which the enemy character will be placed initially.
+	 */
 	public Enemy (Coordinate p) {
 		super(p);
 		this.velocity = 1;
@@ -29,7 +48,10 @@ public class Enemy extends Player {
 		this.currentSprite = this.stillRightSprite;
 		this.caption = new Word("'u suck fool'", this.getCaptionCoordinate(p,-20));
 	}
-	
+	/**
+	 * Automates the movement of the enemy to the right by changing the X-coordinates based on acceleration and velocity variables.
+	 * Animates the sprite during movement by toggling the sprite image.
+	 */
 	@Override
 	public void right() {
 		//System.out.println(this.moveableRight);
@@ -57,11 +79,18 @@ public class Enemy extends Player {
 			this.run++;
 		}
 	}
-	
+	/**
+	 * Getter method for the words to be displayed above enemy.
+	 * @see model.Word
+	 * @return caption the current caption.
+	 */
 	public Word getCaption() {
 		return this.caption;
 	}
-
+	/**
+	 * Setter method for the velocity variable.
+	 * @param v new velocity value.
+	 */
 	public void setVelocity(int v) {
 		this.velocity = v;
 	}
