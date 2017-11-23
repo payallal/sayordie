@@ -13,17 +13,28 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-
+/**
+ * JPanel containing the start menu dialog box.
+ * @author Alexia
+ *
+ */
 public class StartMenu extends JPanel{
 	
+	 /**
+	 * Stores RGB value for the background color of the button panel.
+	 */
 	 private static final Color BG = new Color(10, 50, 200);
 
-	    public StartMenu() {
-	        JLabel pausedLabel = new JLabel("Start Game");
-	        pausedLabel.setForeground(Color.WHITE);
+	 /**
+	  * Constructor for the start menu.
+	  * Initializes labels and buttons. Sets layout of components on the screen. 
+	  */
+	 public StartMenu() {
+	        JLabel startLabel = new JLabel("Start Game");
+	        startLabel.setForeground(Color.WHITE);
 	        JPanel pausedPanel = new JPanel();
 	        pausedPanel.setOpaque(false);
-	        pausedPanel.add(pausedLabel);
+	        pausedPanel.add(startLabel);
 
 	        setBackground(BG);
 	        int eb = 15;
@@ -35,11 +46,16 @@ public class StartMenu extends JPanel{
 	    }
 
 	    // simple action -- all it does is to make the dialog no longer visible
-	    private class DialogDisposer extends AbstractAction {
+	/**
+	 * Subclass which disposes of main menu dialog box upon button selection. 
+	 * @author david
+	 *
+	 */
+    private class DialogDisposer extends AbstractAction {
 	        public DialogDisposer(String name) {
 	            super(name);
 	        }
-
+	        
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	            Component comp = (Component) e.getSource();
