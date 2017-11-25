@@ -324,13 +324,13 @@ public class GamePanel extends JPanel {
 	/**
 	 * Setter method to change the #record field to the red record icon.
 	 */
-	public void setRecordingButtonRed() {
+	public void setRecordingIndicatorRed() {
 		this.record = this.recordRed;
 	}
 	/**
 	 * Setter method to change the #record field to the grey record icon.
 	 */
-	public void setRecordingButtonGrey() {
+	public void setRecordingIndicatorGrey() {
 		this.record = this.recordGrey;
 	}
 	
