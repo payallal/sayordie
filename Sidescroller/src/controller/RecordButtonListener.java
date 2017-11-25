@@ -7,6 +7,9 @@ public class RecordButtonListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (!Controller.getSingleton().getConnected()) {
+			Controller.getSingleton().setTextOfInstruction("Connecting...");
+		}
 		Controller.getSingleton().record();
 	}
 }

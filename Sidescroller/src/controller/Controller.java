@@ -45,6 +45,7 @@ public class Controller implements ActionListener {
 	private final int accurateJumpDistance = 60;
 	private Obstacle nextObstacle;
 	private boolean jumpOverObstacle = false;
+	private boolean connected = false;
 	
 	private Controller() {}
 	
@@ -369,5 +370,13 @@ public class Controller implements ActionListener {
 	
 	public void setNextObstacle(Obstacle o) {
 		this.nextObstacle = o;
+	}
+	
+	public boolean getConnected() {
+		return this.connected;
+	}
+	
+	public void setConnected(boolean b) {
+		this.connected = b;
 	}
 }

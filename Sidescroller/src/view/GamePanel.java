@@ -156,7 +156,7 @@ public class GamePanel extends JPanel {
 		//On Screen text
 		this.words = new ArrayList<Word>();
 		Word status = new Word("Status:", new Coordinate(this.width-600,60));
-		this.textInstruction = new Word("", new Coordinate(this.width-400,60));
+		this.textInstruction = new Word("Click to connect ->", new Coordinate(this.width-400,60));
 		Word whatYouSaid = new Word("What you said:", new Coordinate(this.width-600,90));
 		this.textOfWordSaid = new Word("", new Coordinate(this.width-400,90));
 

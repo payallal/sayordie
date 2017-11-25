@@ -101,8 +101,10 @@ public class AudioHandlerThread extends Thread{
 		    	  	targetDataLine.open();
 		    	  	//don't forget to start the microphone
 		    	  	targetDataLine.start();
-		    		this.c.setTextOfInstruction("Speak now!");
-		    		this.c.setRecordingIndicatorRed();
+		    	  	if (this.c.getConnected()) {
+		    	  		this.c.setTextOfInstruction("Speak now!");
+			    		this.c.setRecordingIndicatorRed();
+		    	  	}
 		      } catch (LineUnavailableException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -129,8 +131,9 @@ public class AudioHandlerThread extends Thread{
 			  }
 			  
 			  this.c.setRecordingIndicatorGrey();
-			  
-			  this.c.setTextOfInstruction("Loading...");
+			  if (this.c.getConnected()) {
+				  this.c.setTextOfInstruction("Loading...");
+			  }
 			  
 			  //Make sure that each request thread is finished before moving on
 			  for (RequestThread reqt : this.reqtArray) {
@@ -157,8 +160,14 @@ public class AudioHandlerThread extends Thread{
 		      }
 		      
 			  speech.close();
-			  this.c.setTextOfInstruction("Processed!");
-
+			  
+			  if (!this.c.getConnected()) {
+	    	  		this.c.setConnected(true);
+	    	  		this.c.setTextOfInstruction("Connected!");
+	    	  	  }
+			  else {
+				  this.c.setTextOfInstruction("Processed!");
+			  }
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
