@@ -5,7 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 
-import javax.swing.JButton;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.Timer;
 
 import audio.AudioHandlerThread;
@@ -46,6 +48,10 @@ public class Controller implements ActionListener {
 	private Obstacle nextObstacle;
 	private boolean jumpOverObstacle = false;
 	private boolean connected = false;
+	private JLabel recordLabel;
+	private Icon recordRed = new ImageIcon("img/ui/recordRed.png");
+	private Icon recordGrey = new ImageIcon("img/ui/recordGrey.png");
+	private Icon recordDarkGrey = new ImageIcon("img/ui/recordDarkGrey.png");
 	
 	private Controller() {}
 	
@@ -265,8 +271,24 @@ public class Controller implements ActionListener {
 		}
 	}
 	
-	public void setRecordButtonListener(JButton recordButton) {
-		recordButton.addActionListener(new RecordButtonListener());
+	public void setRecordLabel(JLabel recordLabel) {
+		this.recordLabel = recordLabel;
+	}
+	
+	public void setRecordLabelMouseListener(JLabel recordLabel) {
+		recordLabel.addMouseListener(new RecordLabelListener());
+	}
+	
+	public void setRecordingIndicatorRed() {
+		this.recordLabel.setIcon(this.recordRed);
+	}
+	
+	public void setRecordingIndicatorGrey() {
+		this.recordLabel.setIcon(this.recordGrey);
+	}
+	
+	public void setRecordingIndicatorDarkGrey() {
+		this.recordLabel.setIcon(this.recordDarkGrey);
 	}
 	
 	/*audio listening part*/
@@ -293,9 +315,9 @@ public class Controller implements ActionListener {
 					//we wait for player 2 to get started, disable the recording button
 					this.setTextOfInstruction("Waiting for other player...");
 					this.setTextOfWordSaid(s);
-					this.gw.getRecordButton().setEnabled(false);
+					//this.gw.getRecordButton().setEnabled(false);
 					while(!player2.getGameStarted()) {}
-					this.gw.getRecordButton().setEnabled(true);
+					//this.gw.getRecordButton().setEnabled(true);
 
 					//Once player 2 has joined, we start moving right
 					this.setTextOfInstruction("Player 2 is in. BEGIN!");
@@ -355,13 +377,6 @@ public class Controller implements ActionListener {
 		this.gp.setTextOfInstruction(instruction);
 	}
 	
-	public void setRecordingIndicatorRed() {
-		this.gp.setRecordingIndicatorRed();
-	}
-	
-	public void setRecordingIndicatorGrey() {
-		this.gp.setRecordingIndicatorGrey();
-	}
 	
 	public void setGameOver() {
 		this.gameInProgress = false;

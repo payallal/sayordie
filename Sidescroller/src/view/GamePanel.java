@@ -28,19 +28,6 @@ public class GamePanel extends JPanel {
 	 * Stores background image to be displayed.
 	 */
 	private Image backgroundImage;
-	/**
-	 * Stores image of a red recording mic to be displayed when the microphone is active.
-	 */
-	private Image recordRed;
-	/**
-	 * Stores image of a grey recording mic to be displayed when the microphone is inactive.
-	 */
-	private Image recordGrey;
-	/**
-	 * Stores the recording mic to be displayed dependent on the current microphone state (ie. active or inactive).
-	 * Serves as an intermediary to allow for toggling between states.
-	 */
-	private Image record;
 	
 	/**
 	 * Stores information about the player that the user will control.
@@ -125,10 +112,6 @@ public class GamePanel extends JPanel {
 		this.BGMAX_X = 10000;
 		
 		this.backgroundImage = new ImageIcon("img/background/bg.png").getImage();
-		this.recordRed = new ImageIcon("img/ui/recordRed.png").getImage();
-		this.recordGrey = new ImageIcon("img/ui/recordGrey.png").getImage();
-		this.record = this.recordGrey;
-
 		
 		//Create player and player2
 		this.player = new Player(new Coordinate(400,530));
@@ -188,7 +171,7 @@ public class GamePanel extends JPanel {
 		this.controller = Controller.getSingleton();
 		this.controller.setGamePanel(this);
 		this.controller.setTimer(30);
-		this.controller.addKeyListenerToGamePanel();
+		//this.controller.addKeyListenerToGamePanel();
 		
 		setLayout(null);
 	}
@@ -211,7 +194,7 @@ public class GamePanel extends JPanel {
 	 */
 	public void drawBackground(Graphics2D g2d) {
 		g2d.drawImage(this.backgroundImage, 700 - this.bgX, 0, null);
-		g2d.drawImage(this.record, this.width-200,20,null);
+		//g2d.drawImage(this.record, this.width-200,20,null);
 	}
 	/**
 	 * Helper method used in the paint component to draw sprites over the background image at the current coordinates.
@@ -321,17 +304,4 @@ public class GamePanel extends JPanel {
 	public void setTextOfWordSaid(String wordSaid) {
 		this.textOfWordSaid.setText(wordSaid);
 	}
-	/**
-	 * Setter method to change the #record field to the red record icon.
-	 */
-	public void setRecordingIndicatorRed() {
-		this.record = this.recordRed;
-	}
-	/**
-	 * Setter method to change the #record field to the grey record icon.
-	 */
-	public void setRecordingIndicatorGrey() {
-		this.record = this.recordGrey;
-	}
-	
 }
