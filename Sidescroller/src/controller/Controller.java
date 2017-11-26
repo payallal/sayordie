@@ -31,69 +31,177 @@ import multiplayer.GameServer;
 import view.GamePanel;
 import view.GameWindow;
 
+/**
+ * CLass which translates user input into onscreen actions.
+ * @author Roger
+ *
+ */
 public class Controller implements ActionListener {
 	
-	//Singleton
+	
+	/**
+	 * Singleton for game controller.
+	 */
 	private static Controller controller = new Controller();
 	
 	
 	//the controller does not have any field itself- it leaves that to the view and model classes to carry
+	/**
+	 * Stores an instance of the game window.
+	 * @see view.GameWindow
+	 */
 	private GameWindow gw;
+	/**
+	 * Stores an instance of the game panel.
+	 * @see view.GamePanel
+	 */
 	private GamePanel gp;
+	/**
+	 * Stores an instance of the game server for multiplayer mode.
+	 * @see multiplayer.GameServer
+	 */
 	private GameServer gs;
 	//for our convenience
+	/**
+	 * Stores boolean value that changes during runtime to indicate when the game has started.
+	 */
 	private boolean gameInProgress = false;
+	/**
+	 * Stores boolean value to indicate whether or not the game is in multiplayer mode.
+	 */
 	private boolean multiplayer = false;
+	/**
+	 * Stores information about an instance of the player that the user will control.
+	 * @see model.Player
+	 */
 	private Player player;
+	/**
+	 * Stores information about the second player that will be controlled in multiplayer mode.
+	 * @see model.Player2
+	 */
 	private Player2 player2;
+	/**
+	 * Stores an instance of the timer to be used to determine the times to activate the microphone.
+	 */
 	private Timer timer;	
+	/**
+	 * Stores the upcoming obstacle during runtime. Changes obstacle dependent on other conditions.
+	 */
 	private Obstacle nextObstacle;
+	/**
+	 * Stores boolean value to indicate if the player is currently jumping over an obstacle.
+	 */
 	private boolean jumpOverObstacle = false;
+	/**
+	 * 
+	 */
 	private boolean connected = false;
+	/**
+	 * Stores boolean value to indicate if the microphone is currently recording.
+	 */
 	private boolean recording = false;
 	
-	
+	/**
+	 * Stores the JButton which the user clicks to start the microphone.
+	 */
 	private JButton recordButton;
+	/**
+	 * Stores the image that is displayed when the microphone is activated.
+	 */
 	private Icon recordRed = new ImageIcon("img/ui/recordRed.png");
+	/**
+	 * Stores the image that is displayed when the microphone is inactive.
+	 */
 	private Icon recordGrey = new ImageIcon("img/ui/recordGrey.png");
+	/**
+	 * Stores the image that is displayed when the microphone button is pressed to give the visual effect of pressing the button.
+	 */
 	private Icon recordDarkGrey = new ImageIcon("img/ui/recordDarkGrey.png");
-	
+	/**
+	 * Stores change in velocity of enemy sprite.
+	 */
 	private int newVelocity = 0;
+	/**
+	 * Stores the distance from the object at which the microphone is activated.
+	 */
 	private final int obstacleDistance = 990;
+	/**
+	 * Stores the distance from the object at which the microphone should start recording.
+	 */
 	private final int recordingDistance = 890;
+	/**
+	 * Stores distance to calculate jumping over obstacle.
+	 */
 	private final int accurateJumpDistance = 60;
+	/**
+	 * Stores sprite's offset to make sprite image move with the background.
+	 */
 	private final int playerMovementOffset = 8;
+	/**
+	 * Stores value to set timer in seconds.
+	 */
 	private final int updateTime = 30;
 	
+	/**
+	 * Constructor for controller singleton.
+	 */
 	private Controller() {}
 	
+	/**
+	 * Getter method for the controller.
+	 * @return current instance of the controller.
+	 */
 	public static Controller getSingleton() {
 		return controller;
 	}
 	
+	/**
+	 * Setter method to initialize the GameWindow field of the controller.
+	 * @param gw an instance of game window
+	 * @see view.GameWindow
+	 */
 	public void setGameWindow(GameWindow gw) {
 		this.gw = gw;
 	}
 	
+	/**
+	 * Getter method to retrieve the game window stored in this class's GameWindow variable.
+	 * @return instance of game window being used by controller
+	 * @see view.GameWindow
+	 */
 	public GameWindow getGameWindow() {
 		return this.gw;
 	}
-	
+	/**
+	 * Initializes the GamePanel, Player and Player2 fields.
+	 * @param gp instance of the current game panel.
+	 */
 	public void setGamePanel(GamePanel gp) {
 		this.gp = gp;
 		this.player = gp.getPlayer();
 		this.player2 = gp.getPlayer2();
 	}
 	
+	/**
+	 * Setter method for the game server
+	 * @param gs current instance of game server when in multiplayer mode.
+	 * @see multiplayer.GameServer
+	 */
 	public void setServer(GameServer gs) {
 		this.gs = gs;
 	}
-	
+	/**
+	 * Getter method for the given instance of the game server.
+	 * @return an instance of the game server.
+	 * @see multiplayer.GameServer
+	 */
 	public GameServer getServer () {
 		return this.gs;
 	}
 	
-	//set timer 
+	/**
+	 * Sets and starts timer.
+	 */
 	public void setTimer() {
 		this.timer = new Timer(this.updateTime, this);
 		this.timer.start();
@@ -101,6 +209,10 @@ public class Controller implements ActionListener {
 	
 	//this is called when timer reaches 30ms. Essentially the update function
 	@Override
+	/**
+	 * Update function which repaints screen and checks the various boolean values such as whether there is a collision.
+	 * @param e an action event.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if (this.gameInProgress) {
 			
@@ -123,11 +235,11 @@ public class Controller implements ActionListener {
 		}
 		this.gp.repaint();
 	}
-	
 
-	
-	//this is the function that checks the left right bounds to make sure player is not at the edge of the map
-	//If player is at the edge, the we set moveable to false
+	/**
+	 *  Checks the left right bounds to make sure player is not at the edge of the map.
+	 *  If player is at the edge, then set moveable to false
+	 */
 	public void checkBoundsToSetMoveable() {
 		if (this.gp.getBgX() >= this.gp.getBGMAX() - 800) {
 			this.player.setMoveableRight(false);
@@ -144,6 +256,10 @@ public class Controller implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Moves the player in the indicated direction.
+	 * @param p current instance of the player.
+	 */
 	public void checkMovement(Player p) {
 		if (p.getDirection() == 2) {
 			p.right();
@@ -153,7 +269,9 @@ public class Controller implements ActionListener {
 		}
 		p.jump();
 	}
-	
+	/**
+	 * Increases the background X-coordinate by player offset.
+	 */
 	public void incrementBgX() {
 		this.gp.setBgX(this.gp.getBgX() + this.playerMovementOffset);
 		
@@ -167,7 +285,9 @@ public class Controller implements ActionListener {
 			this.player2.setCharCoord(this.player2.getCharCoord().getX()-this.playerMovementOffset, this.player2.getCharCoord().getY());
 		}
 	}
-	
+	/**
+	 * Decreases the background X-coordinate by player offset.
+	 */
 	public void decrementBgX() {
 		this.gp.setBgX(this.gp.getBgX() - this.playerMovementOffset);
 		
@@ -182,6 +302,9 @@ public class Controller implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Checks whether player collided with other sprites and ends gameplay if collision occurs. 
+	 */
 	public void checkCollisions() {
 		Rectangle playerRect = this.player.getBounds();
 		for (Sprite s: this.gp.getHostiles()) {
@@ -200,7 +323,10 @@ public class Controller implements ActionListener {
 			}
 		}
 	}
-	
+	/**
+	 * Resets controller fields after jumping over an obstacle.
+	 * Changes enemy velocity, resets booleans and sets microphone.
+	 */
 	public void nextObstaclePreparation() {
 		//check range for obstacles, but we only do so if there is no current nextObstacle
 		//remember to set nextobstacle as null when the obstacle is jumped over 
@@ -242,36 +368,60 @@ public class Controller implements ActionListener {
 			}
 		}
 	}
-	
+	/**
+	 * Getter method for current instance of Player in this class.
+	 * @return current instance of player.
+	 */
 	public Player getPlayer() {
 		return this.gp.getPlayer();
 	}
-	
+	/**
+	 * Getter method for the current background image coordinates.
+	 * @return the current background image coordinates.
+	 */
 	public int getBgX() {
 		return this.gp.getBgX();
 	}
-	
+	/**
+	 * Getter method for the current maximum X-coordinate of background image.
+	 * @return the current maximum X-coordinate of background image.
+	 */
 	public int getBGMAX() {
 		return this.gp.getBGMAX();
 	}
-	
+	/**
+	 * Getter method for the current minimum X-coordinate of background image.
+	 * @return the current minimum X-coordinate of background image.
+	 */
 	public int getBGMIN() {
 		return this.gp.getBGMIN();
 	}
-	
+	/**
+	 * Getter method for the whether the game is in multiplayer mode.
+	 * @return boolean value of whether the game is in multiplayer mode.
+	 */
 	public boolean getMultiplayer() {
 		return this.multiplayer;
 	}
-	
+	/**
+	 * Setter method to change boolean value determining whether game is in multiplayer mode.
+	 * @param b new boolean value for whether the game is in multiplayer mode.
+	 */
 	public void setMultiplayer(boolean b) {
 		this.multiplayer = b;
 	}
-	
+	/**
+	 * Getter method for whether game is still in progress.
+	 * @return boolean value of whether game is in progress.
+	 */
 	public boolean getGameInProgress() {
 		return this.gameInProgress;
 	}
 	
-	/*all player2 movements here. This should work like MyKeyAdapter*/
+	/**
+	 * Controls all player2 movements.
+	 * @param barray array of the boolean parameters necessary to determine character movement.
+	 */
 	public void updatePlayer2Movement(boolean barray[]) {
 		
 		if (this.player2 != null) {
@@ -312,33 +462,51 @@ public class Controller implements ActionListener {
 			}
 		}
 	}
-	
+	/**
+	 * Sets the record button to this class' instance of the record button
+	 * @param recordButton field
+	 */
 	public void setrecordButton(JButton recordButton) {
 		this.recordButton = recordButton;
 	}
-	
+	/**
+	 * Adds action listener to recod button.
+	 * @param recordButton field of controller class.
+	 */
 	public void setrecordButtonMouseListener(JButton recordButton) {
 		recordButton.addActionListener(new RecordButtonListener());
 	}
-	
+	/**
+	 * Changes the record icon to red image.
+	 */
 	public void setRecordingIndicatorRed() {
 		this.recordButton.setIcon(this.recordRed);
 	}
-	
+	/**
+	 * Changes the record icon to grey image.
+	 */
 	public void setRecordingIndicatorGrey() {
 		this.recordButton.setIcon(this.recordGrey);
 	}
-	
+	/**
+	 * Changes the record icon to dark grey image.
+	 */
 	public void setRecordingIndicatorDarkGrey() {
 		this.recordButton.setIcon(this.recordDarkGrey);
 	}
 	
 	/*audio listening part*/
+	/**
+	 * Handles audio by starting audio recording for set time period.
+	 */
 	public void record() {
 		AudioHandlerThread aht = new AudioHandlerThread(1500);
 		aht.start();
 	}
-	
+	/**
+	 * Connects audio transcriptions from user to player actions. 
+	 * @param s transcript from user speech.
+	 */
 	public void convertStringToMovement(String s) {
 		
 		boolean[] barray = new boolean[4];
@@ -410,21 +578,32 @@ public class Controller implements ActionListener {
 
 		}
 	}
-	
+	/**
+	 * Setter method to change onscreen text to the audio transcription from user.
+	 * @param wordSaid audio transcript from user.
+	 */
 	public void setTextOfWordSaid(String wordSaid) {
 		this.gp.setTextOfWordSaid(wordSaid);
 	}
-	
+	/**
+	 * Setter method to change instructions displayed on the screen.
+	 * @param instruction text to be displayed
+	 */
 	public void setTextOfInstruction(String instruction) {
 		this.gp.setTextOfInstruction(instruction);
 	}
 	
-	
+	/**
+	 * Ends current gameplay and sets instruction text to game over text.
+	 */
 	public void setGameOver() {
 		this.gameInProgress = false;
 		this.setTextOfInstruction("GAME OVER.");
 	}
-	
+	/**
+	 * Setter method to set the next obstacle that the player will encounter.
+	 * @param o the next game obstacle 
+	 */
 	public void setNextObstacle(Obstacle o) {
 		this.nextObstacle = o;
 	}
@@ -436,7 +615,12 @@ public class Controller implements ActionListener {
 	public void setConnected(boolean b) {
 		this.connected = b;
 	}
-	
+	/**
+	 * Loads game obstacles into array in a random order.
+	 * @param obstacle an array list of game obstacle sprites. 
+	 * @param obstacleCoordinates an array list of the coordinates of each game obstacle sprite.
+	 * @param obstacleLibrary an array list of the strings associated with the game obstacles.
+	 */
 	public void loadObstacles(ArrayList <Obstacle> obstacle, ArrayList<Coordinate> obstacleCoordinates, ArrayList<String> obstacleLibrary) {
 		for (Coordinate coordinate: obstacleCoordinates) {
 			//get random obstacle from obstacle library
@@ -448,7 +632,9 @@ public class Controller implements ActionListener {
 			obstacle.add(new Obstacle(coordinate, randomObstacleName));
 		}
 	}
-
+	/**
+	 * Initializes the second player in multiplayer mode.
+	 */
 	public void setPlayer2() {
 		this.player2 = new Player2(new Coordinate(410, 530));
 		this.gp.setPlayer2(this.player2);
