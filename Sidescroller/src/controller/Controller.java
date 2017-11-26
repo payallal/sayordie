@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.Timer;
 
 import audio.AudioHandlerThread;
+import audio.AudioPlayerThread;
 import model.Coordinate;
 import model.Enemy;
 import model.Obstacle;
@@ -55,7 +56,7 @@ public class Controller implements ActionListener {
 	private Icon recordDarkGrey = new ImageIcon("img/ui/recordDarkGrey.png");
 	
 	private int newVelocity = 0;
-	private final int obstacleDistance = 900;
+	private final int obstacleDistance = 880;
 	private final int accurateJumpDistance = 60;
 	private final int playerMovementOffset = 8;
 	private final int updateTime = 30;
@@ -109,30 +110,13 @@ public class Controller implements ActionListener {
 			
 			this.checkCollisions();
 			
-			//check range for obstacles, but we only do so if there is no current nextObstacle
-			//remmeber to set nextobstacle as null when the obstacle is jumped over 
-			if (this.nextObstacle == null) {
-				for (Obstacle obstacle: this.gp.getObstacles()) {
-					if ((obstacle.getCharCoord().getX() - this.player.getCharCoord().getX()) <= this.obstacleDistance) {
-						this.nextObstacle = obstacle;
-						this.record();
-					}
-				}
-			} 
-			
-			//if there is a next obstacle
-			else {
-				//if we are jumping over the obstacle and the distance is right
-				if (this.jumpOverObstacle && ((this.nextObstacle.getCharCoord().getX() - this.player.getCharCoord().getX()) <= this.accurateJumpDistance)) {
-					this.player.checkJump();
-					this.gp.getObstacles().remove(this.nextObstacle);
-					this.nextObstacle = null;
-					this.jumpOverObstacle = false;
-				}
-			}
+			this.nextObstaclePreparation();
+
 		}
 		this.gp.repaint();
 	}
+	
+
 	
 	//this is the function that checks the left right bounds to make sure player is not at the edge of the map
 	//If player is at the edge, the we set moveable to false
@@ -205,6 +189,47 @@ public class Controller implements ActionListener {
 			Rectangle playerRect2 = this.player2.getBounds();
 			if (playerRect.intersects(playerRect2)) {
 				System.out.println("Collision with player2 Detected.");
+			}
+		}
+	}
+	
+	public void nextObstaclePreparation() {
+		//check range for obstacles, but we only do so if there is no current nextObstacle
+		//remember to set nextobstacle as null when the obstacle is jumped over 
+		if (this.nextObstacle == null) {
+			for (Obstacle obstacle: this.gp.getObstacles()) {
+				if ((obstacle.getCharCoord().getX() - this.player.getCharCoord().getX()) <= this.obstacleDistance) {
+					this.nextObstacle = obstacle;
+					//AudioPlayerThread apt = new AudioPlayerThread(this.nextObstacle);
+					//apt.start();
+					this.record();
+					for (Enemy e: this.gp.getEnemies()) {
+						e.setVelocity(e.getVelocity()+this.newVelocity);
+						if (this.newVelocity >= 10) {
+							this.newVelocity=0;
+						}
+						else {
+							this.newVelocity+=5;
+						}
+					}
+				}
+			}
+		}
+		
+		//if there is a next obstacle
+		else {
+			//if (!this.recording) {
+			//	this.record();
+			//  this.recording = true;
+			//}
+			
+			//if we are jumping over the obstacle and the distance is right
+			if (this.jumpOverObstacle && ((this.nextObstacle.getCharCoord().getX() - this.player.getCharCoord().getX()) <= this.accurateJumpDistance)) {
+				this.player.checkJump();
+				this.gp.getObstacles().remove(this.nextObstacle);
+				this.nextObstacle = null;
+				this.jumpOverObstacle = false;
+				//this.recording = false;
 			}
 		}
 	}
@@ -361,8 +386,7 @@ public class Controller implements ActionListener {
 				this.jumpOverObstacle = true;
 				//calm the enemy down
 				for (Enemy enemy : this.gp.getEnemies()) {
-					enemy.setVelocity(this.newVelocity);
-					this.newVelocity += 5;
+					enemy.setVelocity(0);
 				}
 			}
 		}
@@ -405,6 +429,7 @@ public class Controller implements ActionListener {
 			//get random obstacle from obstacle library
 			Random randomizer = new Random();
 			String randomObstacleName = obstacleLibrary.get(randomizer.nextInt(obstacleLibrary.size()));
+			obstacleLibrary.remove(randomObstacleName);
 			System.out.println(randomObstacleName);
 			//add obstacle to obstacle list
 			obstacle.add(new Obstacle(coordinate, randomObstacleName));

@@ -29,7 +29,7 @@ public class Enemy extends Player {
 	 */
 	public Enemy (Coordinate p) {
 		super(p);
-		this.velocity = 1;
+		this.velocity = 3;
 		this.acceleration = 2;
 		
 		//Protected fields from parent Character class
@@ -46,7 +46,7 @@ public class Enemy extends Player {
 		this.jumpRightSprite = new ImageIcon("img/sprites/enemy/enemyJumpRight.png").getImage(); 
 		this.jumpLeftSprite = new ImageIcon("img/sprites/enemy/enemyJumpLeft.png").getImage();
 		this.currentSprite = this.stillRightSprite;
-		this.caption = new Word("'u suck fool'", this.getCaptionCoordinate(p,-20));
+		this.caption = new Word("'u suck'", this.getCaptionCoordinate(p,-20));
 	}
 	/**
 	 * Automates the movement of the enemy to the right by changing the X-coordinates based on acceleration and velocity variables.
@@ -91,6 +91,10 @@ public class Enemy extends Player {
 	 */
 	public void setVelocity(int v) {
 		this.velocity = v;
+	}
+	
+	public int getVelocity() {
+		return this.velocity;
 	}
 		
 }

@@ -17,9 +17,12 @@ public class Obstacle extends Sprite {
 	 * @see model.Word
 	 */
 	private Word caption;
-	private String path = "img/sprites/obstacles/";
-	private String path2 = ".png";
+	private String imgDir = "img/sprites/obstacles/";
+	private String audioDir = "audio/";
+	private String imgExtension = ".png";
+	private String audioExtension = ".wav";
 	private String imgPath;
+	private String audioPath;
 	
 	/**
 	 * Constructor for obstacles. Sets coordinates, sprite image and caption.
@@ -28,9 +31,10 @@ public class Obstacle extends Sprite {
 	 */
 	public Obstacle (Coordinate p, String wordDescriptor) {
 		super(p);
-		this.imgPath = this.path + wordDescriptor + this.path2;
+		this.imgPath = this.imgDir + wordDescriptor + this.imgExtension;
 		this.currentSprite = new ImageIcon(this.imgPath).getImage(); 
 		this.caption = new Word(wordDescriptor, this.getCaptionCoordinate(p,10));
+		this.audioPath = this.audioDir + wordDescriptor + this.audioExtension;
 	}
 	
 	//the get bounds needs to be a little less sensitive
@@ -53,4 +57,7 @@ public class Obstacle extends Sprite {
 		return this.caption;
 	}
 	
+	public String getAudioPath() {
+		return this.audioPath;
+	}
 }
