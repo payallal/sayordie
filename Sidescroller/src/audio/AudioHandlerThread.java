@@ -18,10 +18,21 @@ import com.google.cloud.speech.v1.RecognitionConfig.AudioEncoding;
 
 import controller.Controller;
 
+/**
+ * Represents thread which handles the capture and passing of audio the the server for processing.
+ * @author Roger, Alexia
+ *
+ */
 public class AudioHandlerThread extends Thread{
 	
 	//These are default 
+	/**
+	 * Stores array list of request threads.
+	 */
 	 ArrayList<RequestThread> reqtArray = new ArrayList<RequestThread>();
+	 /**
+	  * Stores boolean value to determine whether or not to stop audio capture.
+	  */
 	 boolean stopCapture = false;
 	 SpeechClient speech;
 	 RecognitionConfig recConfig;
@@ -34,14 +45,29 @@ public class AudioHandlerThread extends Thread{
 	 TargetDataLine targetDataLine;
 	 ResponseThread respt;
 	 
+	 /**
+	  * Stores the number of second that the audio thread will sleep.
+	  */
 	 private int seconds;
+	 /**
+	  * Stores instance of the game controller.
+	  * @see controller.Controller
+	  */
 	 private Controller c;
 
+	 /**
+	  * Initializes controller and sets the length of the sleep time of the thread in seconds.
+	  * @param seconds number of seconds that the thread sleeps.
+	  */
 	 public AudioHandlerThread(int seconds) {
 		 this.seconds = seconds;
 		 this.c = Controller.getSingleton();
 	 }
 	 
+	/**
+	 * Sets the format of the audio to be exchanged with the Google server.
+	 * @return format of the audio. 
+	 */
 	public AudioFormat getAudioFormat() {
 	      float sampleRate = 16000;
 	      int sampleSizeInBits = 16;
@@ -53,6 +79,10 @@ public class AudioHandlerThread extends Thread{
 	}
 
 	@Override
+	/**
+	 * Establishes connection with Google's server and configures request. 
+	 * Instantiate response observer custom class, gets audio format, instantiates audio threads and handles recording and passing of audio to Google server.
+	 */
 	public void run() {	
 		
 		try {
@@ -184,6 +214,10 @@ public class AudioHandlerThread extends Thread{
 		}
 	}
 	
+	/**
+	 * Setter method for boolean value to determine whether to stop audio capture.
+	 * @param b new boolean value to determine whether to stop audio capture.
+	 */
 	public void setStopCapture(boolean b) {
 		this.stopCapture = b;
 	}

@@ -7,17 +7,39 @@ import com.google.cloud.speech.v1.StreamingRecognizeResponse;
 
 import controller.Controller;
 
+/**
+ * Represents thread to receive transcription response for audio sent to Google's server.
+ * @author Roger
+ *
+ */
 public class ResponseThread extends Thread {
 	
+	 /**
+	  * 
+	  * @see audio.ResponseApiStreamingObserver
+	  */
 	  private ResponseApiStreamingObserver<StreamingRecognizeResponse> responseObserver;
+	  /**
+	   * Stores instance of game controller.
+	   * @see controller.Controller
+	   */
 	  private Controller c;
 	  
+	  /**
+	   * Constructor for response thread. Initializes response observer and controller.
+	   * @param responseObserver
+	   */
 	  public ResponseThread(ResponseApiStreamingObserver<StreamingRecognizeResponse> responseObserver) {
 		  this.responseObserver = responseObserver;
 		  this.c = Controller.getSingleton();
 	  }
 	  
 	  @Override 
+	  /**
+	   * Receives audio transcription from Google's server and sets to a string.
+	   * Passes the string to the controller to perform in-game actions and displays transcription on the screen.
+	   * @see controller.Controller
+	   */
 	  public void run() {
 		  
 		List<StreamingRecognizeResponse> responses;
