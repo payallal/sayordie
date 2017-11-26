@@ -18,7 +18,7 @@ public class Obstacle extends Sprite {
 	 */
 	private Word caption;
 	private String imgDir = "img/sprites/obstacles/";
-	private String audioDir = "audio/";
+	private String audioDir = "audiowav/";
 	private String imgExtension = ".png";
 	private String audioExtension = ".wav";
 	private String imgPath;

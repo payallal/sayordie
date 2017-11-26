@@ -50,13 +50,17 @@ public class Controller implements ActionListener {
 	private Obstacle nextObstacle;
 	private boolean jumpOverObstacle = false;
 	private boolean connected = false;
+	private boolean recording = false;
+	
+	
 	private JButton recordButton;
 	private Icon recordRed = new ImageIcon("img/ui/recordRed.png");
 	private Icon recordGrey = new ImageIcon("img/ui/recordGrey.png");
 	private Icon recordDarkGrey = new ImageIcon("img/ui/recordDarkGrey.png");
 	
 	private int newVelocity = 0;
-	private final int obstacleDistance = 880;
+	private final int obstacleDistance = 980;
+	private final int recordingDistance = 880;
 	private final int accurateJumpDistance = 60;
 	private final int playerMovementOffset = 8;
 	private final int updateTime = 30;
@@ -204,9 +208,9 @@ public class Controller implements ActionListener {
 			for (Obstacle obstacle: this.gp.getObstacles()) {
 				if ((obstacle.getCharCoord().getX() - this.player.getCharCoord().getX()) <= this.obstacleDistance) {
 					this.nextObstacle = obstacle;
-					//AudioPlayerThread apt = new AudioPlayerThread(this.nextObstacle);
-					//apt.start();
-					this.record();
+					AudioPlayerThread apt = new AudioPlayerThread(this.nextObstacle);
+					apt.start();
+					//this.record();
 					for (Enemy e: this.gp.getEnemies()) {
 						e.setVelocity(e.getVelocity()+this.newVelocity);
 						if (this.newVelocity >= 10) {
@@ -222,10 +226,11 @@ public class Controller implements ActionListener {
 		
 		//if there is a next obstacle
 		else {
-			//if (!this.recording) {
-			//	this.record();
-			//  this.recording = true;
-			//}
+			//if recording is within recording distance
+			if (!this.recording && (this.nextObstacle.getCharCoord().getX() - this.player.getCharCoord().getX()) <= this.recordingDistance) {
+				this.record();
+				this.recording = true;
+			}
 			
 			//if we are jumping over the obstacle and the distance is right
 			if (this.jumpOverObstacle && ((this.nextObstacle.getCharCoord().getX() - this.player.getCharCoord().getX()) <= this.accurateJumpDistance)) {
@@ -233,7 +238,7 @@ public class Controller implements ActionListener {
 				this.gp.getObstacles().remove(this.nextObstacle);
 				this.nextObstacle = null;
 				this.jumpOverObstacle = false;
-				//this.recording = false;
+				this.recording = false;
 			}
 		}
 	}
@@ -260,6 +265,10 @@ public class Controller implements ActionListener {
 	
 	public void setMultiplayer(boolean b) {
 		this.multiplayer = b;
+	}
+	
+	public boolean getGameInProgress() {
+		return this.gameInProgress;
 	}
 	
 	/*all player2 movements here. This should work like MyKeyAdapter*/

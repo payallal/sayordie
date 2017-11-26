@@ -163,10 +163,16 @@ public class AudioHandlerThread extends Thread{
 			  
 			  if (!this.c.getConnected()) {
 	    	  		this.c.setConnected(true);
-	    	  		this.c.setTextOfInstruction("Connected!");
 	    	  	  }
+			  
+			  if (!this.c.getGameInProgress()) {
+	    	  		this.c.setTextOfInstruction("Click button and say 'begin'");
+			  }
+			  else if (this.c.getPlayer().getDirection() != 2) {
+	    	  		this.c.setTextOfInstruction("Click button and say 'right'");
+			  }
 			  else {
-				this.c.setTextOfInstruction("Processed!");
+				  this.c.setTextOfInstruction("Processed!");
 			  }
 
 		} catch (InterruptedException e) {
