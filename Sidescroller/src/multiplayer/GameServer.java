@@ -3,6 +3,7 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 
+import controller.Controller;
 
 public class GameServer {
 	private ServerSocket servSock;
@@ -18,24 +19,18 @@ public class GameServer {
 	}
 
 	public void acceptClientLoop() {
-		while (true) {
-			Socket c;
-			try {
-				c = this.servSock.accept();
-				ClientThread clientThread = new ClientThread(c);
-				this.clientList.add(clientThread);
-				clientThread.start();
-				System.out.println("Just accepted a client. Going to the next iteration");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		ClientConnectorThread cct = new ClientConnectorThread(this, this.servSock);
+		cct.start();
 	}
 	
 	public void sendJSONToClients(boolean[] barray) {
 		for (ClientThread ct: this.clientList) {
 			ct.sendJSONToClient(barray);
 		}
+	}
+	
+	public void addToClientList(ClientThread ct) {
+		this.clientList.add(ct);
 	}
 	
 	/*

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Dialog.ModalityType;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 /**
  * /**
@@ -50,7 +51,6 @@ public class StartPanel extends JPanel{
         dialog.pack(); // size it
         dialog.setLocationRelativeTo(this.gw); // ** Center it over the JFrame **
         dialog.setVisible(true);  // display it, pausing the GUI below it
-
         // at this point the dialog is no longer visible, so get rid of glass pane
         this.setVisible(false); 
 
