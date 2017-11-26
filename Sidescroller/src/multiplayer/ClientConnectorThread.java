@@ -28,7 +28,6 @@ public class ClientConnectorThread extends Thread {
 				ClientThread clientThread = new ClientThread(c);
 				this.gs.addToClientList(clientThread);
 				clientThread.start();
-				System.out.println("Just accepted a client. Going to the next iteration");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

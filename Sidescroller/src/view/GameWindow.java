@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Insets;
 
 import javax.swing.AbstractButton;
 import javax.swing.Icon;
@@ -22,7 +23,7 @@ public class GameWindow extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	private GamePanel gp;
-	private JLabel recordLabel;
+	private JButton recordButton;
 	private StartMenu menu;
 	private StartPanel sp;
 	private final int width = 1280;
@@ -45,12 +46,19 @@ public class GameWindow extends JFrame{
 	    
 	    //set up record label
 		Icon recordGrey = new ImageIcon("img/ui/recordGrey.png");
-		this.recordLabel = new JLabel(recordGrey);
-		layeredPane.add(this.recordLabel, new Integer(2));
-		this.recordLabel.setSize(labelDimension);
-		this.recordLabel.setLocation(this.width-150, 0);
-		Controller.getSingleton().setRecordLabel(this.recordLabel);
-		Controller.getSingleton().setRecordLabelMouseListener(this.recordLabel);
+		Icon recordDarkGrey = new ImageIcon("img/ui/recordDarkGrey.png");
+		this.recordButton = new JButton();
+		this.recordButton.setBorderPainted(false);
+		this.recordButton.setBorder(null);
+		this.recordButton.setMargin(new Insets(0, 0, 0, 0));
+		this.recordButton.setContentAreaFilled(false);
+		this.recordButton.setIcon(recordGrey);
+		this.recordButton.setPressedIcon(recordDarkGrey);
+		layeredPane.add(this.recordButton, new Integer(2));
+		this.recordButton.setSize(labelDimension);
+		this.recordButton.setLocation(this.width-150, 0);
+		Controller.getSingleton().setrecordButton(this.recordButton);
+		Controller.getSingleton().setrecordButtonMouseListener(this.recordButton);
 
 		this.pack();
 		this.setSize(this.width, this.height);
@@ -61,11 +69,11 @@ public class GameWindow extends JFrame{
 	} 
 
 	public static void main(String[] args) {
-			GameWindow gw = new GameWindow();	
+			GameWindow gw = new GameWindow();
 	}
 
-	public JLabel getRecordLabel() {
-		return this.recordLabel;
+	public JButton getRecordButton() {
+		return this.recordButton;
 	}
 }
 
