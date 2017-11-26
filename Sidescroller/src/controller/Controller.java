@@ -3,7 +3,9 @@ package controller;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -11,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.Timer;
 
 import audio.AudioHandlerThread;
+import model.Coordinate;
 import model.Enemy;
 import model.Obstacle;
 
@@ -43,8 +46,6 @@ public class Controller implements ActionListener {
 	private Player player;
 	private Player2 player2;
 	private Timer timer;	
-	private final int obstacleDistance = 900;
-	private final int accurateJumpDistance = 60;
 	private Obstacle nextObstacle;
 	private boolean jumpOverObstacle = false;
 	private boolean connected = false;
@@ -52,6 +53,12 @@ public class Controller implements ActionListener {
 	private Icon recordRed = new ImageIcon("img/ui/recordRed.png");
 	private Icon recordGrey = new ImageIcon("img/ui/recordGrey.png");
 	private Icon recordDarkGrey = new ImageIcon("img/ui/recordDarkGrey.png");
+	
+	private int newVelocity = 0;
+	private final int obstacleDistance = 900;
+	private final int accurateJumpDistance = 60;
+	private final int playerMovementOffset = 8;
+	private final int updateTime = 30;
 	
 	private Controller() {}
 	
@@ -78,13 +85,9 @@ public class Controller implements ActionListener {
 	}
 	
 	//set timer 
-	public void setTimer(int i) {
-		this.timer = new Timer(i, this);
+	public void setTimer() {
+		this.timer = new Timer(this.updateTime, this);
 		this.timer.start();
-	}
-	
-	public void addKeyListenerToGamePanel() {
-		this.gp.addKeyListener(new MyKeyAdapter());		
 	}
 	
 	//this is called when timer reaches 30ms. Essentially the update function
@@ -124,6 +127,7 @@ public class Controller implements ActionListener {
 					this.player.checkJump();
 					this.gp.getObstacles().remove(this.nextObstacle);
 					this.nextObstacle = null;
+					this.jumpOverObstacle = false;
 				}
 			}
 		}
@@ -159,30 +163,30 @@ public class Controller implements ActionListener {
 	}
 	
 	public void incrementBgX() {
-		this.gp.setBgX(this.gp.getBgX() + 8);
+		this.gp.setBgX(this.gp.getBgX() + this.playerMovementOffset);
 		
 		//for each sprite, have them move with the background
 		for (Sprite s : this.gp.getBackgroundSprites()) {
-			int newX = s.getCharCoord().getX() - 8;
+			int newX = s.getCharCoord().getX() - this.playerMovementOffset;
 			s.setCharCoord(newX, s.getCharCoord().getY());
 		}
 		
 		if (this.player2 != null) {
-			this.player2.setCharCoord(this.player2.getCharCoord().getX()-8, this.player2.getCharCoord().getY());
+			this.player2.setCharCoord(this.player2.getCharCoord().getX()-this.playerMovementOffset, this.player2.getCharCoord().getY());
 		}
 	}
 	
 	public void decrementBgX() {
-		this.gp.setBgX(this.gp.getBgX() - 8);
+		this.gp.setBgX(this.gp.getBgX() - this.playerMovementOffset);
 		
 		//for each sprite, have them move with the background
 		for (Sprite s : this.gp.getBackgroundSprites()) {
-			int newX = s.getCharCoord().getX() + 8;
+			int newX = s.getCharCoord().getX() + this.playerMovementOffset;
 			s.setCharCoord(newX, s.getCharCoord().getY());
 		}
 		
 		if (this.player2 != null) {
-			this.player2.setCharCoord(this.player2.getCharCoord().getX()+8, this.player2.getCharCoord().getY());
+			this.player2.setCharCoord(this.player2.getCharCoord().getX()+this.playerMovementOffset, this.player2.getCharCoord().getY());
 		}
 	}
 	
@@ -299,7 +303,7 @@ public class Controller implements ActionListener {
 	
 	public void convertStringToMovement(String s) {
 		
-		boolean[] barray = new boolean[6];
+		boolean[] barray = new boolean[4];
 		Arrays.fill(barray, false);	
 		
 		if (s.contains("start") || s.contains("begin")) {
@@ -357,7 +361,8 @@ public class Controller implements ActionListener {
 				this.jumpOverObstacle = true;
 				//calm the enemy down
 				for (Enemy enemy : this.gp.getEnemies()) {
-					enemy.setVelocity(0);
+					enemy.setVelocity(this.newVelocity);
+					this.newVelocity += 5;
 				}
 			}
 		}
@@ -393,5 +398,16 @@ public class Controller implements ActionListener {
 	
 	public void setConnected(boolean b) {
 		this.connected = b;
+	}
+	
+	public void loadObstacles(ArrayList <Obstacle> obstacle, ArrayList<Coordinate> obstacleCoordinates, ArrayList<String> obstacleLibrary) {
+		for (Coordinate coordinate: obstacleCoordinates) {
+			//get random obstacle from obstacle library
+			Random randomizer = new Random();
+			String randomObstacleName = obstacleLibrary.get(randomizer.nextInt(obstacleLibrary.size()));
+			System.out.println(randomObstacleName);
+			//add obstacle to obstacle list
+			obstacle.add(new Obstacle(coordinate, randomObstacleName));
+		}
 	}
 }

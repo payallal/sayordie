@@ -166,7 +166,7 @@ public class AudioHandlerThread extends Thread{
 	    	  		this.c.setTextOfInstruction("Connected!");
 	    	  	  }
 			  else {
-				  this.c.setTextOfInstruction("Processed!");
+				this.c.setTextOfInstruction("Processed!");
 			  }
 
 		} catch (InterruptedException e) {

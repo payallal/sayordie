@@ -17,16 +17,19 @@ public class Obstacle extends Sprite {
 	 * @see model.Word
 	 */
 	private Word caption;
+	private String path = "img/sprites/obstacles/";
+	private String path2 = ".png";
+	private String imgPath;
 	
 	/**
 	 * Constructor for obstacles. Sets coordinates, sprite image and caption.
 	 * @param p X and Y-coordinates at which the obstacle will be placed.
-	 * @param imgPath the location of the image file of the obstacle.
 	 * @param wordDescriptor word to be displayed as obstacle caption.
 	 */
-	public Obstacle (Coordinate p, String imgPath, String wordDescriptor) {
+	public Obstacle (Coordinate p, String wordDescriptor) {
 		super(p);
-		this.currentSprite = new ImageIcon(imgPath).getImage(); 
+		this.imgPath = this.path + wordDescriptor + this.path2;
+		this.currentSprite = new ImageIcon(this.imgPath).getImage(); 
 		this.caption = new Word(wordDescriptor, this.getCaptionCoordinate(p,10));
 	}
 	

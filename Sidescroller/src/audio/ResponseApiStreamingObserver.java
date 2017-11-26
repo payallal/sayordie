@@ -12,6 +12,7 @@ import com.google.common.util.concurrent.SettableFuture;
 	  @Override
 	  public void onNext(T message) {
 	    messages.add(message);
+	    this.onCompleted();
 	  }
 
 	  @Override

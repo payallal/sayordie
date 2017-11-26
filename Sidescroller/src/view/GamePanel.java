@@ -2,6 +2,7 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -63,11 +64,20 @@ public class GamePanel extends JPanel {
 	//private ArrayList<Backgrounds> backgrounds;
 	
 	/**
-	 * Stores arrays of game obstacles.
+	 * Stores all in game obstacles.
 	 * @see model.Obstacle
 	 */
 	private ArrayList<Obstacle> obstacles;
 	/**
+	 * Stores all the obstacle names in the img/sprites/obstacles directory
+	 */
+	 private ArrayList<String> obstacleLibrary;
+	/**
+	 * Stores all the obstacles coordinates
+	 * @see model.Coordinate
+	 */
+	 private ArrayList<Coordinate> obstacleCoordinates;
+	 /**
 	 * Stores the array of all hostile sprites, that is, the obstacles and enemy sprites.
 	 * @see model.Sprite
 	 */
@@ -109,21 +119,32 @@ public class GamePanel extends JPanel {
 		this.height = h;
 		
 		this.BGMIN_X = 1000;
-		this.BGMAX_X = 10000;
+		this.BGMAX_X = 30000;
 		
-		this.backgroundImage = new ImageIcon("img/background/bg.png").getImage();
+		this.backgroundImage = new ImageIcon("img/background/bg2.png").getImage();
 		
 		//Create player and player2
 		this.player = new Player(new Coordinate(400,530));
 		//this.player2 = new Player2(new Coordinate(650, 530));
 		
+		//This is the part where the controller adds listeners
+		this.controller = Controller.getSingleton();
+		this.controller.setGamePanel(this);
+		this.controller.setTimer();
+		
 		//Put the enemies in relevant array
 		this.enemies = new ArrayList<Enemy>();
 		this.enemies.add(new Enemy(new Coordinate(100, 530)));
 		
+		//Put obstacle coordinates in relevant array
+		this.loadObstacleCoordinates();
+		//Load obstacles in the obstacle library
+		this.loadObstacleLibrary();
+	    
 		//Put the obstacles in relevant array
 		this.obstacles = new ArrayList<Obstacle>();
-		this.obstacles.add(new Obstacle(new Coordinate(3000, 645), "img/sprites/obstacles/flower.png", "flower"));
+		//This is done by controller because it contains game logic (Random selection)
+		this.controller.loadObstacles(obstacles, obstacleCoordinates, obstacleLibrary);
 		
 		//add all hostiles
 		this.hostiles = new ArrayList<Sprite>();
@@ -167,12 +188,6 @@ public class GamePanel extends JPanel {
 			this.backgroundSprites.add(e.getCaption());
 		}
 		
-		//This is the part where the controller adds listeners
-		this.controller = Controller.getSingleton();
-		this.controller.setGamePanel(this);
-		this.controller.setTimer(30);
-		//this.controller.addKeyListenerToGamePanel();
-		
 		setLayout(null);
 	}
 	/**
@@ -194,7 +209,6 @@ public class GamePanel extends JPanel {
 	 */
 	public void drawBackground(Graphics2D g2d) {
 		g2d.drawImage(this.backgroundImage, 700 - this.bgX, 0, null);
-		//g2d.drawImage(this.record, this.width-200,20,null);
 	}
 	/**
 	 * Helper method used in the paint component to draw sprites over the background image at the current coordinates.
@@ -304,4 +318,32 @@ public class GamePanel extends JPanel {
 	public void setTextOfWordSaid(String wordSaid) {
 		this.textOfWordSaid.setText(wordSaid);
 	}
+	
+	public void loadObstacleLibrary() {
+		this.obstacleLibrary = new ArrayList<String>();
+
+		/*We load all the obstacles from the obstacle folder*/ 
+		File folder = new File("img/sprites/obstacles");
+		File[] listOfFiles = folder.listFiles();
+
+	    for (int i = 0; i < listOfFiles.length; i++) {
+	    		if (listOfFiles[i].isFile()) {
+	    			String fileName = listOfFiles[i].getName();
+	    			String obstacleName= fileName.substring(0, fileName.lastIndexOf('.'));
+	    			//set coordinates to null first
+	    			this.obstacleLibrary.add(obstacleName);
+	    		} 
+	    }
+	}
+	
+	public void loadObstacleCoordinates() {
+		this.obstacleCoordinates = new ArrayList<Coordinate>();
+		this.obstacleCoordinates.add(new Coordinate(3000, 645));
+		this.obstacleCoordinates.add(new Coordinate(5000, 645));
+		this.obstacleCoordinates.add(new Coordinate(7000, 645));
+		this.obstacleCoordinates.add(new Coordinate(9000, 645));
+		this.obstacleCoordinates.add(new Coordinate(11000, 645));
+		this.obstacleCoordinates.add(new Coordinate(13000, 645));
+	}
+	
 }

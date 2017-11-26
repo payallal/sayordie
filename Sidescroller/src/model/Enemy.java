@@ -54,8 +54,6 @@ public class Enemy extends Player {
 	 */
 	@Override
 	public void right() {
-		//System.out.println(this.moveableRight);
-		//System.out.println(this.controller.getBgX() < this.controller.getBGMAX() - 800);
 
 		if (this.moveableRight == true) {
 			//instead of moving the background, you move the character
@@ -73,7 +71,7 @@ public class Enemy extends Player {
 			}
 			
 			//Character will keep moving right, every 50th time run is being run, we'll add some acceleration
-			if (this.run % 45 == 0) {
+			if (this.run % 46 == 0) {
 				this.velocity += this.acceleration;
 			}
 			this.run++;
