@@ -93,10 +93,15 @@ public class GamePanel extends JPanel {
 	 */
 	private ArrayList<Sprite> sprites;
 	/**
-	 * Stores the array to keep track of all text.
+	 * Stores the array to keep track of all sprite text.
 	 * @see model.Word
 	 */
-	private ArrayList<Word> words;
+	private ArrayList<Word> spriteWords;
+	/**
+	 * Stores the array to keep track of all status text.
+	 * @see model.Word
+	 */
+	private ArrayList<Word> statusWords;
 	/**
 	 * Stores text of word to be said by user. Empty at first.
 	 * @see model.Word
@@ -119,7 +124,7 @@ public class GamePanel extends JPanel {
 		this.height = h;
 		
 		this.BGMIN_X = 1000;
-		this.BGMAX_X = 30000;
+		this.BGMAX_X = 10000;
 		
 		this.backgroundImage = new ImageIcon("img/background/bg2.png").getImage();
 		
@@ -158,16 +163,16 @@ public class GamePanel extends JPanel {
 		this.sprites.addAll(this.obstacles);
 		
 		//On Screen text
-		this.words = new ArrayList<Word>();
+		this.statusWords = new ArrayList<Word>();
 		Word status = new Word("Status:", new Coordinate(this.width-600,60));
 		this.textInstruction = new Word("Click to connect ->", new Coordinate(this.width-400,60));
 		Word whatYouSaid = new Word("What you said:", new Coordinate(this.width-600,90));
 		this.textOfWordSaid = new Word("", new Coordinate(this.width-400,90));
 
-		this.words.add(this.textOfWordSaid);
-		this.words.add(this.textInstruction);
-		this.words.add(status);
-		this.words.add(whatYouSaid);
+		this.statusWords.add(this.textOfWordSaid);
+		this.statusWords.add(this.textInstruction);
+		this.statusWords.add(status);
+		this.statusWords.add(whatYouSaid);
 		
 		//set background offsets
 		this.bgX = 700; //695;
@@ -177,14 +182,17 @@ public class GamePanel extends JPanel {
 		this.backgroundSprites = new ArrayList<Sprite>();
 		this.backgroundSprites.addAll(this.hostiles);
 		
+		//Empty array words
+		this.spriteWords = new ArrayList<Word>();
+
 		//Add all captions from obstacles into words and bgsprites list
 		for (Obstacle o : this.obstacles) {
-			this.words.add(o.getCaption());
+			this.spriteWords.add(o.getCaption());
 			this.backgroundSprites.add(o.getCaption());
 		}
 		
 		for (Enemy e : this.enemies) {
-			this.words.add(e.getCaption());
+			this.spriteWords.add(e.getCaption());
 			this.backgroundSprites.add(e.getCaption());
 		}
 		
@@ -226,8 +234,14 @@ public class GamePanel extends JPanel {
 	 * @param g2d Java swing Graphics2D object.
 	 */
 	public void drawText(Graphics2D g2d) {
+		
 		g2d.setFont(new Font("Helvetica", Font.BOLD, 20)); 
-		for (Word w : this.words) {
+		for (Word w : this.statusWords) {
+			g2d.drawString(w.getText(), w.getCharCoord().getX(), w.getCharCoord().getY());
+		}
+		
+		g2d.setFont(new Font("Helvetica", Font.BOLD, 50)); 
+		for (Word w : this.spriteWords) {
 			g2d.drawString(w.getText(), w.getCharCoord().getX(), w.getCharCoord().getY());
 		}
 	}
@@ -245,6 +259,12 @@ public class GamePanel extends JPanel {
 	 */
 	public Player2 getPlayer2() {
 		return this.player2;
+	}
+	/**
+	 * Setter method for player2 of this class.
+	 */
+	public void setPlayer2(Player2 p2) {
+		this.player2 = p2;
 	}
 	/**
 	 * Getter method for the background offset.

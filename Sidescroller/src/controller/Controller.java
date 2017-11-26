@@ -435,4 +435,9 @@ public class Controller implements ActionListener {
 			obstacle.add(new Obstacle(coordinate, randomObstacleName));
 		}
 	}
+
+	public void setPlayer2() {
+		this.player2 = new Player2(new Coordinate(650, 530));
+		this.gp.setPlayer2(this.player2);
+	}
 }

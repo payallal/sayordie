@@ -3,6 +3,7 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 
+import controller.Controller;
 
 public class GameServer {
 	private ServerSocket servSock;
@@ -21,7 +22,10 @@ public class GameServer {
 		while (true) {
 			Socket c;
 			try {
+				//blocking method to wait for client
 				c = this.servSock.accept();
+				//if there is a client then we will instantiate player2
+				Controller.getSingleton().setPlayer2();
 				ClientThread clientThread = new ClientThread(c);
 				this.clientList.add(clientThread);
 				clientThread.start();

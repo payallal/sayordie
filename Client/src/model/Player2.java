@@ -1,13 +1,15 @@
 package model;
-import javax.swing.ImageIcon;
-
 
 public class Player2 extends Player {
 	
+	private boolean gameStarted;
+	
 	public Player2 (Coordinate p) {
 		super(p);
-		//Protected fields from parent Character class
-		/*//we override this when we actually want new sprites
+		this.gameStarted = false;
+		//we override this when we actually want new sprites
+		//This should be Obama's sprite- for now we just inherit trump
+		/*
 		this.stillRightSprite = new ImageIcon("img/sprites/rz_still_right.png").getImage(); 
 		this.stillLeftSprite = new ImageIcon("img/sprites/rz_still_left.png").getImage(); 
 		this.walkLeftSprite = new ImageIcon("img/sprites/rz_walk_left2.png").getImage(); 
@@ -62,5 +64,13 @@ public class Player2 extends Player {
 
 			this.run++;
 		}
+	}
+	
+	public boolean getGameStarted() {
+		return this.gameStarted;
+	}
+	
+	public void setGameStarted(boolean b) {
+		this.gameStarted = b;
 	}
 }
