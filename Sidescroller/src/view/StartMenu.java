@@ -13,12 +13,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import controller.MultiPlayerButtonListener;
+import controller.SinglePlayerButtonListener;
+
 /**
  * JPanel containing the start menu dialog box.
  * @author Alexia
  *
  */
 public class StartMenu extends JPanel{
+	
+	 private JLabel startLabel;
 	
 	 /**
 	 * Stores RGB value for the background color of the button panel.
@@ -30,8 +35,9 @@ public class StartMenu extends JPanel{
 	  * Initializes labels and buttons. Sets layout of components on the screen. 
 	  */
 	 public StartMenu() {
-	        JLabel startLabel = new JLabel("Start Game");
-	        startLabel.setForeground(Color.WHITE);
+		 
+	        this.startLabel = new JLabel("Start Game");
+	        this.startLabel.setForeground(Color.WHITE);
 	        JPanel pausedPanel = new JPanel();
 	        pausedPanel.setOpaque(false);
 	        pausedPanel.add(startLabel);
@@ -41,9 +47,20 @@ public class StartMenu extends JPanel{
 	        setBorder(BorderFactory.createEmptyBorder(eb, eb, eb, eb));
 	        setLayout(new GridLayout(0, 1, 10, 10));
 	        add(pausedPanel);
-	        add(new JButton(new DialogDisposer("Single Player")));
-	        add(new JButton(new DialogDisposer("Multi Player")));
-	    }
+	        
+	        JButton singlePlayerButton = new JButton(new DialogDisposer("Single Player"));
+	        singlePlayerButton.addActionListener(new SinglePlayerButtonListener());
+	        
+	        JButton multiPlayerButton = new JButton(new DialogDisposer("Multi Player"));
+	        multiPlayerButton.addActionListener(new MultiPlayerButtonListener());
+	        
+	        add(singlePlayerButton);
+	        add(multiPlayerButton);
+	 }
+	 
+	 public void setStartLabel(String s) {
+		 this.startLabel.setText(s);
+	 }
 
 	    // simple action -- all it does is to make the dialog no longer visible
 	/**

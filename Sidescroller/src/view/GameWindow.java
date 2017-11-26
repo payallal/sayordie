@@ -61,12 +61,7 @@ public class GameWindow extends JFrame{
 	} 
 
 	public static void main(String[] args) {
-			GameWindow gw = new GameWindow();
-			GameServer s;
-			s = new GameServer(1664);
-			Controller.getSingleton().setServer(s);
-			s.acceptClientLoop();
-		
+			GameWindow gw = new GameWindow();	
 	}
 
 	public JLabel getRecordLabel() {

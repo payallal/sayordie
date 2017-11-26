@@ -19,27 +19,18 @@ public class GameServer {
 	}
 
 	public void acceptClientLoop() {
-		while (true) {
-			Socket c;
-			try {
-				//blocking method to wait for client
-				c = this.servSock.accept();
-				//if there is a client then we will instantiate player2
-				Controller.getSingleton().setPlayer2();
-				ClientThread clientThread = new ClientThread(c);
-				this.clientList.add(clientThread);
-				clientThread.start();
-				System.out.println("Just accepted a client. Going to the next iteration");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		ClientConnectorThread cct = new ClientConnectorThread(this, this.servSock);
+		cct.start();
 	}
 	
 	public void sendJSONToClients(boolean[] barray) {
 		for (ClientThread ct: this.clientList) {
 			ct.sendJSONToClient(barray);
 		}
+	}
+	
+	public void addToClientList(ClientThread ct) {
+		this.clientList.add(ct);
 	}
 	
 	/*

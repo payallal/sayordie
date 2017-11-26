@@ -437,7 +437,8 @@ public class Controller implements ActionListener {
 	}
 
 	public void setPlayer2() {
-		this.player2 = new Player2(new Coordinate(650, 530));
+		this.player2 = new Player2(new Coordinate(410, 530));
 		this.gp.setPlayer2(this.player2);
 	}
+	
 }

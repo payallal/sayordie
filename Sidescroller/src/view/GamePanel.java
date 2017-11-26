@@ -130,7 +130,6 @@ public class GamePanel extends JPanel {
 		
 		//Create player and player2
 		this.player = new Player(new Coordinate(400,530));
-		//this.player2 = new Player2(new Coordinate(650, 530));
 		
 		//This is the part where the controller adds listeners
 		this.controller = Controller.getSingleton();
@@ -265,6 +264,7 @@ public class GamePanel extends JPanel {
 	 */
 	public void setPlayer2(Player2 p2) {
 		this.player2 = p2;
+		this.sprites.add(this.player2);
 	}
 	/**
 	 * Getter method for the background offset.
@@ -317,6 +317,7 @@ public class GamePanel extends JPanel {
 	public ArrayList<Sprite> getSprites() {
 		return this.sprites;
 	}
+	
 	/**
 	 * Setter method for the background offset.
 	 * @param i the new integer value of the background offset bgX.
