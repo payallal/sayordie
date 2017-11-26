@@ -25,6 +25,7 @@ public class ClientConnectorThread extends Thread {
 				//if there is a client then we will instantiate player2
 				Controller.getSingleton().setPlayer2();
 				Controller.getSingleton().setTextOfInstruction("Connected to player! Connect to audio->");
+				Controller.getSingleton().getGameWindow().getRecordButton().setEnabled(true);
 				ClientThread clientThread = new ClientThread(c);
 				this.gs.addToClientList(clientThread);
 				clientThread.start();

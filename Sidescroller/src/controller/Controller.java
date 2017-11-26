@@ -10,7 +10,6 @@ import java.util.Random;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.Timer;
 
 import audio.AudioHandlerThread;
@@ -70,6 +69,10 @@ public class Controller implements ActionListener {
 	
 	public void setGameWindow(GameWindow gw) {
 		this.gw = gw;
+	}
+	
+	public GameWindow getGameWindow() {
+		return this.gw;
 	}
 	
 	public void setGamePanel(GamePanel gp) {

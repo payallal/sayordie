@@ -23,6 +23,7 @@ import controller.SinglePlayerButtonListener;
  */
 public class StartMenu extends JPanel{
 	
+	 private GameWindow gw;
 	 private JLabel startLabel;
 	
 	 /**
@@ -34,8 +35,8 @@ public class StartMenu extends JPanel{
 	  * Constructor for the start menu.
 	  * Initializes labels and buttons. Sets layout of components on the screen. 
 	  */
-	 public StartMenu() {
-		 
+	 public StartMenu(GameWindow gw) {
+		 	this.gw = gw;
 	        this.startLabel = new JLabel("Start Game");
 	        this.startLabel.setForeground(Color.WHITE);
 	        JPanel pausedPanel = new JPanel();
@@ -52,7 +53,7 @@ public class StartMenu extends JPanel{
 	        singlePlayerButton.addActionListener(new SinglePlayerButtonListener());
 	        
 	        JButton multiPlayerButton = new JButton(new DialogDisposer("Multi Player"));
-	        multiPlayerButton.addActionListener(new MultiPlayerButtonListener());
+	        multiPlayerButton.addActionListener(new MultiPlayerButtonListener(this.gw.getRecordButton()));
 	        
 	        add(singlePlayerButton);
 	        add(multiPlayerButton);

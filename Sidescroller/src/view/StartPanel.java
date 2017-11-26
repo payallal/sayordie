@@ -29,7 +29,7 @@ public class StartPanel extends JPanel{
      * Stores an instance of the start menu JPanel.
      * @see view.StartMenu
      */
-    private StartMenu deDialogPanel = new StartMenu(); 
+    private StartMenu deDialogPanel; 
     
     /**
      * Constructor for the start menu panel to overlay the game screen.
@@ -38,6 +38,7 @@ public class StartPanel extends JPanel{
      */
 	public StartPanel(GameWindow gw) {
 		this.gw = gw;
+		this.deDialogPanel = new StartMenu(gw);
 		this.setOpaque(false); 
         this.setBackground(GP_BG);
         gw.setGlassPane(this);  // set the glass pane
