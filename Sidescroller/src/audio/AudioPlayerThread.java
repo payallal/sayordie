@@ -23,9 +23,7 @@ public class AudioPlayerThread extends Thread {
 	
 	public void playAudio() {
 	    try {
-	        System.out.println(this.obstacle.getAudioPath());
 	        URL url = this.getClass().getResource(this.obstacle.getAudioPath());
-	        System.out.println(url);
 	        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
 	        Clip clip = AudioSystem.getClip();
 	        clip.open(audioInputStream);

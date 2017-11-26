@@ -1,10 +1,6 @@
 package view;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import controller.Controller;
 import model.Coordinate;
@@ -126,7 +122,7 @@ public class GamePanel extends JPanel {
 		this.BGMIN_X = 1000;
 		this.BGMAX_X = 10000;
 		
-		this.backgroundImage = new ImageIcon("img/background/bg2.png").getImage();
+		this.backgroundImage = new ImageIcon("img/background/bg.png").getImage();
 		
 		//Create player and player2
 		this.player = new Player(new Coordinate(400,530));
@@ -188,11 +184,6 @@ public class GamePanel extends JPanel {
 		for (Obstacle o : this.obstacles) {
 			this.spriteWords.add(o.getCaption());
 			this.backgroundSprites.add(o.getCaption());
-		}
-		
-		for (Enemy e : this.enemies) {
-			this.spriteWords.add(e.getCaption());
-			this.backgroundSprites.add(e.getCaption());
 		}
 		
 		setLayout(null);

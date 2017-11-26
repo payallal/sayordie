@@ -9,11 +9,6 @@ import javax.swing.ImageIcon;
  */
 public class Enemy extends Player {
 	/**
-	 * Stores the text to be shown above enemy character on game screen.
-	 * @see model.Word
-	 */
-	private Word caption;
-	/**
 	 * Stores the value velocity at which the character will move.
 	 */
 	private int velocity;
@@ -46,7 +41,6 @@ public class Enemy extends Player {
 		this.jumpRightSprite = new ImageIcon("img/sprites/enemy/enemyJumpRight.png").getImage(); 
 		this.jumpLeftSprite = new ImageIcon("img/sprites/enemy/enemyJumpLeft.png").getImage();
 		this.currentSprite = this.stillRightSprite;
-		this.caption = new Word("'u suck'", this.getCaptionCoordinate(p,-20));
 	}
 	/**
 	 * Automates the movement of the enemy to the right by changing the X-coordinates based on acceleration and velocity variables.
@@ -76,14 +70,6 @@ public class Enemy extends Player {
 			}
 			this.run++;
 		}
-	}
-	/**
-	 * Getter method for the words to be displayed above enemy.
-	 * @see model.Word
-	 * @return caption the current caption.
-	 */
-	public Word getCaption() {
-		return this.caption;
 	}
 	/**
 	 * Setter method for the velocity variable.

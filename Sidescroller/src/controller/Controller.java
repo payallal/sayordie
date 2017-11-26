@@ -59,8 +59,8 @@ public class Controller implements ActionListener {
 	private Icon recordDarkGrey = new ImageIcon("img/ui/recordDarkGrey.png");
 	
 	private int newVelocity = 0;
-	private final int obstacleDistance = 980;
-	private final int recordingDistance = 880;
+	private final int obstacleDistance = 990;
+	private final int recordingDistance = 890;
 	private final int accurateJumpDistance = 60;
 	private final int playerMovementOffset = 8;
 	private final int updateTime = 30;
