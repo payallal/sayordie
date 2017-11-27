@@ -48,12 +48,20 @@ If you're NOT Simon Perrault, follow the next few steps before you get to step 1
 
 You're almost done! 
 
-14. Go back to Eclipse and right click on the folder Sidescroller (you'll find it in your navigation window under the sayordie master folder). Select run as > configurations. You'll see a pop up window with multiple tabs. Go to the tab called 'environment variable' and select the 'new' option on the right hand side. In the field called name, enter 'GOOGLE_APPLICATION_CREDENTIALS'. In the value field, enter 'auth.json'. 
+14. Go back to Eclipse and right click on the folder Sidescroller (you'll find it in your navigation window under the sayordie master folder). Select run as > configurations. You'll see a pop up window with multiple tabs. 
+
+15. Go to the tab called 'environment variable' and select the 'new' option on the right hand side. In the field called name, enter 'GOOGLE_APPLICATION_CREDENTIALS'. In the value field, enter 'auth.json'. 
 ![alt text](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/Step14.png)
 
-15. And that's all folks! You're done setting up the game. You can now right click on Side scroller project > Run as > Java Application 
+16. If you want to try our extremely exciting multiplayer mode of the game too, then click ClientGameWindow on the left hand side of the pop up window and repeat step 15. 
 
-16. Click on the microphone on the top right and shout 'begin' at your computer to get Mr Mump moving. Enjoy!
+17. Click apply, and then select run. 
+
+18. And that's all folks! You're done setting up the game. Click on the microphone on the top right of the screen and shout 'begin' at your computer to get Mr Mump moving. 
+
+Enjoy!
+
 ![Preview](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/fail2.gif)
+
 
 
