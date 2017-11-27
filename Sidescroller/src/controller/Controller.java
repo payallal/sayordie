@@ -35,7 +35,7 @@ import view.GameWindow;
 import view.UIPanel;
 
 /**
- * CLass which translates user input into onscreen actions.
+ * Class which handles all logic for the game.
  * @author Roger
  *
  */
@@ -276,6 +276,7 @@ public class Controller implements ActionListener {
 	public void checkBoundsToSetMoveable() {
 		if (this.gp.getBgX() >= this.gp.getBGMAX() - 800) {
 			this.player.setMoveableRight(false);
+			this.setGameWon();
 		}
 		else {
 			this.player.setMoveableRight(true);
@@ -367,7 +368,6 @@ public class Controller implements ActionListener {
 					this.nextObstacle = obstacle;
 					AudioPlayerThread apt = new AudioPlayerThread(this.nextObstacle);
 					apt.start();
-					//this.record();
 					for (Enemy e: this.gp.getEnemies()) {
 						e.setVelocity(e.getVelocity()+this.newVelocity);
 						if (this.newVelocity >= 10) {
@@ -672,7 +672,7 @@ public class Controller implements ActionListener {
 			}
 		}
 		
-		new UIPanel(this.gw, "Game Over", Color.black, "Main Menu", "Replay", new MainMenuButtonListener(), new ReplayButtonListener());
+		new UIPanel(this.gw, "Game Over", Color.black, "Main Menu", "", new MainMenuButtonListener(), new MainMenuButtonListener());
 	}
 	
 	public void setGameWon() {
@@ -687,7 +687,7 @@ public class Controller implements ActionListener {
 		this.player.setDirection(0);
 		this.setTextOfInstruction("GAME WON!");
 		
-		new UIPanel(this.gw, "You Won!", Color.pink, "Main Menu", "Replay", new MainMenuButtonListener(), new ReplayButtonListener());
+		new UIPanel(this.gw, "You Won!", Color.pink, "Main Menu", "", new MainMenuButtonListener(), new MainMenuButtonListener());
 	}
 	
 	/**
@@ -773,6 +773,25 @@ public class Controller implements ActionListener {
 			this.player2 = new Player2(new Coordinate(400, 530));
 		}
 		this.gp.setPlayer2(this.player2);
+	}
+
+	public void resetController() {
+		//this.gw = null;	
+		this.gp = null;
+		this.gs = null;
+		this.gc = null;
+		this.gameInProgress = false;
+		this.player = null;
+		this.player2 = null;
+		/*This ensures that you frame rate doesn't go up*/
+		this.timer.stop();
+		this.nextObstacle = null;
+		this.jumpOverObstacle = false;
+		this.connected = false;
+		this.recording = false;
+		this.recordButton = null;
+		//recordRed, grey and dark grey stay the same
+		this.newVelocity = 0;
 	}
 	
 }

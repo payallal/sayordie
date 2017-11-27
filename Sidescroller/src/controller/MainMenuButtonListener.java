@@ -1,14 +1,28 @@
 package controller;
-
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import client.ClientGameWindow;
+import view.GameWindow;
+import view.UIPanel;
 
 public class MainMenuButtonListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		Controller.getSingleton().getGameWindow().dispose();
+		Controller.getSingleton().resetController();
+		GameWindow gw;
+		if (Controller.getSingleton().getServerFlag()) {
+			gw = new GameWindow();
+
+		}
+		else {
+			gw = new ClientGameWindow();
+
+		}
+		new UIPanel(gw, "Start Game", Color.black, "Single Player", "Multi Player", new SinglePlayerButtonListener(), new MultiPlayerButtonListener());
 	}
 
 }
