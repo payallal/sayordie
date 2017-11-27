@@ -48,6 +48,7 @@ public class AudioPlayerThread extends Thread {
 	        // If you want to stop the sound, then use clip.stop();
 	    } catch (Exception ex) {
 	        ex.printStackTrace();
+	        System.out.println(this.obstacle.getAudioPath());
 	    }
 	}
 }

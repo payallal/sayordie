@@ -82,5 +82,13 @@ public class Enemy extends Player {
 	public int getVelocity() {
 		return this.velocity;
 	}
+	
+	public void setAcceleration(double d) {
+		this.acceleration = d;
+	}
+	
+	public double getAcceleration() {
+		return this.acceleration;
+	}
 		
 }

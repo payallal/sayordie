@@ -357,12 +357,12 @@ public class GamePanel extends JPanel {
 	public void loadObstacleCoordinates() {
 		this.obstacleCoordinates = new ArrayList<Coordinate>();
 		this.obstacleCoordinates.add(new Coordinate(2000, 645));
-		this.obstacleCoordinates.add(new Coordinate(3500, 645));
-		this.obstacleCoordinates.add(new Coordinate(4800, 645));
-		this.obstacleCoordinates.add(new Coordinate(6000, 645));
-		this.obstacleCoordinates.add(new Coordinate(7100, 645));
-		this.obstacleCoordinates.add(new Coordinate(8100, 645));
-		this.obstacleCoordinates.add(new Coordinate(9050, 645));
+		this.obstacleCoordinates.add(new Coordinate(3200, 645));
+		this.obstacleCoordinates.add(new Coordinate(4400, 645));
+		this.obstacleCoordinates.add(new Coordinate(5500, 645));
+		this.obstacleCoordinates.add(new Coordinate(6600, 645));
+		this.obstacleCoordinates.add(new Coordinate(7600, 645));
+		this.obstacleCoordinates.add(new Coordinate(8600, 645));
 	}
 	
 }
