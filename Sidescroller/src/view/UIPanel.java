@@ -2,16 +2,17 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionListener;
 import java.awt.Dialog.ModalityType;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 /**
  * /**
  * JPanel which overlays the game screen with the start menu dialog box and a glass pane.
  * @author Alexia
  */
-public class StartPanel extends JPanel{
+public class UIPanel extends JPanel{
 	/**
 	 * Stores the alpha value to determine the opacity of the colour of the glass pane between 0 to 255.
 	 */
@@ -27,23 +28,22 @@ public class StartPanel extends JPanel{
     private GameWindow gw;
     /**
      * Stores an instance of the start menu JPanel.
-     * @see view.StartMenu
+     * @see view.Menu
      */
-    private StartMenu deDialogPanel; 
+    private Menu deDialogPanel; 
     
     /**
      * Constructor for the start menu panel to overlay the game screen.
      * Sets the glass pane, adds the start menu and sets the modality.
      * @param gw an instance the game window on which this start JPanel will be overlayed.
      */
-	public StartPanel(GameWindow gw) {
+	public UIPanel(GameWindow gw, String labelName, Color color, String buttonText1, String buttonText2, ActionListener aL1, ActionListener aL2) {
 		this.gw = gw;
-		this.deDialogPanel = new StartMenu();
+		this.deDialogPanel = new Menu(labelName, color, buttonText1, buttonText2, aL1, aL2);
 		this.setOpaque(false); 
         this.setBackground(GP_BG);
         gw.setGlassPane(this);  // set the glass pane
         this.setVisible(true);
-        
         this.add(deDialogPanel);
         // create a modal JDialog
         JDialog dialog = new JDialog(this.gw, "", ModalityType.APPLICATION_MODAL);

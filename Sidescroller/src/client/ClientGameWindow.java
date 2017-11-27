@@ -1,9 +1,13 @@
 package client;
 
+import java.awt.Color;
+
 import controller.Controller;
+import controller.MultiPlayerButtonListener;
+import controller.SinglePlayerButtonListener;
 import model.Player;
 import view.GameWindow;
-import view.StartPanel;
+import view.UIPanel;
 
 
 /**
@@ -26,6 +30,6 @@ public class ClientGameWindow extends GameWindow{
 		ClientGameWindow gw = new ClientGameWindow();
 		//Indicate to controller that this is server
 		Controller.getSingleton().setServerFlag(false);
-		new StartPanel(gw);
+		new UIPanel(gw, "Start Game", Color.black, "Single Player", "Multi Player", new SinglePlayerButtonListener(), new MultiPlayerButtonListener());
 	}
 }

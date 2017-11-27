@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,10 +31,9 @@ import model.Player2;
 import model.Sprite;
 import model.Word;
 import multiplayer.GameServer;
-import view.GameOverPanel;
 import view.GamePanel;
 import view.GameWindow;
-import view.WinPanel;
+import view.UIPanel;
 
 /**
  * CLass which translates user input into onscreen actions.
@@ -652,15 +652,16 @@ public class Controller implements ActionListener {
 		//player has died, player2 has won
 		this.player.die();
 		this.gameInProgress = false;
-		if (this.player2.getDirection() == 2) {
-			this.player2.setCurrentSprite(this.player2.getStillRightSprite());// set still image	
-		}			
-		this.player2.setDirection(0);
+
 		this.setTextOfInstruction("GAME OVER.");
 
-		//if multiplayer quickly send instructions that this player has died - see setGameWon method
-		if (multiplayer) {
-			System.out.println("in multi");
+		//if multi-player quickly send instructions that this player has died - see setGameWon method
+		if (this.multiplayer) {	
+			//stop player2
+			if (this.player2.getDirection() == 2) {
+				this.player2.setCurrentSprite(this.player2.getStillRightSprite());// set still image	
+			}			
+			this.player2.setDirection(0);
 			boolean[] barray = new boolean[4];
 			Arrays.fill(barray, false);	
 			barray[3] = true; //set the 3rd index to true because game is over
@@ -671,20 +672,23 @@ public class Controller implements ActionListener {
 				this.gc.sendJSONToServer(barray);
 			}
 		}
-		new GameOverPanel(this.gw);
+		
+		new UIPanel(this.gw, "Game Over", Color.black, "Main Menu", "Replay", new MainMenuButtonListener(), new ReplayButtonListener());
 	}
 	
 	public void setGameWon() {
-		System.out.println("in game won");
 		//player has won, player2 has died
 		this.gameInProgress = false;
-		this.player2.die();
+		if (this.multiplayer) {
+			this.player2.die();
+		}
 		if (this.player.getDirection() == 2) {
 			this.player.setCurrentSprite(this.player2.getStillRightSprite());// set still image	
 		}		
 		this.player.setDirection(0);
 		this.setTextOfInstruction("GAME WON!");
-		new WinPanel(this.gw);	
+		
+		new UIPanel(this.gw, "You Won!", Color.pink, "Main Menu", "Replay", new MainMenuButtonListener(), new ReplayButtonListener());
 	}
 	
 	/**

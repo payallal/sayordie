@@ -7,7 +7,7 @@ import javax.swing.JButton;
 
 import client.GameClient;
 import multiplayer.GameServer;
-import view.StartMenu;
+import view.Menu;
 /**
  * Action listener that sets game to multiplayer mode.
  * @author Roger
@@ -23,8 +23,8 @@ public class MultiPlayerButtonListener implements ActionListener {
 	 * Constructor that sets the record button.
 	 * @param b the record JButton to which the action listener is to be attached.
 	 */
-	public MultiPlayerButtonListener (JButton b) {
-		this.recordButton = b;
+	public MultiPlayerButtonListener () {
+		this.recordButton = Controller.getSingleton().getGameWindow().getRecordButton();
 	}
 	
 	@Override

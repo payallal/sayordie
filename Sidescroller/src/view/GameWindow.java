@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Insets;
@@ -14,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
 import controller.Controller;
+import controller.MultiPlayerButtonListener;
+import controller.SinglePlayerButtonListener;
 import multiplayer.GameServer;
 
 /**
@@ -38,14 +41,14 @@ public class GameWindow extends JFrame{
 	private JButton recordButton;
 	/**
 	 * Stores instance of the start menu.
-	 * @see view.StartMenu
+	 * @see view.Menu
 	 */
-	private StartMenu menu;
+	private Menu menu;
 	/**
 	 * Stores instance of start panel.
-	 * @see view.StartPanel
+	 * @see view.UIPanel
 	 */
-	private StartPanel sp;
+	private UIPanel sp;
 	/**
 	 * Stores intended width of screen in pixels.
 	 */
@@ -102,7 +105,7 @@ public class GameWindow extends JFrame{
 			GameWindow gw = new GameWindow();
 			//Indicate to controller that this is server
 			Controller.getSingleton().setServerFlag(true);
-			new StartPanel(gw);
+			new UIPanel(gw, "Start Game", Color.black, "Single Player", "Multi Player", new SinglePlayerButtonListener(), new MultiPlayerButtonListener());
 	}
 
 	/**
