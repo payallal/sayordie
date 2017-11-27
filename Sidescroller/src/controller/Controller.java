@@ -675,7 +675,7 @@ public class Controller implements ActionListener {
 			}
 		}
 		
-		new UIPanel(this.gw, "Game Over", Color.black, "Main Menu", "", new MainMenuButtonListener(), new MainMenuButtonListener());
+		new UIPanel(this.gw, "Game Over", Color.black, "Main Menu", "Replay", new MainMenuButtonListener(), new MainMenuButtonListener());
 	}
 	
 	public void setGameWon() {
@@ -690,7 +690,7 @@ public class Controller implements ActionListener {
 		this.player.setDirection(0);
 		this.setTextOfInstruction("GAME WON!");
 		
-		new UIPanel(this.gw, "You Won!", Color.pink, "Main Menu", "", new MainMenuButtonListener(), new MainMenuButtonListener());
+		new UIPanel(this.gw, "You Won!", Color.pink, "Main Menu", "Replay", new MainMenuButtonListener(), new MainMenuButtonListener());
 	}
 	
 	/**
