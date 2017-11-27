@@ -19,7 +19,7 @@ This game is a desktop game that you can set up on your PC.
 
 Installation Instructions
 ------------------------
-1. After pulling this github repository, import the local repository into Eclipse. 
+1. After cloning this github repository, import the local repository into Eclipse. 
 2. Add M2e plugin in eclipse. You can do this by going to Help > Eclipse Marketplace > Maven. 
 ![alt text](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/Step3.png)
 3. Once this is done, right click on Sidescroller project that appears under your project navigator. Select Run as > Maven Install.
@@ -53,11 +53,15 @@ You're almost done!
 15. Go to the tab called 'environment variable' and select the 'new' option on the right hand side. In the field called name, enter 'GOOGLE_APPLICATION_CREDENTIALS'. In the value field, enter 'auth.json'. 
 ![alt text](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/Step14.png)
 
-16. If you want to try our extremely exciting multiplayer mode of the game too, then click ClientGameWindow on the left hand side of the pop up window and repeat step 15. 
+16. Click apply, and then select run. 
 
-17. Click apply, and then select run. 
+17. If you want to try our extremely exciting multiplayer mode, then right click on the Sidescroller project, select run as > Java Application. Click on the 'ClientGameWindow' class and then click run. 
 
-18. And that's all folks! You're done setting up the game. Click on the microphone on the top right of the screen and shout 'begin' at your computer to get Mr Mump moving. 
+18. Close the window that pops up and right click on sidescroller again. This time, go to Run as > Run configurations. On the left hand side, you'll see ClientGameWindow. Repeat step 15 to complete the multiplayer set up. 
+
+19.Run the ClientGameWindow class AND the GameWindow class(your server) to try multiplayer!
+
+20. And that's all folks! You're done setting up the game. Click on the microphone on the top right of the screen and shout 'begin' at your computer to get Mr Mump moving. 
 
 Enjoy!
 

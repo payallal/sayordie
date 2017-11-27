@@ -265,7 +265,6 @@ public class Controller implements ActionListener {
 			for (Enemy enemy: this.gp.getEnemies()) {
 				this.checkMovement(enemy);
 				//put a limit on enemy's velocity
-				System.out.println(enemy.getVelocity());
 				if (enemy.getVelocity()>=11) {
 					enemy.setVelocity(6);
 				}
