@@ -1,6 +1,5 @@
-###SAY OR DIE
-
-![Preview](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/success.gif))
+SAY OR DIE 
+![Preview](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/success.gif = 500x400))
 ![Preview](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/fail.gif))
 
 
