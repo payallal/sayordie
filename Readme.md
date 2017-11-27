@@ -59,7 +59,7 @@ You're almost done!
 
 18. Close the window that pops up and right click on sidescroller again. This time, go to Run as > Run configurations. On the left hand side, you'll see ClientGameWindow. Repeat step 15 to complete the multiplayer set up. 
 
-19.Run the ClientGameWindow class AND the GameWindow class(your server) to try multiplayer!
+19. Run the ClientGameWindow class AND the GameWindow class(your server) to try multiplayer!
 
 20. And that's all folks! You're done setting up the game. Click on the microphone on the top right of the screen and shout 'begin' at your computer to get Mr Mump moving. 
 
