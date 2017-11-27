@@ -27,7 +27,7 @@ Installation Instructions
 
 If you are Simon Perrault, follow this next step and then skip to step 14.
 
-5. Find the auth.json file we provided you with as a part of our submission and add it into the Sidescroller folder (you can find it in sayordie > Sidescroller)
+5. Find the auth.json file we provided you with as a part of our submission and add it into the Sidescroller folder (you can find it in sayordie > Sidescroller).
 
 If you're NOT Simon Perrault, follow the next few steps before you get to step 14. 
 
