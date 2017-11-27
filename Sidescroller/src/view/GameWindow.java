@@ -16,19 +16,48 @@ import javax.swing.JLayeredPane;
 import controller.Controller;
 import multiplayer.GameServer;
 
+/**
+ * Represents game window on which game panel and game-play take place.
+ * @author Roger
+ *
+ */
 public class GameWindow extends JFrame{
 	
 	/**
-	 * 
+	 * Stores unique identifier for the serialization of the class.
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * Stores current instance of game panel.
+	 * @see view.GamePanel
+	 */
 	private GamePanel gp;
+	/**
+	 * Stores JButton for recording.
+	 */
 	private JButton recordButton;
+	/**
+	 * Stores instance of the start menu.
+	 * @see view.StartMenu
+	 */
 	private StartMenu menu;
+	/**
+	 * Stores instance of start panel.
+	 * @see view.StartPanel
+	 */
 	private StartPanel sp;
+	/**
+	 * Stores intended width of screen in pixels.
+	 */
 	private final int width = 1280;
+	/**
+	 * Stores intended height of screen in pixels
+	 */
 	private final int height = 800;
 	
+	/**
+	 * Constructor for game window. Initializes fields, creates window and adds JComponents to the window.
+	 */
 	public GameWindow() {
 		this.setLayout(new BorderLayout());
 		JLayeredPane layeredPane = new JLayeredPane();
@@ -72,6 +101,10 @@ public class GameWindow extends JFrame{
 			GameWindow gw = new GameWindow();
 	}
 
+	/**
+	 * Getter method for the record button.
+	 * @return JButton associated with recording.
+	 */
 	public JButton getRecordButton() {
 		return this.recordButton;
 	}

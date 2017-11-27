@@ -27,10 +27,14 @@ public class GamePanel extends JPanel {
 	private Image backgroundImage;
 	
 	/**
-	 * Stores information about the player that the user will control.
-	 * @see model.Player.java
+	 * Stores information about an instance of the player that the user will control.
+	 * @see model.Player
 	 */
 	private Player player;
+	/**
+	 * Stores information about the second player that will be controlled in multiplayer mode.
+	 * @see model.Player2
+	 */
 	private Player2 player2;
 	//probably need a list to keep track of all the enemies but later
 	/**

@@ -66,7 +66,7 @@ public class StartMenu extends JPanel{
 	    // simple action -- all it does is to make the dialog no longer visible
 	/**
 	 * Subclass which disposes of main menu dialog box upon button selection. 
-	 * @author david
+	 * @author Alexia
 	 *
 	 */
     private class DialogDisposer extends AbstractAction {
