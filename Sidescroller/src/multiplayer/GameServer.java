@@ -3,8 +3,6 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 
-import controller.Controller;
-
 public class GameServer {
 	private ServerSocket servSock;
 	private ArrayList<ClientThread> clientList;

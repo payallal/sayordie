@@ -14,6 +14,10 @@ import javax.swing.JPanel;
  */
 public class UIPanel extends JPanel{
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * Stores the alpha value to determine the opacity of the colour of the glass pane between 0 to 255.
 	 */
 	private static final int ALPHA = 175; 

@@ -29,7 +29,6 @@ import audio.AudioRecordingUtil;
 import model.Player;
 import model.Player2;
 import model.Sprite;
-import model.Word;
 import multiplayer.GameServer;
 import view.GamePanel;
 import view.GameWindow;

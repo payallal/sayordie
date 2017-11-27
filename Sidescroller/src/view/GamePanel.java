@@ -18,6 +18,10 @@ import java.util.*;
  */
 public class GamePanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	final private int BGMIN_X;
 	final private int BGMAX_X;
 	
@@ -41,7 +45,6 @@ public class GamePanel extends JPanel {
 	 * background offsets for when the main player moves left and right
 	 */
 	private int bgX;
-	private int bgY;
 	/**
 	 * Stores instance of controller which moves sprite based on user input.
 	 * @see controller.Controller
@@ -51,10 +54,6 @@ public class GamePanel extends JPanel {
 	 * Stores width of game screen.
 	 */
 	private int width;
-	/**
-	 * Stores height of game screen.
-	 */
-	private int height;
 	/**
 	 * Stores arrays to keep track of enemies.
 	 * @see model.Enemy
@@ -121,7 +120,6 @@ public class GamePanel extends JPanel {
 	public GamePanel(int w, int h) {
 		
 		this.width = w;
-		this.height = h;
 		
 		this.BGMIN_X = 1000;
 		this.BGMAX_X = 10000;
@@ -172,8 +170,7 @@ public class GamePanel extends JPanel {
 		this.statusWords.add(whatYouSaid);
 		
 		//set background offsets
-		this.bgX = 700; //695;
-		this.bgY = 535;
+		this.bgX = 700; 
 		
 		//Add all bg sprites
 		this.backgroundSprites = new ArrayList<Sprite>();

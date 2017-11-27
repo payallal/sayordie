@@ -7,7 +7,6 @@ import javax.swing.JButton;
 
 import client.GameClient;
 import multiplayer.GameServer;
-import view.Menu;
 /**
  * Action listener that sets game to multiplayer mode.
  * @author Roger

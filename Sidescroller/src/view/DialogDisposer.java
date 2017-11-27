@@ -15,6 +15,11 @@ import javax.swing.SwingUtilities;
 
 public class DialogDisposer extends AbstractAction {
 	        
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public DialogDisposer(String name) {
 		super(name);
     }

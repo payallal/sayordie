@@ -18,6 +18,11 @@ import view.UIPanel;
 public class ClientGameWindow extends GameWindow{
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Constructor for game window. Initializes fields, creates window and adds JComponents to the window.
 	 */
 	public ClientGameWindow() {

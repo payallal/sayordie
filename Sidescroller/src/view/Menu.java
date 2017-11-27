@@ -1,23 +1,14 @@
 package view;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Window;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
-import controller.Controller;
-import controller.MultiPlayerButtonListener;
-import controller.SinglePlayerButtonListener;
 
 /**
  * JPanel containing the start menu dialog box.
@@ -27,6 +18,11 @@ import controller.SinglePlayerButtonListener;
 public class Menu extends JPanel{
 
 	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	  * Constructor for the start menu.
 	  * Initializes labels and buttons. Sets layout of components on the screen. 
 	  */
@@ -50,7 +46,6 @@ public class Menu extends JPanel{
          //can use this for other classes
          singlePlayerButton.addActionListener(aL1);
          JButton multiPlayerButton = new JButton(new DialogDisposer(buttonText2));
-         GameWindow gw = Controller.getSingleton().getGameWindow();
          //in this case I pass the multiplayer button
          multiPlayerButton.addActionListener(aL2);
         

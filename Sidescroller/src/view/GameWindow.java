@@ -2,22 +2,18 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Insets;
 
-import javax.swing.AbstractButton;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
 import controller.Controller;
 import controller.MultiPlayerButtonListener;
 import controller.SinglePlayerButtonListener;
-import multiplayer.GameServer;
 
 /**
  * Represents game window on which game panel and game-play take place.
@@ -39,16 +35,6 @@ public class GameWindow extends JFrame{
 	 * Stores JButton for recording.
 	 */
 	private JButton recordButton;
-	/**
-	 * Stores instance of the start menu.
-	 * @see view.Menu
-	 */
-	private Menu menu;
-	/**
-	 * Stores instance of start panel.
-	 * @see view.UIPanel
-	 */
-	private UIPanel sp;
 	/**
 	 * Stores intended width of screen in pixels.
 	 */
