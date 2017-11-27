@@ -569,9 +569,17 @@ public class Controller implements ActionListener {
 				
 				//If this is a multiplayer game, we have to wait for the other player to get started
 				if (multiplayer) {
+					
 					//Tell client we have started game, and then wait for client to start game
 					barray[0] = true; 
-					this.gs.sendJSONToClients(barray);
+					
+					//Client and server send their array with new movement
+					if (this.serverFlag) {
+						this.gs.sendJSONToClients(barray);
+					}
+					else {
+						this.gc.sendJSONToServer(barray);
+					}
 					
 					//we wait for player 2 to get started, disable the recording button
 					this.setTextOfInstruction("Waiting for other player...");
@@ -589,7 +597,14 @@ public class Controller implements ActionListener {
 				
 					//Start telling client that server player is moving right
 					barray[1] = true; //set right
-					this.gs.sendJSONToClients(barray);
+					
+					//Client and server send their array with new movement
+					if (this.serverFlag) {
+						this.gs.sendJSONToClients(barray);
+					}
+					else {
+						this.gc.sendJSONToServer(barray);
+					}
 				}
 				
 				//When everything is ready we begin the game
@@ -700,7 +715,7 @@ public class Controller implements ActionListener {
 		ArrayList <Obstacle> obstacles = this.gp.getObstacles();
 		ArrayList<Coordinate> obstacleCoordinates = this.gp.getObstacleCoordinates();
 		ArrayList<String> obstacleLibrary = this.gp.getObstacleLibrary();
-		int i = 0;
+		int i = 1;
 		for (Coordinate coordinate: obstacleCoordinates) {
 			//get random obstacle from obstacle library
 			String obstacleName = obstacleLibrary.get(i);

@@ -48,7 +48,6 @@ public class Player2 extends Player {
 
 		if (this.moveableRight == true & this.controller.getBgX() < this.controller.getBGMAX() - 800) {
 			//instead of moving the background, you move the character
-			System.out.println("right");
 			int newX = this.getCharCoord().getX()+8;
 			int y = this.getCharCoord().getY();
 			this.setCharCoord(newX, y);
@@ -66,11 +65,13 @@ public class Player2 extends Player {
 		}
 	}
 	
-	public boolean getGameStarted() {
+	//While loop in convertStringToMovement will check this continuously
+	public synchronized boolean getGameStarted() {
 		return this.gameStarted;
 	}
 	
-	public void setGameStarted(boolean b) {
+	//Thread will set this to true asynchronously, so it MUST be synchronized with the above method
+	public synchronized void setGameStarted(boolean b) {
 		this.gameStarted = b;
 	}
 }
