@@ -657,10 +657,10 @@ public class Controller implements ActionListener {
 		}			
 		this.player2.setDirection(0);
 		this.setTextOfInstruction("GAME OVER.");
-		new GameOverPanel(this.gw);
 
 		//if multiplayer quickly send instructions that this player has died - see setGameWon method
 		if (multiplayer) {
+			System.out.println("in multi");
 			boolean[] barray = new boolean[4];
 			Arrays.fill(barray, false);	
 			barray[3] = true; //set the 3rd index to true because game is over
@@ -671,9 +671,11 @@ public class Controller implements ActionListener {
 				this.gc.sendJSONToServer(barray);
 			}
 		}
+		new GameOverPanel(this.gw);
 	}
 	
 	public void setGameWon() {
+		System.out.println("in game won");
 		//player has won, player2 has died
 		this.gameInProgress = false;
 		this.player2.die();
@@ -682,7 +684,7 @@ public class Controller implements ActionListener {
 		}		
 		this.player.setDirection(0);
 		this.setTextOfInstruction("GAME WON!");
-		new WinPanel(this.gw);
+		new WinPanel(this.gw);	
 	}
 	
 	/**
@@ -762,7 +764,7 @@ public class Controller implements ActionListener {
 		//if a thread is setting player 2, it must be because of multiplayer
 		assert(this.multiplayer);
 		if (this.serverFlag) {
-			this.player2 = new Player2(new Coordinate(450, 530));
+			this.player2 = new Player2(new Coordinate(500, 530));
 		}
 		else {
 			this.player2 = new Player2(new Coordinate(400, 530));
