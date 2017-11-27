@@ -13,15 +13,15 @@ This game is a desktop game that you can set up on your PC.
 Installation Instructions
 ------------------------
 1. After pulling this github repository, import the local repository into Eclipse. 
-2. Add M2e plugin in eclipse. You can do this by going to Help > Install new software > Maven (m2e))
+2. Add M2e plugin in eclipse. You can do this by going to Help > Eclipse Marketplace > Maven. 
 3. Once this is done, right click on Sidescroller project that appears under your project navigator. Select Run as > Maven Install.
 4. Now, time to set up Google's Speech API! 
 
-If you are Professor Perrault, follow this next step and then skip to step 14.
+If you are Simon Perrault, follow this next step and then skip to step 14.
 
 5. Find the auth.json file we provided you with as a part of our submission and add it into the Sidescroller folder (you can find it in sayordie > Sidescroller)
 
-If you are anyone other than Professor Perrault, follow the next few steps before you get to step 14. 
+If you're NOT Simon Perrault, follow the next few steps before you get to step 14. 
 
 5. Sign up for a Google Cloud account here: https://cloud.google.com/
 6. Once you're signed up, go to your Google Cloud Console and create a new project. Name it as you like! 
@@ -33,7 +33,9 @@ If you are anyone other than Professor Perrault, follow the next few steps befor
 12. On the next page, choose new service account and set the name of the service account and its ownership however you'd like. Select the key type to be 'JSON'.
 13. Once you click create, a json file will get downloaded into your computer. Rename this file to 'auth.json' and drag it inside the folder SayOrDie > SideScroller.
 
-14. Go back to Eclipse and right click on the folder Sidescroller (you'll find it in your navigation window under the sayordie master folder). Right click on it and select run as > configurations. You'll see a pop up window with multiple tabs. Go to the tab called 'environment variable'. In the field called name, enter 'GOOGLE_APPLICATION_CREDENTIALS'. In value, enter 'auth.json'. 
+You're almost done! 
+
+14. Go back to Eclipse and right click on the folder Sidescroller (you'll find it in your navigation window under the sayordie master folder). Right click on it and select run as > configurations. You'll see a pop up window with multiple tabs. Go to the tab called 'environment variable' and select the 'new' option on the right hand side. In the field called name, enter 'GOOGLE_APPLICATION_CREDENTIALS'. In the value field, enter 'auth.json'. 
 
 15. And that's all folks! You're done setting up the game. You can now right click on Side scroller project > Run as > Java Application 
 
