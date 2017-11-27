@@ -38,7 +38,7 @@ public class StartPanel extends JPanel{
      */
 	public StartPanel(GameWindow gw) {
 		this.gw = gw;
-		this.deDialogPanel = new StartMenu(gw);
+		this.deDialogPanel = new StartMenu();
 		this.setOpaque(false); 
         this.setBackground(GP_BG);
         gw.setGlassPane(this);  // set the glass pane

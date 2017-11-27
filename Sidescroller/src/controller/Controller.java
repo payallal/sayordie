@@ -30,6 +30,7 @@ import model.Player2;
 import model.Sprite;
 import model.Word;
 import multiplayer.GameServer;
+import view.GameOverPanel;
 import view.GamePanel;
 import view.GameWindow;
 
@@ -460,7 +461,7 @@ public class Controller implements ActionListener {
 			boolean start = barray[0];
 			boolean right = barray[1];
 			boolean jump = barray[2];
-			boolean stop = barray[3];
+			boolean over = barray[3]; //game over
 			
 			if (start) {
 				if (!this.player2.getGameStarted()) {
@@ -483,13 +484,15 @@ public class Controller implements ActionListener {
 				this.player2.checkJump();
 			}	
 			
-			if (stop)
+			if (over)
 			{
+				this.setTextOfInstruction("YOU WIN!");
 				if (this.player2.getDirection() == 2) {
 					this.player2.setCurrentSprite(this.player2.getStillRightSprite());// set still image	
 				}
-
 				this.player2.setDirection(0); //set direction back to still
+				this.gameInProgress = false;
+
 			}
 		}
 	}
@@ -654,7 +657,31 @@ public class Controller implements ActionListener {
 	public void setGameOver() {
 		this.gameInProgress = false;
 		this.setTextOfInstruction("GAME OVER.");
+		if (multiplayer) {
+			boolean[] barray = new boolean[4];
+			Arrays.fill(barray, false);	
+			barray[3] = true; //set the 3rd index to true because game is over
+			if (this.serverFlag) {
+				this.gs.sendJSONToClients(barray);
+			}
+			else {
+				this.gc.sendJSONToServer(barray);
+			}
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		new GameOverPanel(this.gw);
 	}
+	
+	public void setGameWon() {
+		this.gameInProgress = false;
+		this.setTextOfInstruction("GAME WON!");
+		//new GameWonPanel(this.gw);
+	}
+	
 	/**
 	 * Setter method to set the next obstacle that the player will encounter.
 	 * @param o the next game obstacle 
@@ -731,7 +758,12 @@ public class Controller implements ActionListener {
 	public void setPlayer2() {
 		//if a thread is setting player 2, it must be because of multiplayer
 		assert(this.multiplayer);
-		this.player2 = new Player2(new Coordinate(402, 530));
+		if (this.serverFlag) {
+			this.player2 = new Player2(new Coordinate(405, 530));
+		}
+		else {
+			this.player2 = new Player2(new Coordinate(400, 530));
+		}
 		this.gp.setPlayer2(this.player2);
 	}
 	

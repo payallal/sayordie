@@ -14,7 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import view.StartMenu.DialogDisposer;
+import controller.Controller;
+import controller.MultiPlayerButtonListener;
+import controller.SinglePlayerButtonListener;
 
 /**
  * JPanel containing the start menu dialog box.
@@ -22,11 +24,6 @@ import view.StartMenu.DialogDisposer;
  *
  */
 public class StartMenu extends JPanel{
-	
-	 /**
-	 * Stores RGB value for the background color of the button panel.
-	 */
-	 private static final Color BG = new Color(10, 50, 200);
 
 	 /**
 	  * Constructor for the start menu.
@@ -45,28 +42,12 @@ public class StartMenu extends JPanel{
 	        setBorder(BorderFactory.createEmptyBorder(eb, eb, eb, eb));
 	        setLayout(new GridLayout(0, 1, 10, 10));
 	        add(pausedPanel);
-	        add(new JButton(new DialogDisposer("Single Player")));
-	        add(new JButton(new DialogDisposer("Multi Player")));
-	    }
-
-	    // simple action -- all it does is to make the dialog no longer visible
-	/**
-	 * Subclass which disposes of main menu dialog box upon button selection. 
-	 * @author david
-	 *
-	 */
-    private class DialogDisposer extends AbstractAction {
-	        public DialogDisposer(String name) {
-	            super(name);
-	        }
-	        
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	            Component comp = (Component) e.getSource();
-	            Window win = SwingUtilities.getWindowAncestor(comp);
-	            win.dispose();  // here -- dispose of the JDialog
-	        }
-
-			
+	        JButton singlePlayerButton = new JButton(new DialogDisposer("Single Player"));
+	        singlePlayerButton.addActionListener(new SinglePlayerButtonListener());
+	        JButton multiPlayerButton = new JButton(new DialogDisposer("Multi Player"));
+	        GameWindow gw = Controller.getSingleton().getGameWindow();
+	        multiPlayerButton.addActionListener(new MultiPlayerButtonListener(gw.getRecordButton()));
+	        add(singlePlayerButton);
+	        add(multiPlayerButton);
 	    }
 }

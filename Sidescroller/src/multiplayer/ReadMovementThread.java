@@ -37,7 +37,7 @@ public class ReadMovementThread extends Thread {
 			while(true)
 			{
 				if ((json = this.incomingJSON.readLine()) != null) {
-					System.out.println("Server received the following JSON: " + json);
+					//System.out.println("Server received the following JSON: " + json);
 					// parseJSON, and sets the booleans
 					parseJSONToSetBool(json);
 					controller.updatePlayer2Movement(this.barray);

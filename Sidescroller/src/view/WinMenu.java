@@ -14,6 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import controller.MultiPlayerButtonListener;
+import controller.SinglePlayerButtonListener;
+
 /**
  * JPanel containing the win menu dialog box.
  * @author Valerie
@@ -44,6 +47,13 @@ public class WinMenu extends JPanel{
 	        add(pausedPanel);
 	        add(new JButton(new DialogDisposer("Restart")));
 	        add(new JButton(new DialogDisposer("Back to main menu")));
+	        /*
+	        JButton singlePlayerButton = new JButton(new DialogDisposer("Single Player"));
+	        singlePlayerButton.addActionListener(new SinglePlayerButtonListener());
+	        JButton multiPlayerButton = new JButton(new DialogDisposer("Multi Player"));
+	        multiPlayerButton.addActionListener(new MultiPlayerButtonListener(this.gw.getRecordButton()));
+	        add(singlePlayerButton);
+	        add(multiPlayerButton);*/
 	    }
 
 	    // simple action -- all it does is to make the dialog no longer visible
@@ -52,6 +62,7 @@ public class WinMenu extends JPanel{
 	 * @author Valerie
 	 *
 	 */
+	 /*
     private static class DialogDisposer extends AbstractAction {
 	        public DialogDisposer(String name) {
 	            super(name);
@@ -65,5 +76,5 @@ public class WinMenu extends JPanel{
 	        }
 
 			
-	    }
+	    }*/
 }

@@ -1,6 +1,7 @@
 package client;
 
 import controller.Controller;
+import model.Player;
 import view.GameWindow;
 import view.StartPanel;
 
@@ -17,6 +18,8 @@ public class ClientGameWindow extends GameWindow{
 	 */
 	public ClientGameWindow() {
 		super();
+		Player p = Controller.getSingleton().getPlayer();
+		p.setCharCoord(p.getCharCoord().getX()+5, p.getCharCoord().getY());
 	} 
 
 	public static void main(String[] args) {

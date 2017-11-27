@@ -43,8 +43,6 @@ public class Player2 extends Player {
 
 	@Override
 	public void right() {
-		//System.out.println(this.moveableRight);
-		//System.out.println(this.controller.getBgX() < this.controller.getBGMAX() - 800);
 
 		if (this.moveableRight == true & this.controller.getBgX() < this.controller.getBGMAX() - 800) {
 			//instead of moving the background, you move the character

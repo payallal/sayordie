@@ -45,25 +45,4 @@ public class GameOverMenu extends JPanel{
 	        add(new JButton(new DialogDisposer("Restart")));
 	        add(new JButton(new DialogDisposer("Back to main menu")));
 	    }
-
-	    // simple action -- all it does is to make the dialog no longer visible
-	/**
-	 * Subclass which disposes of main menu dialog box upon button selection. 
-	 * @author 
-	 *
-	 */
-    private static class DialogDisposer extends AbstractAction {
-	        public DialogDisposer(String name) {
-	            super(name);
-	        }
-	        
-			@Override
-	        public void actionPerformed(ActionEvent e) {
-	            Component comp = (Component) e.getSource();
-	            Window win = SwingUtilities.getWindowAncestor(comp);
-	            win.dispose();  // here -- dispose of the JDialog
-	        }
-
-			
-	    }
 }
