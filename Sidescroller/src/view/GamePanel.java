@@ -234,7 +234,7 @@ public class GamePanel extends JPanel {
 			g2d.drawString(w.getText(), w.getCharCoord().getX(), w.getCharCoord().getY());
 		}
 		
-		g2d.setFont(new Font("Helvetica", Font.BOLD, 50)); 
+		g2d.setFont(new Font("COURIER Plain", Font.BOLD, 15)); 
 		for (Word w : this.spriteWords) {
 			g2d.drawString(w.getText(), w.getCharCoord().getX(), w.getCharCoord().getY());
 		}
