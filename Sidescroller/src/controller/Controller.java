@@ -183,7 +183,10 @@ public class Controller implements ActionListener {
 	public GameWindow getGameWindow() {
 		return this.gw;
 	}
-	
+	/**
+	 * Getter method for current instance of game panel stored.
+	 * @return instance of game panel stored.
+	 */
 	public GamePanel getGamePanel() {
 		return this.gp;
 	}
@@ -197,11 +200,17 @@ public class Controller implements ActionListener {
 		this.player = gp.getPlayer();
 		this.player2 = gp.getPlayer2();
 	}
-	
+	/**
+	 * Getter method for boolean value of the server flag.
+	 * @return boolean value of the server flag.
+	 */
 	public boolean getServerFlag () {
 		return this.serverFlag;
 	}
-	
+	/**
+	 * Setter method for the game server flag.
+	 * @param b boolean value for game server.
+	 */
 	public void setServerFlag (boolean b) {
 		this.serverFlag = b;
 	}

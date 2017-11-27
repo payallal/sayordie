@@ -6,10 +6,17 @@ import java.awt.event.ActionListener;
 import client.ClientGameWindow;
 import view.GameWindow;
 import view.UIPanel;
-
+/**
+ * Action listener to control the mode of the game based on main menu selections.
+ * @author Roger
+ *
+ */
 public class MainMenuButtonListener implements ActionListener {
 
 	@Override
+	/**
+	 * Sets the game mode based on user selection.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		Controller.getSingleton().getGameWindow().dispose();
 		Controller.getSingleton().resetController();

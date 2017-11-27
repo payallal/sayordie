@@ -15,7 +15,7 @@ import controller.Controller;
 public class ResponseThread extends Thread {
 	
 	 /**
-	  * 
+	  * Stores instance of the observer for responses from the API.
 	  * @see audio.ResponseApiStreamingObserver
 	  */
 	  private ResponseApiStreamingObserver<StreamingRecognizeResponse> responseObserver;
