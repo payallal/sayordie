@@ -161,10 +161,10 @@ public class GamePanel extends JPanel {
 		
 		//On Screen text
 		this.statusWords = new ArrayList<Word>();
-		Word status = new Word("Status:", new Coordinate(this.width-600,60));
-		this.textInstruction = new Word("Click to connect ->", new Coordinate(this.width-400,60));
-		Word whatYouSaid = new Word("What you said:", new Coordinate(this.width-600,90));
-		this.textOfWordSaid = new Word("", new Coordinate(this.width-400,90));
+		Word status = new Word("Status:", new Coordinate(this.width-450,60));
+		this.textInstruction = new Word("Click to connect   --->", new Coordinate(this.width-380,60));
+		Word whatYouSaid = new Word("What you said:", new Coordinate(this.width-450,90));
+		this.textOfWordSaid = new Word("", new Coordinate(this.width-320,90));
 
 		this.statusWords.add(this.textOfWordSaid);
 		this.statusWords.add(this.textInstruction);
@@ -221,12 +221,12 @@ public class GamePanel extends JPanel {
 	 */
 	public void drawText(Graphics2D g2d) {
 		
-		g2d.setFont(new Font("Helvetica", Font.BOLD, 20)); 
+		g2d.setFont(new Font("COURIER Plain", Font.BOLD, 15)); 
 		for (Word w : this.statusWords) {
 			g2d.drawString(w.getText(), w.getCharCoord().getX(), w.getCharCoord().getY());
 		}
 		
-		g2d.setFont(new Font("Helvetica", Font.BOLD, 50)); 
+		g2d.setFont(new Font("COURIER Plain", Font.BOLD, 15)); 
 		for (Word w : this.spriteWords) {
 			g2d.drawString(w.getText(), w.getCharCoord().getX(), w.getCharCoord().getY());
 		}
