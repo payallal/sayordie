@@ -1,17 +1,17 @@
 # SAY OR DIE #
 
-![Preview](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/success.gif)
+![Preview](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/success2.gif)
 
 
 
 
 Purpose 
 ------------------------
-All around the world, lots of people aspire to learn new languages. However, current language learning techniques are largely limited to reading and writing, with little emphasis on spoken language. This often affects people’s ability to actually speak the language in real world situations, such as to communicate effectively in the workplace, to start conversations with locals while travelling and to pass on their second language to their children. Using Google’s speech API we created to a game that helps people improve their spoken language abilities. 
+All around the world, lots of people aspire to learn new languages. However, current language learning techniques are largely limited to reading and writing, with little emphasis on spoken language. This often affects people’s ability to actually speak the language in real world situations, such as to communicate effectively in the workplace, to start conversations with locals while travelling and to pass on their second language to their children. Using Google’s speech API we created a game that helps people improve their spoken language abilities. 
 
 Game Play
 ------------------------
-Mr Mump has been impeached from his presidency for cultural insensitivty and now has the navigate the wilderness. The only way he can avoid being attacked by people is to correctly pronounce the names of objects that appear in front of him. Everytime he sees an object in front of him, he needs to say it out loud with the correct pronounciation to jump over the obstacle. Currently, the game is only available for English words. 
+Mr Mump has been impeached from his presidency for cultural insensitivty and now has to navigate the wilderness. The only way he can avoid being attacked by people is to correctly pronounce the names of objects that appear in front of him. Everytime he sees an object in front of him, he needs to say it out loud with the correct pronounciation to jump over the obstacle. Currently, the game is only available for English words. 
 
 Platform
 ------------------------
@@ -48,7 +48,7 @@ If you're NOT Simon Perrault, follow the next few steps before you get to step 1
 
 You're almost done! 
 
-14. Go back to Eclipse and right click on the folder Sidescroller (you'll find it in your navigation window under the sayordie master folder). Right click on it and select run as > configurations. You'll see a pop up window with multiple tabs. Go to the tab called 'environment variable' and select the 'new' option on the right hand side. In the field called name, enter 'GOOGLE_APPLICATION_CREDENTIALS'. In the value field, enter 'auth.json'. 
+14. Go back to Eclipse and right click on the folder Sidescroller (you'll find it in your navigation window under the sayordie master folder). Select run as > configurations. You'll see a pop up window with multiple tabs. Go to the tab called 'environment variable' and select the 'new' option on the right hand side. In the field called name, enter 'GOOGLE_APPLICATION_CREDENTIALS'. In the value field, enter 'auth.json'. 
 ![alt text](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/Step14.png)
 
 15. And that's all folks! You're done setting up the game. You can now right click on Side scroller project > Run as > Java Application 
