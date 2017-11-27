@@ -255,6 +255,11 @@ public class Controller implements ActionListener {
 			
 			for (Enemy enemy: this.gp.getEnemies()) {
 				this.checkMovement(enemy);
+				//put a limit on enemy's velocity
+				System.out.println(enemy.getVelocity());
+				if (enemy.getVelocity()>=18) {
+					enemy.setVelocity(8);
+				}
 			}
 			
 			if (player2 != null) {
@@ -369,13 +374,9 @@ public class Controller implements ActionListener {
 					AudioPlayerThread apt = new AudioPlayerThread(this.nextObstacle);
 					apt.start();
 					for (Enemy e: this.gp.getEnemies()) {
-						e.setVelocity(e.getVelocity()+this.newVelocity);
-						if (this.newVelocity >= 10) {
-							this.newVelocity=0;
-						}
-						else {
-							this.newVelocity+=5;
-						}
+						double acc = e.getAcceleration();
+						acc+=1;
+						e.setAcceleration(acc);
 					}
 				}
 			}
@@ -556,8 +557,9 @@ public class Controller implements ActionListener {
 		
 		boolean[] barray = new boolean[4];
 		Arrays.fill(barray, false);	
+		s = s.toLowerCase();
 		
-		if (s.contains("start") || s.contains("begin")) {
+		if (s.contains("begin")) {
 			if (!this.gameInProgress) {		
 				
 				this.gameInProgress = true;
@@ -618,7 +620,8 @@ public class Controller implements ActionListener {
 				this.jumpOverObstacle = true;
 				//calm the enemy down
 				for (Enemy enemy : this.gp.getEnemies()) {
-					enemy.setVelocity(0);
+					enemy.setVelocity(this.newVelocity);
+					this.newVelocity+=4;
 				}
 			}
 		}
@@ -682,7 +685,7 @@ public class Controller implements ActionListener {
 			this.player2.die();
 		}
 		if (this.player.getDirection() == 2) {
-			this.player.setCurrentSprite(this.player2.getStillRightSprite());// set still image	
+			this.player.setCurrentSprite(this.player.getStillRightSprite());// set still image	
 		}		
 		this.player.setDirection(0);
 		this.setTextOfInstruction("GAME WON!");
@@ -732,7 +735,10 @@ public class Controller implements ActionListener {
 		for (Coordinate coordinate: obstacleCoordinates) {
 			//get random obstacle from obstacle library
 			Random randomizer = new Random();
-			String randomObstacleName = obstacleLibrary.get(randomizer.nextInt(obstacleLibrary.size()));
+			String randomObstacleName = null;
+			while (randomObstacleName == null || randomObstacleName.isEmpty()) {
+				randomObstacleName = obstacleLibrary.get(randomizer.nextInt(obstacleLibrary.size()));
+			}
 			obstacleLibrary.remove(randomObstacleName);
 			//add obstacle to obstacle list
 			obstacles.add(new Obstacle(coordinate, randomObstacleName));
