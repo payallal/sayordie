@@ -1,6 +1,6 @@
 SAY OR DIE 
-![Preview](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/success.gif = 500x400))
-![Preview](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/fail.gif))
+![Preview](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/success.gif)
+
 
 
 
@@ -52,6 +52,7 @@ You're almost done!
 
 15. And that's all folks! You're done setting up the game. You can now right click on Side scroller project > Run as > Java Application 
 
-16. Click on the microphone on the top right and shout 'begin' at your computer to get Mr Mump moving. 
+16. Click on the microphone on the top right and shout 'begin' at your computer to get Mr Mump moving. Enjoy!
+![Preview](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/fail.gif)
 
 
