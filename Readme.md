@@ -1,4 +1,4 @@
-#SAY OR DIE#
+# SAY OR DIE #
 
 ![Preview](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/success.gif)
 
