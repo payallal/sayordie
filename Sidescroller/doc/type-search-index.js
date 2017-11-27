@@ -1,1 +1,0 @@
-typeSearchIndex = [{"p":"client","l":"GameClient"}]
