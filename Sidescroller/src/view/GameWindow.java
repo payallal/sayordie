@@ -59,6 +59,7 @@ public class GameWindow extends JFrame{
 	 * Constructor for game window. Initializes fields, creates window and adds JComponents to the window.
 	 */
 	public GameWindow() {
+		//set layout
 		this.setLayout(new BorderLayout());
 		JLayeredPane layeredPane = new JLayeredPane();
 	    Dimension panelDimension = new Dimension(this.width,this.height);
@@ -86,19 +87,22 @@ public class GameWindow extends JFrame{
 		layeredPane.add(this.recordButton, new Integer(2));
 		this.recordButton.setSize(labelDimension);
 		this.recordButton.setLocation(this.width-150, 0);
-		Controller.getSingleton().setrecordButton(this.recordButton);
-		Controller.getSingleton().setrecordButtonMouseListener(this.recordButton);
+		Controller.getSingleton().setRecordButton(this.recordButton);
+		Controller.getSingleton().setRecordButtonMouseListener(this.recordButton);
 
 		this.pack();
 		this.setSize(this.width, this.height);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
-		this.sp = new StartPanel(this);
+
 		Controller.getSingleton().setGameWindow(this);
 	} 
 
 	public static void main(String[] args) {
 			GameWindow gw = new GameWindow();
+			//Indicate to controller that this is server
+			Controller.getSingleton().setServerFlag(true);
+			new StartPanel(gw);
 	}
 
 	/**

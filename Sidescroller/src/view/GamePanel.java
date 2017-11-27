@@ -145,21 +145,19 @@ public class GamePanel extends JPanel {
 		//Load obstacles in the obstacle library
 		this.loadObstacleLibrary();
 	    
-		//Put the obstacles in relevant array
+		//We will load random obstacles if single player, but fixed obstacles for multiplayer
+		//This is done by controller because it contains game logic- see singleplayerbuttonlistener or multiplayerbuttonlistener
 		this.obstacles = new ArrayList<Obstacle>();
-		//This is done by controller because it contains game logic (Random selection)
-		this.controller.loadObstacles(obstacles, obstacleCoordinates, obstacleLibrary);
+		this.sprites = new ArrayList<Sprite>();
+		this.hostiles = new ArrayList<Sprite>();
 		
 		//add all hostiles
-		this.hostiles = new ArrayList<Sprite>();
 		this.hostiles.addAll(this.enemies);
-		this.hostiles.addAll(this.obstacles);
 		
 		//Add all sprites to sprites list
-		this.sprites = new ArrayList<Sprite>();
 		this.sprites.add(this.player);
 		this.sprites.addAll(this.enemies);
-		this.sprites.addAll(this.obstacles);
+
 		
 		//On Screen text
 		this.statusWords = new ArrayList<Word>();
@@ -183,13 +181,7 @@ public class GamePanel extends JPanel {
 		
 		//Empty array words
 		this.spriteWords = new ArrayList<Word>();
-
-		//Add all captions from obstacles into words and bgsprites list
-		for (Obstacle o : this.obstacles) {
-			this.spriteWords.add(o.getCaption());
-			this.backgroundSprites.add(o.getCaption());
-		}
-		
+	
 		setLayout(null);
 	}
 	/**
@@ -199,7 +191,6 @@ public class GamePanel extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-
 		this.drawBackground(g2d);
 		this.drawSprites(g2d);
 		this.drawText(g2d);
@@ -222,6 +213,7 @@ public class GamePanel extends JPanel {
 			g2d.drawImage(s.getCurrentSprite(), s.getCharCoord().getX(), s.getCharCoord().getY(), null);
 		}
 	}
+	
 	/**
 	 * Helper method used in the paint component to draw text over the background image at the current coordinates.
 	 * @see paintComponent()
@@ -291,6 +283,15 @@ public class GamePanel extends JPanel {
 	public ArrayList<Obstacle> getObstacles() {
 		return this.obstacles;
 	}
+	
+	public ArrayList<Coordinate> getObstacleCoordinates() {
+		return this.obstacleCoordinates;
+	}
+	
+	public ArrayList<String> getObstacleLibrary() {
+		return this.obstacleLibrary;
+	}
+	
 	/**
 	 * Getter method for the array of background sprites.
 	 * @return backgroundSprites field of this class.
@@ -311,6 +312,10 @@ public class GamePanel extends JPanel {
 	 */
 	public ArrayList<Sprite> getSprites() {
 		return this.sprites;
+	}
+	
+	public ArrayList<Word> getSpriteWords() {
+		return this.spriteWords;
 	}
 	
 	/**

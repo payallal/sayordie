@@ -4,14 +4,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Dialog.ModalityType;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 /**
  * /**
- * JPanel which overlays the game screen with the start menu dialog box and a glass pane.
- * @author Alexia
+ * JPanel which overlays the game screen with the GameOver menu dialog box and a glass pane.
+ * @author Valerie
  */
-public class StartPanel extends JPanel{
+public class GameOverPanel extends JPanel{
 	/**
 	 * Stores the alpha value to determine the opacity of the colour of the glass pane between 0 to 255.
 	 */
@@ -26,19 +25,18 @@ public class StartPanel extends JPanel{
      */
     private GameWindow gw;
     /**
-     * Stores an instance of the start menu JPanel.
-     * @see view.StartMenu
+     * Stores an instance of the GameOver menu JPanel.
+     * @see view.GameOverMenu
      */
-    private StartMenu deDialogPanel; 
+    private GameOverMenu deDialogPanel = new GameOverMenu(); 
     
     /**
-     * Constructor for the start menu panel to overlay the game screen.
-     * Sets the glass pane, adds the start menu and sets the modality.
-     * @param gw an instance the game window on which this start JPanel will be overlayed.
+     * Constructor for the GameOver menu panel to overlay the game screen.
+     * Sets the glass pane, adds the GameOver menu and sets the modality.
+     * @param gw an instance the game window on which this GameOver JPanel will be overlayed.
      */
-	public StartPanel(GameWindow gw) {
+	public GameOverPanel(GameWindow gw) {
 		this.gw = gw;
-		this.deDialogPanel = new StartMenu(gw);
 		this.setOpaque(false); 
         this.setBackground(GP_BG);
         gw.setGlassPane(this);  // set the glass pane
@@ -52,6 +50,7 @@ public class StartPanel extends JPanel{
         dialog.pack(); // size it
         dialog.setLocationRelativeTo(this.gw); // ** Center it over the JFrame **
         dialog.setVisible(true);  // display it, pausing the GUI below it
+
         // at this point the dialog is no longer visible, so get rid of glass pane
         this.setVisible(false); 
 

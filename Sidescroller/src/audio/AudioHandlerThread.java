@@ -198,9 +198,6 @@ public class AudioHandlerThread extends Thread{
 			  if (!this.c.getGameInProgress()) {
 	    	  		this.c.setTextOfInstruction("Click button and say 'begin'");
 			  }
-			  else if (this.c.getPlayer().getDirection() != 2) {
-	    	  		this.c.setTextOfInstruction("Click button and say 'right'");
-			  }
 			  else {
 				  this.c.setTextOfInstruction("Processed!");
 			  }

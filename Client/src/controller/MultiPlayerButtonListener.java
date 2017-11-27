@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import client.GameClient;
 import multiplayer.GameServer;
 import view.StartMenu;
 /**
@@ -32,34 +31,12 @@ public class MultiPlayerButtonListener implements ActionListener {
 	 * Initializes controller and game server to multiplayer mode.
 	 */
 	public void actionPerformed(ActionEvent e) {
-		
-		//set multiplayer to true, load our obstacles
-		Controller c = Controller.getSingleton();
-		c.setMultiplayer(true);
-		c.loadFixedObstacles();
-		
-		//disenable record button
+		Controller.getSingleton().setMultiplayer(true);
+		Controller.getSingleton().setTextOfInstruction("Connecting Client...");
 		this.recordButton.setEnabled(false);
-		
-		//set the words so that it is not random 
-		if (c.getServerFlag()) {
-			c.setTextOfInstruction("Connecting to Client...");
-			GameServer server = new GameServer(1664);
-			c.setServer(server);
-			server.acceptClientLoop();
-		}
-		else {
-			c.setTextOfInstruction("Connecting to Server...");
-			GameClient client;
-			try {
-				client = new GameClient("127.0.0.1", 1664);
-			} catch (Exception exception) {
-				// TODO Auto-generated catch block
-				exception.printStackTrace();
-				return;
-			}	
-			c.setClient(client);
-			client.scanningServerLoop();
-		}
+		GameServer s = new GameServer(1664);
+		Controller.getSingleton().setServer(s);
+		s.acceptClientLoop();
 	}
+
 }

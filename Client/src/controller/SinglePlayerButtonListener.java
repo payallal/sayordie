@@ -15,8 +15,6 @@ public class SinglePlayerButtonListener implements ActionListener {
 	 * Sets game to single player mode.
 	 */
 	public void actionPerformed(ActionEvent e) {
-		Controller c = Controller.getSingleton();
-		c.setMultiplayer(false);
-		c.loadRandomObstacles();
+		Controller.getSingleton().setMultiplayer(false);
 	}
 }

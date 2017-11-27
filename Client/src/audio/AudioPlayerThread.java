@@ -1,5 +1,7 @@
 package audio;
 
+import java.net.URL;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -21,7 +23,8 @@ public class AudioPlayerThread extends Thread {
 	
 	public void playAudio() {
 	    try {
-	        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(this.getClass().getResource(this.obstacle.getAudioPath()));
+	        URL url = this.getClass().getResource(this.obstacle.getAudioPath());
+	        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
 	        Clip clip = AudioSystem.getClip();
 	        clip.open(audioInputStream);
 	        clip.start();

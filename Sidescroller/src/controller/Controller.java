@@ -14,6 +14,7 @@ import javax.swing.Timer;
 
 import audio.AudioHandlerThread;
 import audio.AudioPlayerThread;
+import client.GameClient;
 import model.Coordinate;
 import model.Enemy;
 import model.Obstacle;
@@ -27,6 +28,7 @@ import audio.AudioRecordingUtil;
 import model.Player;
 import model.Player2;
 import model.Sprite;
+import model.Word;
 import multiplayer.GameServer;
 import view.GamePanel;
 import view.GameWindow;
@@ -44,7 +46,10 @@ public class Controller implements ActionListener {
 	 */
 	private static Controller controller = new Controller();
 	
-	
+	/**
+	 * Server or client flag
+	 */
+	private boolean serverFlag;
 	//the controller does not have any field itself- it leaves that to the view and model classes to carry
 	/**
 	 * Stores an instance of the game window.
@@ -61,6 +66,11 @@ public class Controller implements ActionListener {
 	 * @see multiplayer.GameServer
 	 */
 	private GameServer gs;
+	/**
+	 * Stores an instance of the game client for multiplayer mode.
+	 * @see multiplayer.GameServer
+	 */
+	private GameClient gc;
 	//for our convenience
 	/**
 	 * Stores boolean value that changes during runtime to indicate when the game has started.
@@ -172,6 +182,11 @@ public class Controller implements ActionListener {
 	public GameWindow getGameWindow() {
 		return this.gw;
 	}
+	
+	public GamePanel getGamePanel() {
+		return this.gp;
+	}
+	
 	/**
 	 * Initializes the GamePanel, Player and Player2 fields.
 	 * @param gp instance of the current game panel.
@@ -182,6 +197,14 @@ public class Controller implements ActionListener {
 		this.player2 = gp.getPlayer2();
 	}
 	
+	public boolean getServerFlag () {
+		return this.serverFlag;
+	}
+	
+	public void setServerFlag (boolean b) {
+		this.serverFlag = b;
+	}
+	
 	/**
 	 * Setter method for the game server
 	 * @param gs current instance of game server when in multiplayer mode.
@@ -189,6 +212,15 @@ public class Controller implements ActionListener {
 	 */
 	public void setServer(GameServer gs) {
 		this.gs = gs;
+	}
+	
+	/**
+	 * Setter method for the game server
+	 * @param gc current instance of game client when in multiplayer mode.
+	 * @see client.GameClient
+	 */
+	public void setClient(GameClient gc) {
+		this.gc = gc;
 	}
 	/**
 	 * Getter method for the given instance of the game server.
@@ -319,7 +351,6 @@ public class Controller implements ActionListener {
 		if (this.player2 != null) {
 			Rectangle playerRect2 = this.player2.getBounds();
 			if (playerRect.intersects(playerRect2)) {
-				System.out.println("Collision with player2 Detected.");
 			}
 		}
 	}
@@ -466,14 +497,14 @@ public class Controller implements ActionListener {
 	 * Sets the record button to this class' instance of the record button
 	 * @param recordButton field
 	 */
-	public void setrecordButton(JButton recordButton) {
+	public void setRecordButton(JButton recordButton) {
 		this.recordButton = recordButton;
 	}
 	/**
 	 * Adds action listener to recod button.
 	 * @param recordButton field of controller class.
 	 */
-	public void setrecordButtonMouseListener(JButton recordButton) {
+	public void setRecordButtonMouseListener(JButton recordButton) {
 		recordButton.addActionListener(new RecordButtonListener());
 	}
 	/**
@@ -503,6 +534,24 @@ public class Controller implements ActionListener {
 		AudioHandlerThread aht = new AudioHandlerThread(1500);
 		aht.start();
 	}
+	
+	/**
+	 * All entities start moving right, game actually begins
+	 */
+	public void beginGame() {
+		if (this.player.getMoveableRight()) {
+			this.player.setDirection(2);
+			this.player.setJumpRight(true);
+		}
+		
+		for (Enemy e : this.gp.getEnemies()) {
+			if (e.getMoveableRight()) {
+				e.setDirection(2);
+				e.setJumpRight(true);
+			}
+		}
+	}
+	
 	/**
 	 * Connects audio transcriptions from user to player actions. 
 	 * @param s transcript from user speech.
@@ -517,6 +566,8 @@ public class Controller implements ActionListener {
 				
 				this.gameInProgress = true;
 				this.player.setCurrentSprite(this.player.getStillRightSprite());
+				
+				//If this is a multiplayer game, we have to wait for the other player to get started
 				if (multiplayer) {
 					//Tell client we have started game, and then wait for client to start game
 					barray[0] = true; 
@@ -540,26 +591,15 @@ public class Controller implements ActionListener {
 					barray[1] = true; //set right
 					this.gs.sendJSONToClients(barray);
 				}
+				
+				//When everything is ready we begin the game
+				this.beginGame();
 			}
 		}
 		
 		//start or begin is the only command allowed if game is not in progress
 		if (!this.gameInProgress) {
 			return;
-		}
-		
-		if (s.contains("walk") || s.contains("right")) {
-			if (this.player.getMoveableRight()) {
-				this.player.setDirection(2);
-				this.player.setJumpRight(true);
-			}
-			
-			for (Enemy e : this.gp.getEnemies()) {
-				if (e.getMoveableRight()) {
-					e.setDirection(2);
-					e.setJumpRight(true);
-				}
-			}
 		}
 		
 		if (this.nextObstacle != null) {
@@ -615,27 +655,68 @@ public class Controller implements ActionListener {
 	public void setConnected(boolean b) {
 		this.connected = b;
 	}
+	
+	public void addAllNewObstacles(ArrayList<Obstacle> obstacles) {
+		this.gp.getSprites().addAll(obstacles);
+		this.gp.getHostiles().addAll(obstacles);
+		this.gp.getBackgroundSprites().addAll(obstacles);
+		
+		//Add all captions from obstacles into words and bgsprites list
+		for (Obstacle o : obstacles) {
+			this.gp.getSpriteWords().add(o.getCaption());
+			this.gp.getBackgroundSprites().add(o.getCaption());
+		}
+	}
+	
 	/**
 	 * Loads game obstacles into array in a random order.
 	 * @param obstacle an array list of game obstacle sprites. 
 	 * @param obstacleCoordinates an array list of the coordinates of each game obstacle sprite.
 	 * @param obstacleLibrary an array list of the strings associated with the game obstacles.
 	 */
-	public void loadObstacles(ArrayList <Obstacle> obstacle, ArrayList<Coordinate> obstacleCoordinates, ArrayList<String> obstacleLibrary) {
+	public void loadRandomObstacles() {
+		assert(!this.multiplayer);
+		ArrayList <Obstacle> obstacles = this.gp.getObstacles();
+		ArrayList<Coordinate> obstacleCoordinates = this.gp.getObstacleCoordinates();
+		ArrayList<String> obstacleLibrary = this.gp.getObstacleLibrary();
 		for (Coordinate coordinate: obstacleCoordinates) {
 			//get random obstacle from obstacle library
 			Random randomizer = new Random();
 			String randomObstacleName = obstacleLibrary.get(randomizer.nextInt(obstacleLibrary.size()));
 			obstacleLibrary.remove(randomObstacleName);
 			//add obstacle to obstacle list
-			obstacle.add(new Obstacle(coordinate, randomObstacleName));
+			obstacles.add(new Obstacle(coordinate, randomObstacleName));
 		}
+		this.addAllNewObstacles(obstacles);
+	}
+	/**
+	 * Loads game obstacles into array in fixed order for multiplayer.
+	 * @param obstacle an array list of game obstacle sprites. 
+	 * @param obstacleCoordinates an array list of the coordinates of each game obstacle sprite.
+	 * @param obstacleLibrary an array list of the strings associated with the game obstacles.
+	 */
+	public void loadFixedObstacles() {
+		assert(this.multiplayer);
+		ArrayList <Obstacle> obstacles = this.gp.getObstacles();
+		ArrayList<Coordinate> obstacleCoordinates = this.gp.getObstacleCoordinates();
+		ArrayList<String> obstacleLibrary = this.gp.getObstacleLibrary();
+		int i = 0;
+		for (Coordinate coordinate: obstacleCoordinates) {
+			//get random obstacle from obstacle library
+			String obstacleName = obstacleLibrary.get(i);
+			//add obstacle to obstacle list
+			obstacles.add(new Obstacle(coordinate, obstacleName));
+			i++;
+		}
+		this.addAllNewObstacles(obstacles);
 	}
 	/**
 	 * Initializes the second player in multiplayer mode.
 	 */
 	public void setPlayer2() {
-		this.player2 = new Player2(new Coordinate(410, 530));
+		//if a thread is setting player 2, it must be because of multiplayer
+		assert(this.multiplayer);
+		this.player2 = new Player2(new Coordinate(402, 530));
 		this.gp.setPlayer2(this.player2);
 	}
 	
