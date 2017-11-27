@@ -39,7 +39,6 @@ public class WinMenu extends JPanel{
 	        pausedPanel.setOpaque(false);
 	        pausedPanel.add(winLabel);
 	        
-	        
 	        setBackground(Color.pink);
 	        int eb = 20;
 	        setBorder(BorderFactory.createEmptyBorder(eb, eb, eb, eb));
@@ -55,26 +54,4 @@ public class WinMenu extends JPanel{
 	        add(singlePlayerButton);
 	        add(multiPlayerButton);*/
 	    }
-
-	    // simple action -- all it does is to make the dialog no longer visible
-	/**
-	 * Subclass which disposes of main menu dialog box upon button selection. 
-	 * @author Valerie
-	 *
-	 */
-	 /*
-    private static class DialogDisposer extends AbstractAction {
-	        public DialogDisposer(String name) {
-	            super(name);
-	        }
-	        
-			@Override
-	        public void actionPerformed(ActionEvent e) {
-	            Component comp = (Component) e.getSource();
-	            Window win = SwingUtilities.getWindowAncestor(comp);
-	            win.dispose();  // here -- dispose of the JDialog
-	        }
-
-			
-	    }*/
 }

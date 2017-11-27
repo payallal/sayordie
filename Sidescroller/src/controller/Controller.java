@@ -33,6 +33,7 @@ import multiplayer.GameServer;
 import view.GameOverPanel;
 import view.GamePanel;
 import view.GameWindow;
+import view.WinPanel;
 
 /**
  * CLass which translates user input into onscreen actions.
@@ -343,7 +344,6 @@ public class Controller implements ActionListener {
 		for (Sprite s: this.gp.getHostiles()) {
 			Rectangle hostileRect = s.getBounds();
 			if (playerRect.intersects(hostileRect)) {
-				this.player.die();
 				this.setGameOver();
 			}
 		}
@@ -463,6 +463,10 @@ public class Controller implements ActionListener {
 			boolean jump = barray[2];
 			boolean over = barray[3]; //game over
 			
+			if (over) {
+				this.setGameWon();
+			}
+			
 			if (start) {
 				if (!this.player2.getGameStarted()) {
 					this.player2.setGameStarted(true);
@@ -484,16 +488,6 @@ public class Controller implements ActionListener {
 				this.player2.checkJump();
 			}	
 			
-			if (over)
-			{
-				this.setTextOfInstruction("YOU WIN!");
-				if (this.player2.getDirection() == 2) {
-					this.player2.setCurrentSprite(this.player2.getStillRightSprite());// set still image	
-				}
-				this.player2.setDirection(0); //set direction back to still
-				this.gameInProgress = false;
-
-			}
 		}
 	}
 	/**
@@ -655,8 +649,17 @@ public class Controller implements ActionListener {
 	 * Ends current gameplay and sets instruction text to game over text.
 	 */
 	public void setGameOver() {
+		//player has died, player2 has won
+		this.player.die();
 		this.gameInProgress = false;
+		if (this.player2.getDirection() == 2) {
+			this.player2.setCurrentSprite(this.player2.getStillRightSprite());// set still image	
+		}			
+		this.player2.setDirection(0);
 		this.setTextOfInstruction("GAME OVER.");
+		new GameOverPanel(this.gw);
+
+		//if multiplayer quickly send instructions that this player has died - see setGameWon method
 		if (multiplayer) {
 			boolean[] barray = new boolean[4];
 			Arrays.fill(barray, false);	
@@ -667,19 +670,19 @@ public class Controller implements ActionListener {
 			else {
 				this.gc.sendJSONToServer(barray);
 			}
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 		}
-		new GameOverPanel(this.gw);
 	}
 	
 	public void setGameWon() {
+		//player has won, player2 has died
 		this.gameInProgress = false;
+		this.player2.die();
+		if (this.player.getDirection() == 2) {
+			this.player.setCurrentSprite(this.player2.getStillRightSprite());// set still image	
+		}		
+		this.player.setDirection(0);
 		this.setTextOfInstruction("GAME WON!");
-		//new GameWonPanel(this.gw);
+		new WinPanel(this.gw);
 	}
 	
 	/**
@@ -759,7 +762,7 @@ public class Controller implements ActionListener {
 		//if a thread is setting player 2, it must be because of multiplayer
 		assert(this.multiplayer);
 		if (this.serverFlag) {
-			this.player2 = new Player2(new Coordinate(405, 530));
+			this.player2 = new Player2(new Coordinate(450, 530));
 		}
 		else {
 			this.player2 = new Player2(new Coordinate(400, 530));
