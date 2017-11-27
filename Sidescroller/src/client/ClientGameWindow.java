@@ -18,7 +18,7 @@ import view.UIPanel;
 public class ClientGameWindow extends GameWindow{
 	
 	/**
-	 * 
+	 * Stores unique data to facilitate versioning of serialized data.
 	 */
 	private static final long serialVersionUID = 1L;
 

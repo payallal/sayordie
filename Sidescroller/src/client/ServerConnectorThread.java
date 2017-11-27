@@ -9,11 +9,32 @@ import java.net.Socket;
 import controller.Controller;
 import multiplayer.ReadMovementThread;
 
+/**
+ * Handles connection between game client and controller.
+ * @author Roger
+ *
+ */
 public class ServerConnectorThread extends Thread {
+	/**
+	 * Stores IP address.
+	 */
 	private String ip;
+	/**
+	 * Stores port number.
+	 */
 	private int port;
+	/**
+	 * Stores instance of game client.
+	 * @see client.GameClient
+	 */
 	private GameClient gc;
 	
+	/**
+	 * Constructor to initialize thread fields.
+	 * @param ip  IP address
+	 * @param port  port number
+	 * @param gc instance of game client
+	 */
 	public ServerConnectorThread(String ip, int port, GameClient gc) {
 		this.ip = ip;
 		this.port = port;
@@ -21,6 +42,9 @@ public class ServerConnectorThread extends Thread {
 	}
 	
 	@Override
+	/**
+	 * Starts thread that connects game client to controller.
+	 */
 	public void run() {
 		boolean scanning = true;
 		while(scanning) {

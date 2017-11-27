@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 /**
  * /**
  * JPanel which overlays the game screen with the start menu dialog box and a glass pane.
- * @author Alexia
+ * @author Alexia, Valerie
  */
 public class UIPanel extends JPanel{
 	/**

@@ -16,15 +16,22 @@ import javax.swing.SwingUtilities;
 public class DialogDisposer extends AbstractAction {
 	        
 	/**
-	 * 
+	 * Stores unique data to facilitate versioning of serialized data.
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructor to set the string to be displayed on dialog box.
+	 * @param name string to be displayed on dialog box.
+	 */
 	public DialogDisposer(String name) {
 		super(name);
     }
 	        
 	@Override
+	/**
+	 * Disposes of dialog box after game mode is selected.
+	 */
     public void actionPerformed(ActionEvent e) {
         Component comp = (Component) e.getSource();
         Window win = SwingUtilities.getWindowAncestor(comp);

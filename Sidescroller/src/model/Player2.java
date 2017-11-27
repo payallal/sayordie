@@ -1,9 +1,19 @@
 package model;
 
+/**
+ * Represents second player in multiplayer mode.
+ * @author david
+ *
+ */
 public class Player2 extends Player {
-	
+	/**
+	 * Stores boolean value for whether the game is in progress.
+	 */
 	private boolean gameStarted;
-	
+	/**
+	 * Constructor for the player2 class. Initializes fields and sets images to their relevant paths.
+	 * @param p X and Y-coordinates at which the sprite will be placed initially.
+	 */
 	public Player2 (Coordinate p) {
 		super(p);
 		this.gameStarted = false;
@@ -20,6 +30,9 @@ public class Player2 extends Player {
 	}
 		
 	@Override
+	/**
+	 * Animates the sprite moving to the left and changes the sprite's x-coordinates if the user chooses to move left.
+	 */
 	public void left() {
 		if (this.moveableLeft == true & this.controller.getBgX() > this.controller.getBGMIN()) {
 
@@ -42,6 +55,9 @@ public class Player2 extends Player {
 	}
 
 	@Override
+	/**
+	 * Animates the sprite moving to the right and changes the sprite's x-coordinates if the user chooses to move left.
+	 */
 	public void right() {
 
 		if (this.moveableRight == true & this.controller.getBgX() < this.controller.getBGMAX() - 800) {
@@ -64,11 +80,19 @@ public class Player2 extends Player {
 	}
 	
 	//While loop in convertStringToMovement will check this continuously
+	/**
+	 * Getter function for the boolean value of whether the game is in progress.
+	 * @return boolean value of whether the game is in progress.
+	 */
 	public synchronized boolean getGameStarted() {
 		return this.gameStarted;
 	}
 	
 	//Thread will set this to true asynchronously, so it MUST be synchronized with the above method
+	/**
+	 *  Setter function for the boolean value of whether the game is in progress.
+	 * @param b the new boolean value of whether the game is in progress.
+	 */
 	public synchronized void setGameStarted(boolean b) {
 		this.gameStarted = b;
 	}

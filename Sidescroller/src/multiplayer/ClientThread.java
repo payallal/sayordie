@@ -3,14 +3,33 @@ import java.net.*;
 
 import java.io.*;
 
-
+/**
+ * Handles exchange of data in multiplayer mode.
+ * @author Roger
+ *
+ */
 public class ClientThread extends Thread {
-	
+	/**
+	 * Stores client socket.
+	 */
 	private Socket client;
+	/**
+	 * Stores instance of thread for movement interpretation.
+	 * @see multiplayer.ReadMovementThread
+	 */
 	private ReadMovementThread readMovementThread;
+	/**
+	 * Stores instance of print writer for text output stream.
+	 */
 	private PrintWriter pw;
+	/**
+	 * Stores instance of buffered reader for text input stream from JSON.
+	 */
 	private BufferedReader br;
-	
+	/**
+	 * Constructor that initializes the class fields.
+	 * @param c instance of client socket.
+	 */
 	public ClientThread (Socket c) {
 		this.client = c;
 		try {
@@ -22,7 +41,10 @@ public class ClientThread extends Thread {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Starts thread to send array of booleans for movement to client.
+	 * @param barray
+	 */
 	public void sendJSONToClient(boolean [] barray) {
 		WriteJSONThread writeJSONThread = new WriteJSONThread(this.pw, barray);
 		writeJSONThread.start();
@@ -38,12 +60,18 @@ public class ClientThread extends Thread {
 	*/
 
 	@Override
+	/**
+	 * Starts this thread.
+	 */
 	public void run()
 	{
 		this.readMovementThread.start();
 	}
 	
 	//method that will 
+	/**
+	 * Disconnect this instance of the client.
+	 */
 	public void cleanConnection()
 	{
 		System.out.println("Client disconnecting, cleaning the data!");

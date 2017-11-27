@@ -18,8 +18,8 @@ import javax.swing.JPanel;
 public class Menu extends JPanel{
 
 	 /**
-	 * 
-	 */
+	  * Stores unique data to facilitate versioning of serialized data.
+	  */
 	private static final long serialVersionUID = 1L;
 
 	/**

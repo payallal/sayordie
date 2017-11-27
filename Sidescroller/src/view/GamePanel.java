@@ -19,7 +19,7 @@ import java.util.*;
 public class GamePanel extends JPanel {
 	
 	/**
-	 * 
+	 *  Stores unique data to facilitate versioning of serialized data.
 	 */
 	private static final long serialVersionUID = 1L;
 	final private int BGMIN_X;
@@ -310,7 +310,10 @@ public class GamePanel extends JPanel {
 	public ArrayList<Sprite> getSprites() {
 		return this.sprites;
 	}
-	
+	/**
+	 * Getter method for the array of words.
+	 * @return spriteWords field of this class.
+	 */
 	public ArrayList<Word> getSpriteWords() {
 		return this.spriteWords;
 	}
@@ -336,7 +339,9 @@ public class GamePanel extends JPanel {
 	public void setTextOfWordSaid(String wordSaid) {
 		this.textOfWordSaid.setText(wordSaid);
 	}
-	
+	/**
+	 * Loads all the obstacles from the obstacle folder.
+	 */
 	public void loadObstacleLibrary() {
 		this.obstacleLibrary = new ArrayList<String>();
 
@@ -353,7 +358,9 @@ public class GamePanel extends JPanel {
 	    		} 
 	    }
 	}
-	
+	/**
+	 * Loads coordinates of all obstacles.
+	 */
 	public void loadObstacleCoordinates() {
 		this.obstacleCoordinates = new ArrayList<Coordinate>();
 		this.obstacleCoordinates.add(new Coordinate(2000, 645));
