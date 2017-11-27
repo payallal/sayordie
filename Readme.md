@@ -1,3 +1,10 @@
+###SAY OR DIE
+
+![Preview](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/success.gif))
+![Preview](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/fail.gif))
+
+
+
 Purpose 
 ------------------------
 All around the world, lots of people aspire to learn new languages. However, current language learning techniques are largely limited to reading and writing, with little emphasis on spoken language. This often affects people’s ability to actually speak the language in real world situations, such as to communicate effectively in the workplace, to start conversations with locals while travelling and to pass on their second language to their children. Using Google’s speech API we created to a game that helps people improve their spoken language abilities. 
@@ -24,7 +31,7 @@ If you are Simon Perrault, follow this next step and then skip to step 14.
 
 If you're NOT Simon Perrault, follow the next few steps before you get to step 14. 
 
-5. Sign up for a Google Cloud account here: https://cloud.google.com/
+5. Sign up for a Google Cloud account [here](https://cloud.google.com/)
 6. Once you're signed up, go to your Google Cloud Console and create a new project. Name it as you like! 
 7. Under the Getting Started card on your dashboard, select 'Enable APIs and get credentials such as keys'
 ![alt text](https://github.com/payallal/sayordie/blob/master/ReadMeAssets/Step7.png)
