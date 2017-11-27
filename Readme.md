@@ -22,6 +22,7 @@ If you are Professor Perrault, follow this next step and then skip to step 14.
 5. Find the auth.json file we provided you with as a part of our submission and add it into the Sidescroller folder (you can find it in sayordie > Sidescroller)
 
 If you are anyone other than Professor Perrault, follow the next few steps before you get to step 14. 
+
 5. Sign up for a Google Cloud account here: https://cloud.google.com/
 6. Once you're signed up, go to your Google Cloud Console and create a new project. Name it as you like! 
 7. Under the Getting Started card on your dashboard, select 'Enable APIs and get credentials such as keys'
