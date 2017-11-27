@@ -174,6 +174,8 @@ public class AudioHandlerThread extends Thread{
 			  else {
 				  this.c.setTextOfInstruction("Processed!");
 			  }
+			  //enable the record button again
+			  this.c.getGameWindow().getRecordButton().setEnabled(true);
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

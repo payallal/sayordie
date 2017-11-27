@@ -19,7 +19,7 @@ public class MultiPlayerButtonListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Controller.getSingleton().setMultiplayer(true);
-		Controller.getSingleton().setTextOfInstruction("Connecting...");
+		Controller.getSingleton().setTextOfInstruction("Connecting Client...");
 		this.recordButton.setEnabled(false);
 		GameServer s = new GameServer(1664);
 		Controller.getSingleton().setServer(s);

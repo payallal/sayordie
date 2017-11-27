@@ -443,7 +443,6 @@ public class Controller implements ActionListener {
 			Random randomizer = new Random();
 			String randomObstacleName = obstacleLibrary.get(randomizer.nextInt(obstacleLibrary.size()));
 			obstacleLibrary.remove(randomObstacleName);
-			System.out.println(randomObstacleName);
 			//add obstacle to obstacle list
 			obstacle.add(new Obstacle(coordinate, randomObstacleName));
 		}

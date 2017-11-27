@@ -10,6 +10,8 @@ public class RecordButtonListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		//disenable record button, enable again after something is understood
+		this.c.getGameWindow().getRecordButton().setEnabled(false);
 		if (!this.c.getConnected()) {
 			this.c.setTextOfInstruction("Connecting Speech...");
 		}
